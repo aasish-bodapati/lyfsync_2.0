@@ -1,1 +1,1 @@
-we need to create a nutrition trackng app which takes in nlp input from user and gives out macros, if the user gives more than one item in a meal for example the user gives I had 2 scrambled eggs and 4 sausages for breakfast, we will give item by item macros in the meal
+we need to create a nutrition trackng app which takes in nlp input from user and gives out macros, if the user gives more than one item in a meal for example the user gives I had 2 paneer parathas and a bowl of curd for breakfast, we will give item by item macros in the meal

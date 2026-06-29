@@ -2,7 +2,6 @@ import os
 import json
 from typing import List
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlmodel import create_engine, Session, Field
 from dotenv import load_dotenv
@@ -13,17 +12,10 @@ load_dotenv()
 
 app = FastAPI(title="LyfSync Nutrition Tracking API", version="1.0.0")
 
-# Configure CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 
 # --- Pydantic Schemas ---
-class MealItemResponse(BaseModel):
+class FoodResponse(BaseModel):
     name: str
     calories: float
     protein: float
@@ -32,13 +24,13 @@ class MealItemResponse(BaseModel):
 
 class MealResponse(BaseModel):
     meal_type: str
-    items: List[MealItemResponse]
+    items: List[FoodResponse]
     total_calories: float
     total_protein: float
     total_carbs: float
     total_fat: float
 
-class MealCreateRequest(BaseModel):
+class UserInput(BaseModel):
     text: str
 
 
@@ -50,7 +42,7 @@ llm_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 # --- AI Parsing Services ---
-def parse_with_openai(request: MealCreateRequest) -> MealResponse:
+def parse_with_openai(request: UserInput) -> MealResponse:
     try:
         completion = llm_client.beta.chat.completions.parse(
             model="gpt-4o-mini",
@@ -78,7 +70,7 @@ def parse_with_openai(request: MealCreateRequest) -> MealResponse:
 
 # --- Endpoints ---
 @app.post("/api/v1/meals/parse", response_model=MealResponse)
-def parse_meal(request: MealCreateRequest):
+def parse_meal(request: UserInput):
     """
     Parses natural language meal logs and returns an itemized macronutrient breakdown.
     """
