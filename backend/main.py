@@ -1,16 +1,25 @@
 import os
 import json
 from typing import List
-from fastapi import FastAPI, HTTPException
+from contextlib import asynccontextmanager
+from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
-from sqlmodel import create_engine, Session, Field
+from sqlmodel import Session
 from dotenv import load_dotenv
 from openai import OpenAI
+
+from database import create_db_and_tables, get_session
+from models import Meal, FoodItem
 
 # Load environment variables
 load_dotenv()
 
-app = FastAPI(title="LyfSync Nutrition Tracking API", version="1.0.0")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_db_and_tables()
+    yield
+
+app = FastAPI(title="LyfSync Nutrition Tracking API", version="1.0.0", lifespan=lifespan)
 
 
 
@@ -70,11 +79,48 @@ def parse_with_openai(request: UserInput) -> MealResponse:
 
 # --- Endpoints ---
 @app.post("/api/v1/meals/parse", response_model=MealResponse)
-def parse_meal(request: UserInput):
+def parse_meal(request: UserInput, session: Session = Depends(get_session)):
     """
-    Parses natural language meal logs and returns an itemized macronutrient breakdown.
+    Parses natural language meal logs, persists them to the DB, and returns the breakdown.
     """
-    return parse_with_openai(request)
+    parsed_meal = parse_with_openai(request)
+    
+    # Create DB models
+    db_items = [
+        FoodItem(
+            name=item.name,
+            calories=item.calories,
+            protein=item.protein,
+            carbs=item.carbs,
+            fat=item.fat
+        )
+        for item in parsed_meal.items
+    ]
+    
+    db_meal = Meal(
+        meal_type=parsed_meal.meal_type,
+        total_calories=parsed_meal.total_calories,
+        total_protein=parsed_meal.total_protein,
+        total_carbs=parsed_meal.total_carbs,
+        total_fat=parsed_meal.total_fat,
+        items=db_items
+    )
+    
+    session.add(db_meal)
+    session.commit()
+    session.refresh(db_meal)
+    
+    return parsed_meal
+
+@app.get("/api/v1/meals", response_model=List[MealResponse])
+def get_meals(session: Session = Depends(get_session)):
+    """
+    Retrieves the history of all logged meals with their itemized food details.
+    """
+    from sqlmodel import select
+    statement = select(Meal)
+    results = session.exec(statement).all()
+    return results
 
 @app.get("/health")
 def health_check():
