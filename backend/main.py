@@ -17,6 +17,7 @@ app = FastAPI(title="LyfSync Nutrition Tracking API", version="1.0.0")
 # --- Pydantic Schemas ---
 class FoodResponse(BaseModel):
     name: str
+    quantity: int
     calories: float
     protein: float
     carbs: float
