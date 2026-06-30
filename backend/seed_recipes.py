@@ -36,7 +36,7 @@ def seed():
         
     recipes_to_insert = []
     
-    with open(CSV_PATH, mode="r", encoding="utf-8") as f:
+    with open(CSV_PATH, mode="r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         for row in reader:
             # 1. Skip rows with missing ingredients
