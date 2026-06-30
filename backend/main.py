@@ -1,27 +1,45 @@
 import os
 import json
-from typing import List
-from fastapi import FastAPI, HTTPException
+from typing import List, Optional
+from datetime import datetime
+from contextlib import asynccontextmanager
+from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
-from sqlmodel import create_engine, Session, Field
+from sqlmodel import create_engine, Session, Field, SQLModel, select
 from dotenv import load_dotenv
 from openai import OpenAI
 
 # Load environment variables
 load_dotenv()
 
-app = FastAPI(title="LyfSync Nutrition Tracking API", version="1.0.0")
+DATABASE_URL = os.getenv("DATABASE_URL")
+engine = create_engine(DATABASE_URL)
+
+def get_db():
+    with Session(engine) as session:
+        yield session
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Initialize SQLModel tables on startup
+    SQLModel.metadata.create_all(engine)
+    yield
+
+app = FastAPI(title="LyfSync Nutrition Tracking API", version="1.0.0", lifespan=lifespan)
 
 
+# --- Database Models & Pydantic Schemas ---
+class Meal(SQLModel, table=True):
+    __tablename__ = "meals"
 
-# --- Pydantic Schemas ---
-class FoodResponse(BaseModel):
-    name: str
-    quantity: int
+    id: Optional[int] = Field(default=None, primary_key=True)
+    raw_text: str
+    meal_type: str
     calories: float
     protein: float
     carbs: float
     fat: float
+    created_at: datetime = Field(default_factory=datetime.utcnow)
 
 
 class MealResponse(BaseModel):
@@ -31,11 +49,9 @@ class MealResponse(BaseModel):
     carbs: float
     fat: float
 
+
 class UserInput(BaseModel):
     text: str
-
-
-
 
 
 # --- Client Initializations ---
@@ -70,12 +86,35 @@ def parse_with_openai(request: UserInput) -> MealResponse:
 
 
 # --- Endpoints ---
-@app.post("/api/v1/meals/parse", response_model=MealResponse)
-def parse_meal(request: UserInput):
+@app.post("/api/v1/meals/parse", response_model=Meal)
+def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     """
-    Parses natural language meal logs and returns a macronutrient breakdown.
+    Parses natural language meal logs, estimates macros, and persists the meal to the database.
     """
-    return parse_with_openai(request)
+    parsed = parse_with_openai(request)
+    
+    db_meal = Meal(
+        raw_text=request.text,
+        meal_type=parsed.meal_type,
+        calories=parsed.calories,
+        protein=parsed.protein,
+        carbs=parsed.carbs,
+        fat=parsed.fat
+    )
+    db.add(db_meal)
+    db.commit()
+    db.refresh(db_meal)
+    return db_meal
+
+
+@app.get("/api/v1/meals", response_model=List[Meal])
+def list_meals(db: Session = Depends(get_db)):
+    """
+    Retrieves all previously logged meals from the database.
+    """
+    meals = db.exec(select(Meal)).all()
+    return meals
+
 
 @app.get("/health")
 def health_check():
@@ -83,3 +122,4 @@ def health_check():
         "status": "Server is running successfully",
         "status_code": 200
     }
+
