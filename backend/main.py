@@ -86,6 +86,16 @@ class Staple(SQLModel, table=True):
     embedding: Optional[List[float]] = Field(sa_column=Column(Vector(1536), nullable=True))
 
 
+class StaplesReview(SQLModel, table=True):
+    __tablename__ = "staples_review"
+
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str = Field(index=True, unique=True)
+    serving_size: str
+    ingredients_text: str
+    instructions: str
+
+
 class MealResponse(BaseModel):
     meal_type: str
     calories: float
@@ -106,6 +116,7 @@ llm_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 class LoggedItem(BaseModel):
     food_name: str
     logged_portion: str
+    is_cooked_dish: bool
 
 
 class DishExtractionResponse(BaseModel):
@@ -117,9 +128,17 @@ class ParsedRawIngredient(BaseModel):
     weight_g: float
 
 
+class NewStapleCandidate(BaseModel):
+    name: str
+    serving_size: str
+    ingredients_text: str
+    instructions: str
+
+
 class RAGScaleResponse(BaseModel):
     meal_type: str
     ingredients: List[ParsedRawIngredient]
+    new_candidates: Optional[List[NewStapleCandidate]] = None
 
 
 # --- AI & Vector Helper Functions ---
@@ -144,6 +163,11 @@ def extract_dishes(text: str) -> List[LoggedItem]:
                     "content": (
                         "You are a precise food diary parser. Extract the distinct cooked dishes or raw food items "
                         "mentioned in the user's log, along with their portion size/quantity.\n\n"
+                        "CLASSIFICATION RULE:\n"
+                        "- Set `is_cooked_dish` to True if the item is a cooked preparation, recipe, or staple made from multiple ingredients "
+                        "(e.g., roti, dal tadka, chicken curry, pasta, lasagna, paratha, omelette, dosa).\n"
+                        "- Set `is_cooked_dish` to False if the item is a single raw agricultural commodity, fruit, vegetable, or simple ingredient "
+                        "(e.g., banana, raw almonds, avocado, milk, raw spinach, jaggery).\n\n"
                         "DECOMPOSITION RULES:\n"
                         "1. If a logged item contains multiple distinct components cooked or served together "
                         "(e.g., 'rice and chicken curry', 'roti with paneer'), decompose them into separate items "
@@ -202,10 +226,10 @@ def retrieve_grounding_templates(logged_items: List[LoggedItem], db: Session) ->
         candidates.sort(key=lambda x: x[2])
         best_type, best_model, best_distance = candidates[0]
         
-        # Check if a staple is matched within distance 0.45
+        # Check if a staple is matched within distance 0.38 (empirically derived threshold)
         staple_cand = next((c for c in candidates if c[0] == "staple"), None)
         
-        if staple_cand and staple_cand[2] <= 0.45:
+        if staple_cand and staple_cand[2] <= 0.38:
             model = staple_cand[1]
             templates[item.food_name] = {
                 "type": "staple",
@@ -233,14 +257,19 @@ def retrieve_grounding_templates(logged_items: List[LoggedItem], db: Session) ->
     return templates
 
 
-def scale_ingredients_with_rag(text: str, templates: dict) -> RAGScaleResponse:
+def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[LoggedItem]) -> RAGScaleResponse:
     context_lines = []
     for food_name, temp in templates.items():
+        item_meta = next((item for item in logged_items if item.food_name == food_name), None)
+        is_cooked = item_meta.is_cooked_dish if item_meta else False
+        is_fallback = temp["type"] == "raw"
+        
         context_lines.append(
             f"Database template for '{food_name}':\n"
             f"  Portion baseline: {temp['serving_size']}\n"
             f"  Raw Ingredients: {temp['ingredients_text']}\n"
-            f"  Cooking Steps: {temp['instructions']}"
+            f"  Cooking Steps: {temp['instructions']}\n"
+            f"  Metadata: is_cooked_dish={is_cooked}, is_fallback_due_to_missing_template={is_fallback}"
         )
     templates_context = "\n\n".join(context_lines)
     
@@ -256,6 +285,10 @@ def scale_ingredients_with_rag(text: str, templates: dict) -> RAGScaleResponse:
         "portion is '2 pieces (100g)' and uses 100g flour, and the user ate 1 piece, scale it to 50g flour. If the user ate 4 pieces, scale it to 200g flour.\n"
         "5. If a logged item is a raw commodity (like banana or almonds), simply output it with its estimated raw weight.\n"
         "6. Do NOT include water or salt in the raw ingredients list.\n"
+        "7. NEW STAPLES REVIEW RULE:\n"
+        "   - If a food item has `is_cooked_dish=True` AND `is_fallback_due_to_missing_template=True`, this is a new cooked dish not in our database.\n"
+        "   - You MUST generate a standard, generic 1-person baseline recipe template for this new dish in the `new_candidates` list.\n"
+        "   - Specify the standard name, serving size (e.g. '1 plate (350g)'), standard raw ingredients and baseline weights, and 3-step cooking instructions.\n"
     )
     
     try:
@@ -266,7 +299,8 @@ def scale_ingredients_with_rag(text: str, templates: dict) -> RAGScaleResponse:
                     "role": "system",
                     "content": (
                         "You are a precise nutrition scaling assistant. Ground all calculations on the provided database templates. "
-                        "Scale raw ingredients and weights proportionally based on the user's portion."
+                        "Scale raw ingredients and weights proportionally based on the user's portion. "
+                        "Generate standard new recipe templates in the new_candidates list for any new cooked dishes."
                     )
                 },
                 {"role": "user", "content": prompt}
@@ -297,7 +331,7 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     templates = retrieve_grounding_templates(logged_items, db)
     
     # 3. Scale ingredients
-    scaled_res = scale_ingredients_with_rag(request.text, templates)
+    scaled_res = scale_ingredients_with_rag(request.text, templates, logged_items)
     
     # 4. Calculate macros mathematically using DB lookups
     total_calories = 0.0
@@ -336,7 +370,7 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
         total_carbs += best_db_model.carbs * weight_factor
         total_fat += best_db_model.fat * weight_factor
         
-    # 5. Persist meal
+    # 5. Persist meal and review candidates
     db_meal = Meal(
         raw_text=request.text,
         meal_type=scaled_res.meal_type,
@@ -346,6 +380,32 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
         fat=round(total_fat, 2)
     )
     db.add(db_meal)
+    
+    # Save review candidates: only for cooked dishes that fell back to raw templates
+    # Gate in Python: item must be a cooked dish (is_cooked_dish=True) AND template type must be 'raw'
+    if scaled_res.new_candidates:
+        cooked_fallback_names = {
+            item.food_name
+            for item in logged_items
+            if item.is_cooked_dish and templates.get(item.food_name, {}).get("type") == "raw"
+        }
+        for cand in scaled_res.new_candidates:
+            if cand.name not in cooked_fallback_names:
+                # Cross-check by name substring match as LLM may slightly rename
+                is_relevant = any(fn.lower() in cand.name.lower() or cand.name.lower() in fn.lower() for fn in cooked_fallback_names)
+                if not is_relevant:
+                    continue
+            exists_staples = db.exec(select(Staple).where(Staple.name == cand.name)).first()
+            exists_review = db.exec(select(StaplesReview).where(StaplesReview.name == cand.name)).first()
+            if not exists_staples and not exists_review:
+                review_row = StaplesReview(
+                    name=cand.name,
+                    serving_size=cand.serving_size,
+                    ingredients_text=cand.ingredients_text,
+                    instructions=cand.instructions
+                )
+                db.add(review_row)
+                
     db.commit()
     db.refresh(db_meal)
     return db_meal

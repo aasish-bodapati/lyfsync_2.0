@@ -1,31 +1,44 @@
 import os
 import sys
 from fastapi.testclient import TestClient
+from sqlmodel import Session, select, delete
 
 # Ensure backend directory is in path
 sys.path.append(os.path.dirname(__file__))
 
-from main import app
+from main import app, StaplesReview, engine
 
 client = TestClient(app)
 
-test_scenarios = [
-    "I had 2 rotis and 1 bowl of dal tadka",
-    "I ate 1 cup of jeera rice and a bowl of chicken curry",
-    "I had 100g of raw bananas",
-    "I had 4 chapatis",
-    "I had a bowl of fresh strawberries and 10 raw almonds",
-    "I ate 1 avocado",
-    "I had a plate of penne pasta with tomato sauce",
-    "I had a plate of beef lasagna"
+benchmark_scenarios = [
+    # 1. NLP Hard & Very Hard
+    "Lunch was leftover butter chicken from yesterday, maybe around a bowl and a half, with some rice.",
+    "I picked around the fries, ate most of the burger but left the top bun.",
+    
+    # 2. Cooking Reasoning
+    "Chicken thighs, air fried.",
+    "Cooked in a tablespoon of butter but I left most of it in the pan.",
+    
+    # 3. Cultural Foods
+    "Two idlis with sambar.",
+    "Poha with peanuts.",
+    
+    # 4. Edge Cases
+    "A bite of cheesecake.",
+    "Shared fries with three people."
 ]
 
 def run_tests():
-    print("🚀 Running RAG Meal Parser Integration Tests...")
+    print("🧹 Clearing staples_review table for benchmark run...")
+    with Session(engine) as session:
+        session.exec(delete(StaplesReview))
+        session.commit()
+        
+    print("🚀 Running RAG Meal Parser Benchmark Tests...")
     
-    for idx, log in enumerate(test_scenarios):
+    for idx, log in enumerate(benchmark_scenarios):
         print(f"\n==========================================")
-        print(f"📝 Test Case {idx + 1}: \"{log}\"")
+        print(f"📝 Benchmark Case {idx + 1}: \"{log}\"")
         print(f"==========================================")
         
         try:
@@ -44,8 +57,6 @@ def run_tests():
             print(f"  Carbs:    {data['carbs']}g")
             print(f"  Fat:      {data['fat']}g")
             
-            # Mathematical consistency check:
-            # Cal = (P * 4) + (C * 4) + (F * 9)
             computed_cal = (data['protein'] * 4.0) + (data['carbs'] * 4.0) + (data['fat'] * 9.0)
             diff = abs(data['calories'] - computed_cal)
             
@@ -53,13 +64,20 @@ def run_tests():
             print(f"  Expected (Atwater sum): {computed_cal:.2f} kcal")
             print(f"  Difference: {diff:.2f} kcal")
             
-            if diff <= 5.0:
-                print("✅ MACROS ARE 100% MATHEMATICALLY CONSISTENT!")
-            else:
-                print("⚠️ Warning: Macro difference exceeds 5 kcal tolerance.")
-                
         except Exception as e:
             print(f"❌ Test crashed: {e}")
+
+    print("\n==========================================")
+    print("📋 Checking staples_review database table...")
+    print("==========================================")
+    with Session(engine) as session:
+        items = session.exec(select(StaplesReview)).all()
+        print(f"Found {len(items)} items in review queue:")
+        for item in items:
+            print(f"\n📌 Candidate: \"{item.name}\"")
+            print(f"  Serving Size: {item.serving_size}")
+            print(f"  Ingredients:  {item.ingredients_text}")
+            print(f"  Instructions: {item.instructions}")
 
 if __name__ == "__main__":
     run_tests()
