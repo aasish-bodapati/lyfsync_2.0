@@ -43,6 +43,7 @@ MANIFEST
 *.db
 *.sqlite
 *.sqlite3
+data/
 
 # OS files
 .DS_Store
