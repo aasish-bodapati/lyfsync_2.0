@@ -7,6 +7,8 @@ from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from sqlmodel import create_engine, Session, Field, SQLModel, select
 from dotenv import load_dotenv
+from sqlalchemy import Column
+from pgvector.sqlalchemy import Vector
 from openai import OpenAI
 
 # Load environment variables
@@ -21,6 +23,11 @@ def get_db():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # Ensure vector extension is enabled before creating tables
+    from sqlalchemy import text
+    with Session(engine) as session:
+        session.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
+        session.commit()
     # Initialize SQLModel tables on startup
     SQLModel.metadata.create_all(engine)
     yield
@@ -51,6 +58,7 @@ class USDARaw(SQLModel, table=True):
     protein: float = Field(default=0.0)
     carbs: float = Field(default=0.0)
     fat: float = Field(default=0.0)
+    embedding: Optional[List[float]] = Field(sa_column=Column(Vector(1536), nullable=True))
 
 
 class ICMRRaw(SQLModel, table=True):
@@ -64,6 +72,7 @@ class ICMRRaw(SQLModel, table=True):
     protein: float = Field(default=0.0)
     carbs: float = Field(default=0.0)
     fat: float = Field(default=0.0)
+    embedding: Optional[List[float]] = Field(sa_column=Column(Vector(1536), nullable=True))
 
 
 class MealResponse(BaseModel):
