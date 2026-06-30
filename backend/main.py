@@ -143,11 +143,14 @@ def extract_dishes(text: str) -> List[LoggedItem]:
                     "role": "system",
                     "content": (
                         "You are a precise food diary parser. Extract the distinct cooked dishes or raw food items "
-                        "mentioned in the user's log, along with their portion size/quantity. "
-                        "If a logged item contains multiple distinct components cooked or served together "
-                        "(e.g., 'pasta with tomato sauce', 'rice and chicken curry', 'roti with paneer') "
-                        "and they are not a single unified staple recipe, decompose them into separate items "
-                        "(e.g., split 'pasta with tomato sauce' into 'pasta' and 'tomato sauce')."
+                        "mentioned in the user's log, along with their portion size/quantity.\n\n"
+                        "DECOMPOSITION RULES:\n"
+                        "1. If a logged item contains multiple distinct components cooked or served together "
+                        "(e.g., 'rice and chicken curry', 'roti with paneer'), decompose them into separate items "
+                        "(e.g., split 'roti with paneer' into 'roti' and 'paneer').\n"
+                        "2. If a logged cooked dish is a complex multi-ingredient meal (such as lasagna, pizza, tacos, burritos, pasta with sauce, sandwiches) "
+                        "and is not a standard simple staple, decompose it into its primary constituent raw ingredients "
+                        "(e.g., decompose 'beef lasagna' into 'ground beef', 'pasta sheets', 'tomato sauce', and 'mozzarella cheese')."
                     )
                 },
                 {"role": "user", "content": text}

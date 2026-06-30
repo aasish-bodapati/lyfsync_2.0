@@ -16,7 +16,8 @@ test_scenarios = [
     "I had 4 chapatis",
     "I had a bowl of fresh strawberries and 10 raw almonds",
     "I ate 1 avocado",
-    "I had a plate of penne pasta with tomato sauce"
+    "I had a plate of penne pasta with tomato sauce",
+    "I had a plate of beef lasagna"
 ]
 
 def run_tests():
