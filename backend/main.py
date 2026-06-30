@@ -42,6 +42,26 @@ class Meal(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 
+class Recipe(SQLModel, table=True):
+    __tablename__ = "recipes"
+
+    srno: int = Field(primary_key=True)
+    recipe_name: str
+    translated_recipe_name: str
+    ingredients: str
+    translated_ingredients: str
+    prep_time_in_mins: int
+    cook_time_in_mins: int
+    total_time_in_mins: int
+    servings: int
+    cuisine: str
+    course: str
+    diet: str
+    instructions: str
+    translated_instructions: str
+    url: str
+
+
 class MealResponse(BaseModel):
     meal_type: str
     calories: float
