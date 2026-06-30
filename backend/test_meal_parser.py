@@ -13,7 +13,10 @@ test_scenarios = [
     "I had 2 rotis and 1 bowl of dal tadka",
     "I ate 1 cup of jeera rice and a bowl of chicken curry",
     "I had 100g of raw bananas",
-    "I had 4 chapatis"
+    "I had 4 chapatis",
+    "I had a bowl of fresh strawberries and 10 raw almonds",
+    "I ate 1 avocado",
+    "I had a plate of penne pasta with tomato sauce"
 ]
 
 def run_tests():
