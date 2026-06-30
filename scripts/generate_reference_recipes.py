@@ -16,21 +16,17 @@ if not api_key:
 
 client = OpenAI(api_key=api_key)
 
-# 1. Pydantic models for structured output
+# 1. Pydantic models for structured output (Macros calculated mathematically, not by LLM)
 class ReferenceRecipeItem(BaseModel):
     name: str
     serving_size: str
-    calories: float
-    protein: float
-    carbs: float
-    fat: float
     ingredients_text: str
     instructions: str
 
 class BatchResponse(BaseModel):
     recipes: List[ReferenceRecipeItem]
 
-# 2. Curated list of 180 most common generic Indian dishes, split into 5 balanced batches of ~36 to avoid token limits
+# Curated list of 180 most common generic Indian dishes, split into 5 balanced batches
 batches = [
     # Batch 1: Staples, Rice & Breads
     [
@@ -100,14 +96,34 @@ def generate_all():
     for idx, batch in enumerate(batches):
         print(f"\n⚡ Generating Batch {idx + 1}/{len(batches)} (contains {len(batch)} dishes)...")
         prompt = (
-            f"Generate standard nutritional profiles and simple recipes for these {len(batch)} Indian dishes:\n"
+            f"Generate standard recipes and raw ingredient lists for the following Indian dishes:\n"
             f"{', '.join(batch)}\n\n"
-            "REQUIREMENTS:\n"
-            "1. Name: Match the requested name exactly.\n"
-            "2. Serving Size: Specify a realistic 1-person portion with approximate weight (e.g. '1 piece (30g)', '1 bowl (150g)', '1 plate (350g)').\n"
-            "3. Calories/Macros: Estimate standard calories, protein, carbs, and fat in grams for that portion. Ensure they align with USDA / ICMR-NIN nutritional standards.\n"
-            "4. Ingredients: Provide a comma-separated list of raw ingredients and weights required to make exactly that 1 serving.\n"
-            "5. Instructions: Provide short, 3-4 step cooking instructions for that dish.\n"
+            "CRITICAL STAPLE & BASE RULES:\n\n"
+            "1. THE GOLDEN BASELINE RULE:\n"
+            "   - Make the recipe as standard, simple, and generic as possible so that it represents the GOLDEN BASELINE / GOLDEN AVERAGE of the dish.\n"
+            "   - Avoid local variations, specialty recipes, or fancy restaurant-style versions.\n"
+            "   - Focus exclusively on the core, staple ingredients that dictate the baseline caloric and macronutrient structure of the dish.\n\n"
+            "2. STAPLE INGREDIENTS ONLY:\n"
+            "   - Use only common, daily staple ingredients (such as basic flours, rice, standard dals, common vegetables, milk, curd, paneer, eggs, simple meats, and standard cooking oils/ghee).\n"
+            "   - Do NOT include fancy, exotic, or garnish-only ingredients (e.g., saffron, cashews/almonds in basic curries, cream/butter in home-style curries, specific local spices, or food coloring) that are not essential to the staple food profile.\n\n"
+            "3. LITERAL NAME MODIFIERS:\n"
+            "   - If the dish name contains 'Plain' (e.g., 'Plain Dosa', 'Plain Naan', 'Plain Rice', 'Plain Paratha'), it must contain ONLY the absolute base grain/batter/meat. Do NOT include stuffing, gravies, potato masala, or heavy toppings.\n"
+            "   - If the dish name contains a characterizing ingredient (e.g., 'Aloo Paratha' contains 'Aloo', 'Paneer Paratha' contains 'Paneer', 'Matar Paneer' contains 'Matar' and 'Paneer'), those exact raw ingredients MUST be listed in the ingredients list with non-zero weights.\n"
+            "   - If the dish name contains 'Butter' or 'Ghee' (e.g., 'Butter Naan', 'Ghee Rice'), the raw ingredients list MUST contain 'Butter' or 'Ghee'. Otherwise, use standard neutral cooking oil.\n\n"
+            "4. RAW INGREDIENT LISTING:\n"
+            "   - Provide a comma-separated list of raw, uncooked ingredients and weights required to make exactly that 1 serving (e.g., '100g raw chicken breast, 50g raw basmati rice, 15g sunflower oil, 30g onion, 20g tomato, salt to taste').\n"
+            "   - Do NOT list cooked states in the ingredients list.\n\n"
+            "5. COOKING INSTRUCTIONS:\n"
+            "   - Provide short, 3-4 step cooking instructions showing how these raw ingredients are combined to make the final dish.\n\n"
+            "6. PORTION SIZE:\n"
+            "   - Specify a realistic 1-person portion with approximate weight (e.g., '1 piece (30g)', '1 bowl (150g)', '1 plate (350g)').\n\n"
+            "---\n\n"
+            "SELF-CORRECTION PASS:\n"
+            "Before outputting, review the list of generated ingredients for each dish:\n"
+            "- Did 'Plain Dosa' get potato? If yes, remove it.\n"
+            "- Did 'Butter Naan' get butter? If no, add it.\n"
+            "- Did a basic home-style dish get premium cream or saffron? If yes, remove it to keep it as a basic staple.\n"
+            "Only output the corrected, logically verified records in the requested schema."
         )
         
         try:
@@ -132,7 +148,7 @@ def generate_all():
     # Save results to JSON
     output_dir = "/Users/aasish/Documents/lyfsync_2.0/backend/data"
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "reference_recipes.json")
+    output_path = os.path.join(output_dir, "reference_recipe_templates.json")
     
     # Convert Pydantic models to dicts for serialization
     data_to_save = [item.model_dump() for item in all_recipes]
@@ -140,7 +156,7 @@ def generate_all():
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data_to_save, f, indent=2, ensure_ascii=False)
         
-    print(f"\n🎉 Generation completed! Saved {len(data_to_save)} standard reference recipes to {output_path}")
+    print(f"\n🎉 Generation completed! Saved {len(data_to_save)} standard reference recipe templates to {output_path}")
 
 if __name__ == "__main__":
     generate_all()

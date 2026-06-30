@@ -1,0 +1,1070 @@
+[
+  {
+    "name": "Roti / Chapati",
+    "serving_size": "2 pieces (100g)",
+    "ingredients_text": "100g whole wheat flour, water to knead, salt to taste",
+    "instructions": "1. In a bowl, mix whole wheat flour and salt. 2. Gradually add water and knead to form a soft dough. 3. Divide the dough into small balls and roll each into a thin circle. 4. Cook on a hot tava until both sides are golden brown."
+  },
+  {
+    "name": "Plain Paratha",
+    "serving_size": "2 pieces (100g)",
+    "ingredients_text": "100g whole wheat flour, water to knead, salt to taste, oil for cooking",
+    "instructions": "1. In a bowl, mix whole wheat flour and salt. 2. Gradually add water and knead to form a soft dough. 3. Roll out the dough into circles, apply oil, fold, and roll again. 4. Cook on a hot tava until both sides are golden brown."
+  },
+  {
+    "name": "Aloo Paratha",
+    "serving_size": "2 pieces (150g)",
+    "ingredients_text": "100g whole wheat flour, 100g boiled potatoes, water to knead, salt to taste, oil for cooking",
+    "instructions": "1. In a bowl, mix whole wheat flour and salt. 2. Mash boiled potatoes and mix with salt. 3. Roll out the dough, place potato filling, and seal. 4. Cook on a hot tava until both sides are golden brown."
+  },
+  {
+    "name": "Paneer Paratha",
+    "serving_size": "2 pieces (150g)",
+    "ingredients_text": "100g whole wheat flour, 100g paneer, water to knead, salt to taste, oil for cooking",
+    "instructions": "1. In a bowl, mix whole wheat flour and salt. 2. Grate paneer and mix with salt. 3. Roll out the dough, place paneer filling, and seal. 4. Cook on a hot tava until both sides are golden brown."
+  },
+  {
+    "name": "Gobi Paratha",
+    "serving_size": "2 pieces (150g)",
+    "ingredients_text": "100g whole wheat flour, 100g grated cauliflower, water to knead, salt to taste, oil for cooking",
+    "instructions": "1. In a bowl, mix whole wheat flour and salt. 2. Grate cauliflower and mix with salt. 3. Roll out the dough, place cauliflower filling, and seal. 4. Cook on a hot tava until both sides are golden brown."
+  },
+  {
+    "name": "Methi Paratha",
+    "serving_size": "2 pieces (150g)",
+    "ingredients_text": "100g whole wheat flour, 50g fresh methi leaves, water to knead, salt to taste, oil for cooking",
+    "instructions": "1. In a bowl, mix whole wheat flour, chopped methi leaves, and salt. 2. Gradually add water and knead to form a soft dough. 3. Roll out the dough into circles. 4. Cook on a hot tava until both sides are golden brown."
+  },
+  {
+    "name": "Poori",
+    "serving_size": "4 pieces (100g)",
+    "ingredients_text": "100g whole wheat flour, water to knead, salt to taste, oil for frying",
+    "instructions": "1. In a bowl, mix whole wheat flour and salt. 2. Gradually add water and knead to form a soft dough. 3. Roll out small circles. 4. Deep fry in hot oil until puffed and golden."
+  },
+  {
+    "name": "Bhatura",
+    "serving_size": "2 pieces (150g)",
+    "ingredients_text": "100g all-purpose flour, 50g yogurt, water to knead, salt to taste, oil for frying",
+    "instructions": "1. In a bowl, mix all-purpose flour, yogurt, and salt. 2. Gradually add water and knead to form a soft dough. 3. Roll out into circles. 4. Deep fry in hot oil until puffed and golden."
+  },
+  {
+    "name": "Plain Naan",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "100g all-purpose flour, 50g yogurt, water to knead, salt to taste, oil for cooking",
+    "instructions": "1. In a bowl, mix all-purpose flour, yogurt, and salt. 2. Gradually add water and knead to form a soft dough. 3. Roll out into an oval shape. 4. Cook on a hot tava until both sides are cooked."
+  },
+  {
+    "name": "Butter Naan",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "100g all-purpose flour, 50g yogurt, water to knead, salt to taste, 10g butter",
+    "instructions": "1. In a bowl, mix all-purpose flour, yogurt, and salt. 2. Gradually add water and knead to form a soft dough. 3. Roll out into an oval shape. 4. Cook on a hot tava and brush with butter."
+  },
+  {
+    "name": "Garlic Naan",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "100g all-purpose flour, 50g yogurt, water to knead, salt to taste, 10g garlic, oil for cooking",
+    "instructions": "1. In a bowl, mix all-purpose flour, yogurt, and salt. 2. Gradually add water and knead to form a soft dough. 3. Roll out into an oval shape and sprinkle minced garlic. 4. Cook on a hot tava until both sides are cooked."
+  },
+  {
+    "name": "Tandoori Roti",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "100g whole wheat flour, water to knead, salt to taste",
+    "instructions": "1. In a bowl, mix whole wheat flour and salt. 2. Gradually add water and knead to form a soft dough. 3. Roll out into a circle. 4. Cook in a tandoor or on a hot tava until both sides are cooked."
+  },
+  {
+    "name": "Missi Roti",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "50g whole wheat flour, 50g besan (gram flour), water to knead, salt to taste",
+    "instructions": "1. In a bowl, mix whole wheat flour, besan, and salt. 2. Gradually add water and knead to form a soft dough. 3. Roll out into a circle. 4. Cook on a hot tava until both sides are cooked."
+  },
+  {
+    "name": "Rumali Roti",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "100g all-purpose flour, water to knead, salt to taste",
+    "instructions": "1. In a bowl, mix all-purpose flour and salt. 2. Gradually add water and knead to form a soft dough. 3. Roll out into a very thin circle. 4. Cook on a hot tava until both sides are cooked."
+  },
+  {
+    "name": "Plain Basmati Rice",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "50g basmati rice, 100ml water, salt to taste",
+    "instructions": "1. Rinse basmati rice under cold water. 2. In a pot, combine rice, water, and salt. 3. Bring to a boil, then reduce heat and cover. 4. Cook until water is absorbed and rice is fluffy."
+  },
+  {
+    "name": "Brown Rice",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "50g brown rice, 100ml water, salt to taste",
+    "instructions": "1. Rinse brown rice under cold water. 2. In a pot, combine rice, water, and salt. 3. Bring to a boil, then reduce heat and cover. 4. Cook until water is absorbed and rice is tender."
+  },
+  {
+    "name": "Jeera Rice",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "50g basmati rice, 100ml water, 5g cumin seeds, salt to taste",
+    "instructions": "1. Rinse basmati rice under cold water. 2. In a pot, heat cumin seeds until fragrant. 3. Add rice, water, and salt. 4. Bring to a boil, then reduce heat and cover until water is absorbed."
+  },
+  {
+    "name": "Ghee Rice",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "50g basmati rice, 100ml water, 10g ghee, salt to taste",
+    "instructions": "1. Rinse basmati rice under cold water. 2. In a pot, heat ghee. 3. Add rice, water, and salt. 4. Bring to a boil, then reduce heat and cover until water is absorbed."
+  },
+  {
+    "name": "Peas Pulao",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "50g basmati rice, 100ml water, 50g green peas, salt to taste",
+    "instructions": "1. Rinse basmati rice under cold water. 2. In a pot, combine rice, peas, water, and salt. 3. Bring to a boil, then reduce heat and cover. 4. Cook until water is absorbed and rice is fluffy."
+  },
+  {
+    "name": "Vegetable Biryani",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "50g basmati rice, 100ml water, 100g mixed vegetables, salt to taste",
+    "instructions": "1. Rinse basmati rice under cold water. 2. In a pot, combine rice, mixed vegetables, water, and salt. 3. Bring to a boil, then reduce heat and cover. 4. Cook until water is absorbed and rice is fluffy."
+  },
+  {
+    "name": "Chicken Biryani",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "50g basmati rice, 100ml water, 100g chicken, salt to taste",
+    "instructions": "1. Rinse basmati rice under cold water. 2. In a pot, combine rice, chicken, water, and salt. 3. Bring to a boil, then reduce heat and cover. 4. Cook until water is absorbed and rice is cooked."
+  },
+  {
+    "name": "Mutton Biryani",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "50g basmati rice, 100ml water, 100g mutton, salt to taste",
+    "instructions": "1. Rinse basmati rice under cold water. 2. In a pot, combine rice, mutton, water, and salt. 3. Bring to a boil, then reduce heat and cover. 4. Cook until water is absorbed and rice is cooked."
+  },
+  {
+    "name": "Egg Biryani",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "50g basmati rice, 100ml water, 2 eggs, salt to taste",
+    "instructions": "1. Rinse basmati rice under cold water. 2. In a pot, boil eggs and set aside. 3. In the same pot, combine rice, water, and salt. 4. Cook until water is absorbed and rice is fluffy, then add boiled eggs."
+  },
+  {
+    "name": "Paneer Biryani",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "50g basmati rice, 100ml water, 100g paneer, salt to taste",
+    "instructions": "1. Rinse basmati rice under cold water. 2. In a pot, combine rice, paneer, water, and salt. 3. Bring to a boil, then reduce heat and cover. 4. Cook until water is absorbed and rice is fluffy."
+  },
+  {
+    "name": "Curd Rice",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "100g cooked rice, 100g curd, salt to taste",
+    "instructions": "1. In a bowl, mix cooked rice and curd. 2. Add salt to taste. 3. Mix well. 4. Serve chilled or at room temperature."
+  },
+  {
+    "name": "Lemon Rice",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "100g cooked rice, 10ml lemon juice, salt to taste, 5g turmeric powder",
+    "instructions": "1. In a bowl, mix cooked rice, lemon juice, turmeric, and salt. 2. Stir well to combine. 3. Serve at room temperature."
+  },
+  {
+    "name": "Tamarind Rice",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "100g cooked rice, 10g tamarind paste, salt to taste",
+    "instructions": "1. In a bowl, mix cooked rice, tamarind paste, and salt. 2. Stir well to combine. 3. Serve at room temperature."
+  },
+  {
+    "name": "Tomato Rice",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "100g cooked rice, 100g tomato, salt to taste",
+    "instructions": "1. In a bowl, mix cooked rice and chopped tomatoes. 2. Add salt to taste. 3. Stir well to combine. 4. Serve at room temperature."
+  },
+  {
+    "name": "Coconut Rice",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "100g cooked rice, 50g grated coconut, salt to taste",
+    "instructions": "1. In a bowl, mix cooked rice and grated coconut. 2. Add salt to taste. 3. Stir well to combine. 4. Serve at room temperature."
+  },
+  {
+    "name": "Khichdi",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "50g rice, 50g moong dal, 100ml water, salt to taste",
+    "instructions": "1. Rinse rice and moong dal under cold water. 2. In a pot, combine rice, dal, water, and salt. 3. Bring to a boil, then reduce heat and cover. 4. Cook until water is absorbed and both are soft."
+  },
+  {
+    "name": "Oats Khichdi",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "50g oats, 50g moong dal, 100ml water, salt to taste",
+    "instructions": "1. Rinse moong dal under cold water. 2. In a pot, combine oats, dal, water, and salt. 3. Bring to a boil, then reduce heat and cover. 4. Cook until water is absorbed and both are soft."
+  },
+  {
+    "name": "Daliya (savory)",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "50g daliya (broken wheat), 100ml water, salt to taste",
+    "instructions": "1. Rinse daliya under cold water. 2. In a pot, combine daliya, water, and salt. 3. Bring to a boil, then reduce heat and cover. 4. Cook until water is absorbed and daliya is soft."
+  },
+  {
+    "name": "Sweet Daliya",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "50g daliya (broken wheat), 100ml water, 10g sugar, 10g ghee",
+    "instructions": "1. Rinse daliya under cold water. 2. In a pot, combine daliya, water, and sugar. 3. Bring to a boil, then reduce heat and cover. 4. Cook until water is absorbed, then stir in ghee."
+  },
+  {
+    "name": "Plain Oatmeal (cooked in water)",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "50g oats, 100ml water, salt to taste",
+    "instructions": "1. In a pot, combine oats, water, and salt. 2. Bring to a boil, then reduce heat and simmer. 3. Cook until oats are soft and water is absorbed. 4. Serve warm."
+  },
+  {
+    "name": "Masala Oats",
+    "serving_size": "1 bowl (200g)",
+    "ingredients_text": "50g oats, 100ml water, 10g mixed spices, salt to taste",
+    "instructions": "1. In a pot, combine oats, water, mixed spices, and salt. 2. Bring to a boil, then reduce heat and simmer. 3. Cook until oats are soft and water is absorbed. 4. Serve warm."
+  },
+  {
+    "name": "Ragi Roti",
+    "serving_size": "2 pieces (100g)",
+    "ingredients_text": "100g ragi flour, water to knead, salt to taste",
+    "instructions": "1. In a bowl, mix ragi flour and salt. 2. Gradually add water and knead to form a soft dough. 3. Roll out into thin circles. 4. Cook on a hot tava until both sides are cooked."
+  },
+  {
+    "name": "Dal Tadka",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g split yellow lentils (toor dal), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Cook the lentils in water until soft. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Mix in the cooked lentils and simmer for a few minutes."
+  },
+  {
+    "name": "Dal Fry",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g split yellow lentils (toor dal), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Cook the lentils in water until soft. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Mix in the cooked lentils and fry for a few minutes."
+  },
+  {
+    "name": "Dal Makhani",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g black lentils (urad dal), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Soak and cook the black lentils until soft. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Mix in the cooked lentils and simmer for a few minutes."
+  },
+  {
+    "name": "Panchmel Dal",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "20g split yellow lentils (toor dal), 20g split green lentils (moong dal), 20g split red lentils (masoor dal), 20g split black lentils (urad dal), 20g split chickpeas (chana dal), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Cook all lentils together in water until soft. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Mix in the cooked lentils and simmer for a few minutes."
+  },
+  {
+    "name": "Chana Dal",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g split chickpeas (chana dal), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Cook the chana dal in water until soft. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Mix in the cooked chana dal and simmer for a few minutes."
+  },
+  {
+    "name": "Sambar",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g split pigeon peas (toor dal), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, 50g mixed vegetables (carrot, beans, etc.), salt to taste, 1g mustard seeds",
+    "instructions": "1. Cook the toor dal in water until soft. 2. Heat oil in a pan, add mustard seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato, mixed vegetables, and salt; cook until soft. 4. Mix in the cooked dal and simmer for a few minutes."
+  },
+  {
+    "name": "Rasam",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g split pigeon peas (toor dal), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g mustard seeds",
+    "instructions": "1. Cook the toor dal in water until soft. 2. Heat oil in a pan, add mustard seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Mix in the cooked dal and add water to adjust consistency."
+  },
+  {
+    "name": "Kadhi Pakora",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g gram flour (besan), 200g yogurt, 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Mix yogurt and gram flour with water to make a batter. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Add the batter and simmer until thickened."
+  },
+  {
+    "name": "Rajma Masala",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g red kidney beans (rajma), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Soak and cook the rajma in water until soft. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Mix in the cooked rajma and simmer for a few minutes."
+  },
+  {
+    "name": "Chole Masala",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g chickpeas (chole), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Soak and cook the chickpeas in water until soft. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Mix in the cooked chickpeas and simmer for a few minutes."
+  },
+  {
+    "name": "Kala Chana Masala",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g black chickpeas (kala chana), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Soak and cook the kala chana in water until soft. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Mix in the cooked kala chana and simmer for a few minutes."
+  },
+  {
+    "name": "Lobia Curry (Black Eyed Peas)",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g black-eyed peas (lobia), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Soak and cook the black-eyed peas in water until soft. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Mix in the cooked black-eyed peas and simmer for a few minutes."
+  },
+  {
+    "name": "Paneer Butter Masala",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g paneer, 15g butter, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat butter in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped tomato and salt; cook until soft. 3. Add paneer cubes and simmer for a few minutes. 4. Serve hot."
+  },
+  {
+    "name": "Palak Paneer",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g paneer, 100g spinach, 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Blanch and blend spinach into a puree. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add spinach puree and salt; cook for a few minutes. 4. Add paneer cubes and simmer for a few minutes."
+  },
+  {
+    "name": "Shahi Paneer",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g paneer, 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped tomato and salt; cook until soft. 3. Add paneer cubes and simmer for a few minutes. 4. Serve hot."
+  },
+  {
+    "name": "Kadai Paneer",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g paneer, 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped tomato and salt; cook until soft. 3. Add paneer cubes and simmer for a few minutes. 4. Serve hot."
+  },
+  {
+    "name": "Matar Paneer",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g paneer, 100g green peas, 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped tomato and salt; cook until soft. 3. Add green peas and cook until tender. 4. Add paneer cubes and simmer for a few minutes."
+  },
+  {
+    "name": "Paneer Bhurji",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g paneer, 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Crumble the paneer and set aside. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Add crumbled paneer and mix well, cooking for a few minutes."
+  },
+  {
+    "name": "Malai Kofta",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g paneer, 100g potato, 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Boil and mash the potato, mix with crumbled paneer to form balls. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Add kofta balls and simmer for a few minutes."
+  },
+  {
+    "name": "Aloo Gobi",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g potato, 100g cauliflower, 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped potato and cauliflower, and salt; cook until tender. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Aloo Baingan",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g potato, 100g eggplant (baingan), 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped potato and eggplant, and salt; cook until tender. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Aloo Jeera",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g potato, 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped potato and salt; cook until tender. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Bhindi Masala (Okra Stir Fry)",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g okra (bhindi), 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped okra and salt; cook until tender. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Baingan Bharta",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g eggplant (baingan), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Roast the eggplant until soft, peel and mash. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Mix in the mashed eggplant and simmer for a few minutes."
+  },
+  {
+    "name": "Cabbage Poriyal",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g cabbage, 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g mustard seeds",
+    "instructions": "1. Heat oil in a pan, add mustard seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped cabbage and salt; cook until tender. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Beans Poriyal",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g green beans, 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g mustard seeds",
+    "instructions": "1. Heat oil in a pan, add mustard seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped green beans and salt; cook until tender. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Bhindi Fry",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g okra (bhindi), 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped okra and salt; fry until crispy. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Lauki Ki Sabzi (Bottle Gourd)",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g bottle gourd (lauki), 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped bottle gourd and salt; cook until tender. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Turai Ki Sabzi (Ridge Gourd)",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g ridge gourd (turai), 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped ridge gourd and salt; cook until tender. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Kathal Ki Sabzi (Jackfruit Curry)",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g raw jackfruit (kathal), 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped jackfruit and salt; cook until tender. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Mushroom Masala",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g mushrooms, 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped tomato and salt; cook until soft. 3. Add sliced mushrooms and cook until tender. 4. Serve hot."
+  },
+  {
+    "name": "Vegetable Kurma",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g mixed vegetables (carrot, beans, peas), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped tomato and salt; cook until soft. 3. Add mixed vegetables and cook until tender. 4. Serve hot."
+  },
+  {
+    "name": "Mixed Vegetable Curry",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g mixed vegetables (carrot, beans, peas), 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add chopped tomato and salt; cook until soft. 3. Add mixed vegetables and cook until tender. 4. Serve hot."
+  },
+  {
+    "name": "Dum Aloo",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g baby potatoes, 15g sunflower oil, 30g onion, 20g tomato, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Boil and peel the baby potatoes. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped tomato and salt; cook until soft. 4. Add the potatoes and simmer for a few minutes."
+  },
+  {
+    "name": "Tindora Fry",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g tindora (ivy gourd), 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add sliced tindora and salt; fry until crispy. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Karela Masala (Bitter Gourd)",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g bitter gourd (karela), 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 2. Add sliced karela and salt; cook until tender. 3. Stir occasionally to prevent sticking. 4. Serve hot."
+  },
+  {
+    "name": "Sarson Ka Saag",
+    "serving_size": "1 bowl (250g)",
+    "ingredients_text": "100g mustard greens (sarson), 15g sunflower oil, 30g onion, 5g ginger, 5g garlic, 5g green chili, salt to taste, 1g cumin seeds",
+    "instructions": "1. Boil and chop the mustard greens. 2. Heat oil in a pan, add cumin seeds, chopped onion, ginger, garlic, and green chili; sauté until golden. 3. Add chopped greens and salt; cook until tender. 4. Serve hot."
+  },
+  {
+    "name": "Chicken Curry (home style)",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw chicken, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp coriander powder",
+    "instructions": "1. Heat oil in a pan and sauté chopped onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add chicken, mix well, and cook until chicken is done."
+  },
+  {
+    "name": "Butter Chicken",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw chicken, 50g onion, 30g tomato, 15g butter, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp garam masala",
+    "instructions": "1. Heat butter in a pan and sauté chopped onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add chicken, mix well, and cook until chicken is done."
+  },
+  {
+    "name": "Chicken Tikka Masala",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw chicken, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp garam masala",
+    "instructions": "1. Marinate chicken with spices and yogurt, then grill or pan-fry until cooked. 2. In a separate pan, heat oil and sauté onions until golden. 3. Add ginger-garlic paste and tomatoes, cook until soft. 4. Add cooked chicken and simmer for a few minutes."
+  },
+  {
+    "name": "Kadai Chicken",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw chicken, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp coriander powder",
+    "instructions": "1. Heat oil in a kadai and sauté onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add chicken, mix well, and cook until chicken is done."
+  },
+  {
+    "name": "Chicken Korma",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw chicken, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp coriander powder",
+    "instructions": "1. Heat oil in a pan and sauté onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add chicken, mix well, and cook until chicken is done."
+  },
+  {
+    "name": "Chicken Sukka",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw chicken, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp coriander powder",
+    "instructions": "1. Heat oil in a pan and sauté onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add chicken, mix well, and cook until chicken is done."
+  },
+  {
+    "name": "Pepper Chicken",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw chicken, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp black pepper powder",
+    "instructions": "1. Heat oil in a pan and sauté onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add chicken, mix well, and cook until chicken is done."
+  },
+  {
+    "name": "Mutton Curry",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw mutton, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp coriander powder",
+    "instructions": "1. Heat oil in a pan and sauté onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add mutton, mix well, and cook until mutton is tender."
+  },
+  {
+    "name": "Mutton Rogan Josh",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw mutton, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp garam masala",
+    "instructions": "1. Heat oil in a pan and sauté onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add mutton, mix well, and cook until mutton is tender."
+  },
+  {
+    "name": "Mutton Keema Masala",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw mutton mince, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp coriander powder",
+    "instructions": "1. Heat oil in a pan and sauté onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add mutton mince, mix well, and cook until done."
+  },
+  {
+    "name": "Fish Curry (generic)",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw fish, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp coriander powder",
+    "instructions": "1. Heat oil in a pan and sauté onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add fish, mix well, and cook until fish is done."
+  },
+  {
+    "name": "Fish Fry",
+    "serving_size": "1 piece (150g)",
+    "ingredients_text": "150g raw fish, 15g sunflower oil, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder",
+    "instructions": "1. Marinate fish with spices and salt. 2. Heat oil in a pan. 3. Fry fish until golden brown on both sides. 4. Serve hot."
+  },
+  {
+    "name": "Prawn Curry",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "150g raw prawns, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp coriander powder",
+    "instructions": "1. Heat oil in a pan and sauté onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add prawns, mix well, and cook until prawns are done."
+  },
+  {
+    "name": "Egg Curry",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "2 boiled eggs, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp coriander powder",
+    "instructions": "1. Heat oil in a pan and sauté onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add boiled eggs, mix well, and simmer for a few minutes."
+  },
+  {
+    "name": "Egg Bhurji (Scrambled eggs)",
+    "serving_size": "1 plate (200g)",
+    "ingredients_text": "2 eggs, 30g onion, 15g sunflower oil, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder",
+    "instructions": "1. Heat oil in a pan and sauté chopped onions until golden brown. 2. Beat eggs with spices and pour into the pan. 3. Scramble until eggs are cooked. 4. Serve hot."
+  },
+  {
+    "name": "Plain Omelette",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "2 eggs, salt to taste",
+    "instructions": "1. Beat eggs with salt. 2. Heat a non-stick pan. 3. Pour in the egg mixture and cook until set. 4. Flip and cook the other side briefly."
+  },
+  {
+    "name": "Egg White Omelette",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "4 egg whites, salt to taste",
+    "instructions": "1. Beat egg whites with salt. 2. Heat a non-stick pan. 3. Pour in the egg mixture and cook until set. 4. Flip and cook the other side briefly."
+  },
+  {
+    "name": "Boiled Egg (single)",
+    "serving_size": "1 piece (50g)",
+    "ingredients_text": "1 egg",
+    "instructions": "1. Place egg in boiling water. 2. Boil for 10 minutes. 3. Remove and cool. 4. Peel and serve."
+  },
+  {
+    "name": "Scrambled Eggs (plain)",
+    "serving_size": "1 plate (200g)",
+    "ingredients_text": "2 eggs, salt to taste, 15g sunflower oil",
+    "instructions": "1. Heat oil in a pan. 2. Beat eggs with salt and pour into the pan. 3. Scramble until eggs are cooked. 4. Serve hot."
+  },
+  {
+    "name": "Sunny Side Up Egg",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "1 egg, salt to taste, 15g sunflower oil",
+    "instructions": "1. Heat oil in a pan. 2. Crack egg into the pan. 3. Cook until white is set but yolk is runny. 4. Serve hot."
+  },
+  {
+    "name": "Chicken Fry",
+    "serving_size": "1 piece (150g)",
+    "ingredients_text": "150g raw chicken, 15g sunflower oil, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder",
+    "instructions": "1. Marinate chicken with spices and salt. 2. Heat oil in a pan. 3. Fry chicken until golden brown on both sides. 4. Serve hot."
+  },
+  {
+    "name": "Tandoori Chicken (1 piece)",
+    "serving_size": "1 piece (150g)",
+    "ingredients_text": "150g raw chicken, 15g sunflower oil, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp garam masala",
+    "instructions": "1. Marinate chicken with spices and oil. 2. Preheat oven or grill. 3. Cook chicken until done. 4. Serve hot."
+  },
+  {
+    "name": "Chicken Tikka (6 pieces)",
+    "serving_size": "6 pieces (150g)",
+    "ingredients_text": "150g raw chicken, 15g sunflower oil, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp garam masala",
+    "instructions": "1. Marinate chicken with spices and oil. 2. Preheat oven or grill. 3. Cook chicken until done. 4. Serve hot."
+  },
+  {
+    "name": "Fish Tikka",
+    "serving_size": "1 piece (150g)",
+    "ingredients_text": "150g raw fish, 15g sunflower oil, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp garam masala",
+    "instructions": "1. Marinate fish with spices and oil. 2. Preheat oven or grill. 3. Cook fish until done. 4. Serve hot."
+  },
+  {
+    "name": "Mutton Seekh Kabab",
+    "serving_size": "1 piece (150g)",
+    "ingredients_text": "150g raw mutton mince, 15g sunflower oil, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp garam masala",
+    "instructions": "1. Mix mutton mince with spices and form into kebabs. 2. Preheat oven or grill. 3. Cook kebabs until done. 4. Serve hot."
+  },
+  {
+    "name": "Chicken Seekh Kabab",
+    "serving_size": "1 piece (150g)",
+    "ingredients_text": "150g raw chicken mince, 15g sunflower oil, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder, 1 tsp garam masala",
+    "instructions": "1. Mix chicken mince with spices and form into kebabs. 2. Preheat oven or grill. 3. Cook kebabs until done. 4. Serve hot."
+  },
+  {
+    "name": "Egg Roast (Kerala style)",
+    "serving_size": "1 bowl (350g)",
+    "ingredients_text": "2 boiled eggs, 50g onion, 30g tomato, 15g sunflower oil, 10g ginger-garlic paste, salt to taste, 1 tsp turmeric powder, 1 tsp red chili powder",
+    "instructions": "1. Heat oil in a pan and sauté onions until golden brown. 2. Add ginger-garlic paste and sauté for a minute. 3. Add chopped tomatoes and spices, cook until tomatoes soften. 4. Add boiled eggs, mix well, and simmer for a few minutes."
+  },
+  {
+    "name": "Plain Dosa",
+    "serving_size": "1 piece (50g)",
+    "ingredients_text": "100g rice, 30g urad dal, 5g salt, 10g oil",
+    "instructions": "1. Soak rice and urad dal separately for 4-6 hours. 2. Grind soaked ingredients into a smooth batter, adding water as needed. 3. Ferment the batter overnight. 4. Heat a pan, pour batter, and cook until golden brown."
+  },
+  {
+    "name": "Masala Dosa",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "100g rice, 30g urad dal, 5g salt, 10g oil, 50g potato, 20g onion, 5g mustard seeds, 5g turmeric powder",
+    "instructions": "1. Soak rice and urad dal separately for 4-6 hours. 2. Grind soaked ingredients into a smooth batter, adding water as needed. 3. Prepare potato filling by boiling and mashing potatoes, sautéing with onions, mustard seeds, and turmeric. 4. Ferment the batter overnight, then cook dosas and fill with potato mixture."
+  },
+  {
+    "name": "Onion Dosa",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "100g rice, 30g urad dal, 5g salt, 10g oil, 30g onion",
+    "instructions": "1. Soak rice and urad dal separately for 4-6 hours. 2. Grind soaked ingredients into a smooth batter, adding water as needed. 3. Ferment the batter overnight. 4. Heat a pan, pour batter, top with chopped onions, and cook until golden brown."
+  },
+  {
+    "name": "Rava Dosa",
+    "serving_size": "1 piece (50g)",
+    "ingredients_text": "100g rava (semolina), 5g salt, 10g oil, 500ml water",
+    "instructions": "1. Mix rava, salt, and water to form a thin batter. 2. Let it rest for 30 minutes. 3. Heat a pan, pour batter, and cook until crispy. 4. Serve hot."
+  },
+  {
+    "name": "Set Dosa",
+    "serving_size": "2 pieces (100g)",
+    "ingredients_text": "100g rice, 30g urad dal, 5g salt, 10g oil",
+    "instructions": "1. Soak rice and urad dal separately for 4-6 hours. 2. Grind soaked ingredients into a smooth batter, adding water as needed. 3. Ferment the batter overnight. 4. Heat a pan, pour batter to form thick dosas, and cook until soft."
+  },
+  {
+    "name": "Plain Idli",
+    "serving_size": "2 pieces (100g)",
+    "ingredients_text": "100g rice, 30g urad dal, 5g salt, 10g water",
+    "instructions": "1. Soak rice and urad dal separately for 4-6 hours. 2. Grind soaked ingredients into a smooth batter, adding water as needed. 3. Ferment the batter overnight. 4. Pour batter into idli molds and steam for 10-15 minutes."
+  },
+  {
+    "name": "Rava Idli",
+    "serving_size": "2 pieces (100g)",
+    "ingredients_text": "100g rava (semolina), 5g salt, 10g yogurt, 10g water, 5g mustard seeds",
+    "instructions": "1. Mix rava, salt, yogurt, and water to form a thick batter. 2. Let it rest for 30 minutes. 3. Add mustard seeds and mix. 4. Pour batter into idli molds and steam for 10-15 minutes."
+  },
+  {
+    "name": "Medu Vada",
+    "serving_size": "2 pieces (100g)",
+    "ingredients_text": "100g urad dal, 5g salt, 10g oil, 30g onion, 5g cumin seeds",
+    "instructions": "1. Soak urad dal for 4-6 hours, then grind into a thick batter. 2. Mix in salt, chopped onions, and cumin seeds. 3. Shape into donuts and deep fry in hot oil until golden brown. 4. Serve hot."
+  },
+  {
+    "name": "Masala Vada",
+    "serving_size": "2 pieces (100g)",
+    "ingredients_text": "100g chana dal, 5g salt, 10g oil, 30g onion, 5g green chili, 5g cumin seeds",
+    "instructions": "1. Soak chana dal for 4-6 hours, then grind coarsely. 2. Mix in salt, chopped onions, green chili, and cumin seeds. 3. Shape into patties and deep fry in hot oil until golden brown. 4. Serve hot."
+  },
+  {
+    "name": "Upma",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "100g rava (semolina), 5g salt, 10g oil, 30g onion, 20g carrot, 500ml water",
+    "instructions": "1. Heat oil in a pan, sauté chopped onions and carrots. 2. Add rava and roast until golden. 3. Boil water, add salt, and pour into the pan. 4. Stir and cook until water is absorbed."
+  },
+  {
+    "name": "Semiya Upma",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "100g semiya (vermicelli), 5g salt, 10g oil, 30g onion, 20g carrot, 500ml water",
+    "instructions": "1. Heat oil in a pan, sauté chopped onions and carrots. 2. Add semiya and roast until golden. 3. Boil water, add salt, and pour into the pan. 4. Stir and cook until water is absorbed."
+  },
+  {
+    "name": "Plain Poha",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "100g poha (flattened rice), 5g salt, 10g oil, 30g onion, 20g peas, 5g mustard seeds",
+    "instructions": "1. Rinse poha in water and drain. 2. Heat oil, add mustard seeds, and sauté onions and peas. 3. Add poha and salt, mix well. 4. Cook for 5 minutes and serve."
+  },
+  {
+    "name": "Indori Poha",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "100g poha (flattened rice), 5g salt, 10g oil, 30g onion, 20g peas, 5g mustard seeds, 5g sugar",
+    "instructions": "1. Rinse poha in water and drain. 2. Heat oil, add mustard seeds, and sauté onions and peas. 3. Add poha, salt, and sugar, mix well. 4. Cook for 5 minutes and serve."
+  },
+  {
+    "name": "Sabudana Khichdi",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "100g sabudana (tapioca pearls), 5g salt, 10g oil, 30g potato, 5g cumin seeds, 20g peanuts",
+    "instructions": "1. Soak sabudana for 4-6 hours. 2. Heat oil, add cumin seeds, and sauté boiled, diced potatoes and peanuts. 3. Add soaked sabudana and salt, mix well. 4. Cook until pearls turn translucent."
+  },
+  {
+    "name": "Sabudana Vada",
+    "serving_size": "2 pieces (100g)",
+    "ingredients_text": "100g sabudana (tapioca pearls), 5g salt, 10g oil, 30g potato, 5g cumin seeds, 20g peanuts",
+    "instructions": "1. Soak sabudana for 4-6 hours. 2. Mash boiled potatoes and mix with soaked sabudana, salt, cumin seeds, and peanuts. 3. Shape into patties and deep fry in hot oil until golden brown. 4. Serve hot."
+  },
+  {
+    "name": "Plain Uttapam",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "100g rice, 30g urad dal, 5g salt, 10g oil",
+    "instructions": "1. Soak rice and urad dal separately for 4-6 hours. 2. Grind soaked ingredients into a smooth batter, adding water as needed. 3. Ferment the batter overnight. 4. Heat a pan, pour batter, and cook until golden brown."
+  },
+  {
+    "name": "Onion Uttapam",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "100g rice, 30g urad dal, 5g salt, 10g oil, 30g onion",
+    "instructions": "1. Soak rice and urad dal separately for 4-6 hours. 2. Grind soaked ingredients into a smooth batter, adding water as needed. 3. Ferment the batter overnight. 4. Heat a pan, pour batter, top with chopped onions, and cook until golden brown."
+  },
+  {
+    "name": "Bread Butter Toast",
+    "serving_size": "2 slices (60g)",
+    "ingredients_text": "2 slices bread, 10g butter",
+    "instructions": "1. Spread butter on one side of each bread slice. 2. Heat a pan and place the bread slices butter-side down. 3. Toast until golden brown. 4. Flip and toast the other side briefly."
+  },
+  {
+    "name": "Bread Omelette",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "2 slices bread, 2 eggs, 5g salt, 10g oil",
+    "instructions": "1. Beat eggs with salt. 2. Heat oil in a pan, pour in the egg mixture. 3. Place bread slices on top and cook until eggs are set. 4. Flip and cook the other side briefly."
+  },
+  {
+    "name": "French Toast (sweet)",
+    "serving_size": "2 slices (60g)",
+    "ingredients_text": "2 slices bread, 1 egg, 10g sugar, 10g milk, 10g oil",
+    "instructions": "1. Beat egg with sugar and milk. 2. Dip bread slices in the mixture. 3. Heat oil in a pan, place dipped bread slices, and cook until golden brown. 4. Flip and cook the other side briefly."
+  },
+  {
+    "name": "Samosa",
+    "serving_size": "1 piece (50g)",
+    "ingredients_text": "50g all-purpose flour, 10g oil, 30g potato, 5g salt, 5g cumin seeds",
+    "instructions": "1. Make a dough with flour, oil, and salt. 2. Boil and mash potatoes, mix with cumin seeds. 3. Roll out dough, fill with potato mixture, and shape into triangles. 4. Deep fry in hot oil until golden brown."
+  },
+  {
+    "name": "Kachori",
+    "serving_size": "1 piece (50g)",
+    "ingredients_text": "50g all-purpose flour, 10g oil, 30g split urad dal, 5g salt, 5g cumin seeds",
+    "instructions": "1. Make a dough with flour, oil, and salt. 2. Grind urad dal coarsely and mix with cumin seeds. 3. Roll out dough, fill with dal mixture, and shape into balls. 4. Deep fry in hot oil until golden brown."
+  },
+  {
+    "name": "Onion Pakora",
+    "serving_size": "1 plate (150g)",
+    "ingredients_text": "100g gram flour, 30g onion, 5g salt, 10g oil, 5g cumin seeds",
+    "instructions": "1. Slice onions and mix with gram flour, salt, and cumin seeds. 2. Add water to form a thick batter. 3. Heat oil in a pan, drop spoonfuls of batter, and fry until golden brown. 4. Serve hot."
+  },
+  {
+    "name": "Mix Veg Pakora",
+    "serving_size": "1 plate (150g)",
+    "ingredients_text": "100g gram flour, 30g mixed vegetables, 5g salt, 10g oil, 5g cumin seeds",
+    "instructions": "1. Chop mixed vegetables and mix with gram flour, salt, and cumin seeds. 2. Add water to form a thick batter. 3. Heat oil in a pan, drop spoonfuls of batter, and fry until golden brown. 4. Serve hot."
+  },
+  {
+    "name": "Paneer Pakora",
+    "serving_size": "1 plate (150g)",
+    "ingredients_text": "100g gram flour, 50g paneer, 5g salt, 10g oil, 5g cumin seeds",
+    "instructions": "1. Cut paneer into slices and mix gram flour, salt, and cumin seeds. 2. Add water to form a thick batter. 3. Heat oil in a pan, dip paneer slices in batter, and fry until golden brown. 4. Serve hot."
+  },
+  {
+    "name": "Bread Pakora",
+    "serving_size": "1 piece (50g)",
+    "ingredients_text": "50g all-purpose flour, 10g oil, 2 slices bread, 5g salt, 30g potato",
+    "instructions": "1. Boil and mash potatoes, mix with salt. 2. Make a batter with flour and water. 3. Stuff potato mixture between bread slices, dip in batter, and deep fry until golden brown. 4. Serve hot."
+  },
+  {
+    "name": "Aloo Bonda",
+    "serving_size": "1 piece (50g)",
+    "ingredients_text": "50g all-purpose flour, 10g oil, 30g potato, 5g salt, 5g cumin seeds",
+    "instructions": "1. Boil and mash potatoes, mix with salt and cumin seeds. 2. Make a dough with flour and water. 3. Shape potato mixture into balls, coat with dough, and deep fry until golden brown. 4. Serve hot."
+  },
+  {
+    "name": "Dhokla",
+    "serving_size": "3 pieces (100g)",
+    "ingredients_text": "100g gram flour, 5g salt, 10g yogurt, 5g turmeric powder, 10g oil, 500ml water",
+    "instructions": "1. Mix gram flour, salt, yogurt, turmeric, and water to form a batter. 2. Pour into a greased steaming tray. 3. Steam for 15-20 minutes. 4. Cut into pieces and serve."
+  },
+  {
+    "name": "Khandvi",
+    "serving_size": "4 pieces (100g)",
+    "ingredients_text": "100g gram flour, 5g salt, 10g yogurt, 5g turmeric powder, 10g oil, 500ml water",
+    "instructions": "1. Mix gram flour, salt, yogurt, turmeric, and water to form a smooth batter. 2. Cook on low heat until thick. 3. Spread on a greased surface, roll up, and cut into pieces. 4. Serve with chutney."
+  },
+  {
+    "name": "Thepla",
+    "serving_size": "1 piece (50g)",
+    "ingredients_text": "50g whole wheat flour, 5g salt, 10g oil, 10g yogurt, 5g turmeric powder",
+    "instructions": "1. Mix flour, salt, yogurt, and turmeric to form a dough. 2. Roll out into thin circles. 3. Cook on a hot pan with oil until golden brown on both sides. 4. Serve hot."
+  },
+  {
+    "name": "Pav Bhaji",
+    "serving_size": "1 plate (350g)",
+    "ingredients_text": "100g mixed vegetables, 5g salt, 10g oil, 2 pav (bread rolls), 5g cumin seeds, 5g turmeric powder",
+    "instructions": "1. Boil and mash mixed vegetables. 2. Heat oil, add cumin seeds, and sauté. 3. Add mashed vegetables, salt, and turmeric, and cook for a few minutes. 4. Serve with buttered pav."
+  },
+  {
+    "name": "Vada Pav",
+    "serving_size": "1 piece (150g)",
+    "ingredients_text": "50g all-purpose flour, 10g oil, 30g potato, 5g salt, 1 pav (bread roll)",
+    "instructions": "1. Boil and mash potatoes, mix with salt. 2. Make a batter with flour and water. 3. Shape potato mixture into balls, coat with batter, and deep fry until golden brown. 4. Serve in a pav."
+  },
+  {
+    "name": "Misal Pav",
+    "serving_size": "1 plate (350g)",
+    "ingredients_text": "100g mixed sprouts, 5g salt, 10g oil, 2 pav (bread rolls), 5g cumin seeds, 5g turmeric powder",
+    "instructions": "1. Cook mixed sprouts with salt and spices. 2. Heat oil, add cumin seeds, and sauté. 3. Add cooked sprouts and simmer. 4. Serve with buttered pav."
+  },
+  {
+    "name": "Bhel Puri",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "100g puffed rice, 5g salt, 10g oil, 30g onion, 20g tomato, 10g tamarind chutney",
+    "instructions": "1. Mix puffed rice, chopped onions, tomatoes, and salt in a bowl. 2. Drizzle with oil and chutney. 3. Toss well. 4. Serve immediately."
+  },
+  {
+    "name": "Sev Puri",
+    "serving_size": "1 plate (150g)",
+    "ingredients_text": "100g papdi (crispy flat puris), 5g salt, 10g oil, 30g onion, 20g tomato, 10g tamarind chutney",
+    "instructions": "1. Arrange papdi on a plate. 2. Top with chopped onions, tomatoes, and salt. 3. Drizzle with oil and chutney. 4. Serve immediately."
+  },
+  {
+    "name": "Pani Puri",
+    "serving_size": "6 pieces (150g)",
+    "ingredients_text": "50g semolina, 10g all-purpose flour, 5g salt, 10g oil, 100ml water",
+    "instructions": "1. Mix semolina, flour, salt, and water to form a dough. 2. Roll out and cut into small circles. 3. Deep fry until puffed and golden. 4. Serve with spicy water."
+  },
+  {
+    "name": "Dahi Puri",
+    "serving_size": "6 pieces (150g)",
+    "ingredients_text": "50g papdi (crispy flat puris), 5g salt, 10g yogurt, 30g onion, 20g tomato, 10g tamarind chutney",
+    "instructions": "1. Arrange papdi on a plate. 2. Top with yogurt, chopped onions, tomatoes, and salt. 3. Drizzle with chutney. 4. Serve immediately."
+  },
+  {
+    "name": "Aloo Tikki",
+    "serving_size": "1 piece (50g)",
+    "ingredients_text": "50g potato, 5g salt, 10g oil, 5g cumin seeds",
+    "instructions": "1. Boil and mash potatoes, mix with salt and cumin seeds. 2. Shape into patties. 3. Heat oil in a pan, and fry until golden brown on both sides. 4. Serve hot."
+  },
+  {
+    "name": "Papdi Chaat",
+    "serving_size": "1 plate (150g)",
+    "ingredients_text": "100g papdi (crispy flat puris), 5g salt, 10g yogurt, 30g onion, 20g tomato, 10g tamarind chutney",
+    "instructions": "1. Arrange papdi on a plate. 2. Top with yogurt, chopped onions, tomatoes, and salt. 3. Drizzle with chutney. 4. Serve immediately."
+  },
+  {
+    "name": "Dahi Vada",
+    "serving_size": "2 pieces (100g)",
+    "ingredients_text": "100g urad dal, 5g salt, 10g yogurt, 10g oil",
+    "instructions": "1. Soak urad dal for 4-6 hours, then grind into a thick batter. 2. Shape into balls and deep fry until golden brown. 3. Soak in water for a few minutes, then squeeze out excess water. 4. Serve topped with yogurt."
+  },
+  {
+    "name": "Gulab Jamun",
+    "serving_size": "2 pieces (60g)",
+    "ingredients_text": "50g khoya, 20g all-purpose flour, 10g baking powder, 50g sugar, 100ml water, 10g ghee, oil for frying",
+    "instructions": "1. Mix khoya, all-purpose flour, and baking powder to form a dough. 2. Shape into small balls. 3. Heat oil and fry until golden brown. 4. Prepare sugar syrup by dissolving sugar in water and soak fried balls in syrup."
+  },
+  {
+    "name": "Rasgulla",
+    "serving_size": "2 pieces (60g)",
+    "ingredients_text": "100g chhena (paneer), 50g sugar, 100ml water, 10g lemon juice",
+    "instructions": "1. Knead chhena until smooth. 2. Shape into small balls. 3. Boil water with sugar to make syrup. 4. Cook the balls in syrup until they double in size."
+  },
+  {
+    "name": "Rice Kheer",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "50g rice, 500ml milk, 50g sugar, 10g cardamom powder",
+    "instructions": "1. Boil milk and add washed rice. 2. Cook until rice is soft. 3. Add sugar and cardamom powder. 4. Simmer for a few minutes and serve."
+  },
+  {
+    "name": "Semiyan Payasam",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "50g vermicelli, 500ml milk, 50g sugar, 10g cardamom powder",
+    "instructions": "1. Roast vermicelli in ghee until golden. 2. Boil milk and add roasted vermicelli. 3. Cook until soft, then add sugar and cardamom. 4. Simmer for a few minutes and serve."
+  },
+  {
+    "name": "Gajar Ka Halwa",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "200g grated carrots, 500ml milk, 50g sugar, 10g ghee",
+    "instructions": "1. Boil milk and add grated carrots. 2. Cook until milk reduces. 3. Add sugar and ghee, mix well. 4. Cook until thickened and serve."
+  },
+  {
+    "name": "Moong Dal Halwa",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "100g moong dal, 500ml milk, 50g sugar, 10g ghee",
+    "instructions": "1. Soak and grind moong dal. 2. Cook in ghee until golden. 3. Add milk and sugar, cook until thick. 4. Serve warm."
+  },
+  {
+    "name": "Suji Ka Halwa",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "100g semolina, 500ml milk, 50g sugar, 10g ghee",
+    "instructions": "1. Roast semolina in ghee until golden. 2. Boil milk and add roasted semolina. 3. Add sugar and cook until thick. 4. Serve warm."
+  },
+  {
+    "name": "Rasmalai",
+    "serving_size": "2 pieces (60g)",
+    "ingredients_text": "100g chhena (paneer), 50g sugar, 100ml milk, 10g cardamom powder",
+    "instructions": "1. Knead chhena and form into flat discs. 2. Boil milk with sugar to make syrup. 3. Cook discs in syrup until soft. 4. Serve chilled."
+  },
+  {
+    "name": "Jalebi",
+    "serving_size": "2 pieces (60g)",
+    "ingredients_text": "50g all-purpose flour, 10g yogurt, 100ml water, 50g sugar, oil for frying",
+    "instructions": "1. Mix flour, yogurt, and water to form a batter. 2. Heat oil and pipe batter into spirals. 3. Fry until golden and dip in sugar syrup. 4. Serve hot."
+  },
+  {
+    "name": "Shrikhand",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "200g yogurt, 50g sugar, 10g cardamom powder",
+    "instructions": "1. Whisk yogurt until smooth. 2. Add sugar and cardamom powder. 3. Mix well and chill. 4. Serve cold."
+  },
+  {
+    "name": "Kulfi",
+    "serving_size": "1 piece (100g)",
+    "ingredients_text": "200ml milk, 50g sugar, 10g cardamom powder",
+    "instructions": "1. Boil milk and reduce to half. 2. Add sugar and cardamom, mix well. 3. Pour into molds and freeze. 4. Serve chilled."
+  },
+  {
+    "name": "Mysore Pak",
+    "serving_size": "1 piece (30g)",
+    "ingredients_text": "50g gram flour, 50g sugar, 30g ghee",
+    "instructions": "1. Heat ghee and add gram flour, stirring continuously. 2. Add sugar and mix until thick. 3. Pour into a greased tray and cool. 4. Cut into pieces and serve."
+  },
+  {
+    "name": "Besan Ladoo",
+    "serving_size": "1 piece (30g)",
+    "ingredients_text": "50g gram flour, 30g ghee, 20g sugar",
+    "instructions": "1. Roast gram flour in ghee until golden. 2. Mix in sugar. 3. Shape into small balls. 4. Serve as a sweet."
+  },
+  {
+    "name": "Motichoor Ladoo",
+    "serving_size": "1 piece (30g)",
+    "ingredients_text": "50g gram flour, 30g sugar, 10g ghee, 100ml water",
+    "instructions": "1. Make a batter with gram flour and water. 2. Fry small droplets in ghee. 3. Soak in sugar syrup. 4. Shape into balls and serve."
+  },
+  {
+    "name": "Kaju Katli",
+    "serving_size": "2 pieces (30g)",
+    "ingredients_text": "50g cashew nuts, 30g sugar, 10g ghee",
+    "instructions": "1. Grind cashews to a fine powder. 2. Cook with sugar and ghee until thick. 3. Roll out and cut into pieces. 4. Serve as a sweet."
+  },
+  {
+    "name": "Plain Yogurt / Dahi",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "200ml milk, 10g yogurt culture",
+    "instructions": "1. Boil milk and cool to lukewarm. 2. Add yogurt culture and mix well. 3. Cover and let set for 6-8 hours. 4. Serve chilled."
+  },
+  {
+    "name": "Boondi Raita",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "100g yogurt, 30g boondi, 10g cumin powder, salt to taste",
+    "instructions": "1. Whisk yogurt until smooth. 2. Add boondi, cumin powder, and salt. 3. Mix well. 4. Serve chilled."
+  },
+  {
+    "name": "Cucumber Raita",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "100g yogurt, 50g cucumber, 10g cumin powder, salt to taste",
+    "instructions": "1. Grate cucumber and squeeze out excess water. 2. Mix with yogurt, cumin, and salt. 3. Serve chilled."
+  },
+  {
+    "name": "Mint Raita",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "100g yogurt, 20g mint leaves, 10g cumin powder, salt to taste",
+    "instructions": "1. Blend mint leaves with yogurt. 2. Add cumin and salt. 3. Mix well. 4. Serve chilled."
+  },
+  {
+    "name": "Coconut Chutney",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "50g grated coconut, 10g green chili, 10g ginger, salt to taste",
+    "instructions": "1. Blend coconut, green chili, and ginger with water. 2. Add salt to taste. 3. Serve fresh."
+  },
+  {
+    "name": "Green Chutney (Coriander-mint)",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "50g coriander leaves, 20g mint leaves, 10g green chili, salt to taste",
+    "instructions": "1. Blend coriander, mint, and green chili with water. 2. Add salt to taste. 3. Serve fresh."
+  },
+  {
+    "name": "Tamarind Chutney",
+    "serving_size": "1 bowl (150g)",
+    "ingredients_text": "50g tamarind, 30g sugar, 100ml water, salt to taste",
+    "instructions": "1. Soak tamarind in water and extract pulp. 2. Add sugar and salt. 3. Mix well. 4. Serve fresh."
+  },
+  {
+    "name": "Masala Papad",
+    "serving_size": "1 piece (30g)",
+    "ingredients_text": "1 papad, 10g onion, 10g tomato, 10g coriander leaves, salt to taste",
+    "instructions": "1. Roast papad until crispy. 2. Top with chopped onion, tomato, and coriander. 3. Sprinkle salt. 4. Serve immediately."
+  },
+  {
+    "name": "Roasted Papad",
+    "serving_size": "1 piece (30g)",
+    "ingredients_text": "1 papad",
+    "instructions": "1. Roast papad over an open flame or in a microwave. 2. Serve hot."
+  },
+  {
+    "name": "Sweet Lassi",
+    "serving_size": "1 glass (250g)",
+    "ingredients_text": "200g yogurt, 50g sugar, 100ml water",
+    "instructions": "1. Blend yogurt, sugar, and water until smooth. 2. Serve chilled."
+  },
+  {
+    "name": "Mango Lassi",
+    "serving_size": "1 glass (250g)",
+    "ingredients_text": "200g yogurt, 50g mango pulp, 50g sugar",
+    "instructions": "1. Blend yogurt, mango pulp, and sugar until smooth. 2. Serve chilled."
+  },
+  {
+    "name": "Salted Lassi",
+    "serving_size": "1 glass (250g)",
+    "ingredients_text": "200g yogurt, 10g salt, 100ml water",
+    "instructions": "1. Blend yogurt, salt, and water until smooth. 2. Serve chilled."
+  },
+  {
+    "name": "Masala Buttermilk (Chaas)",
+    "serving_size": "1 glass (250g)",
+    "ingredients_text": "200g yogurt, 10g cumin powder, 100ml water, salt to taste",
+    "instructions": "1. Blend yogurt, cumin, and water until smooth. 2. Add salt to taste. 3. Serve chilled."
+  },
+  {
+    "name": "Garam Chai (Milk tea)",
+    "serving_size": "1 cup (200g)",
+    "ingredients_text": "200ml water, 10g tea leaves, 50ml milk, 10g sugar",
+    "instructions": "1. Boil water and add tea leaves. 2. Simmer for a few minutes. 3. Add milk and sugar, boil again. 4. Strain and serve hot."
+  },
+  {
+    "name": "Filter Coffee",
+    "serving_size": "1 cup (200g)",
+    "ingredients_text": "10g coffee powder, 200ml water, 50ml milk, 10g sugar",
+    "instructions": "1. Brew coffee powder with hot water. 2. Strain and mix with milk and sugar. 3. Serve hot."
+  },
+  {
+    "name": "Black Coffee",
+    "serving_size": "1 cup (200g)",
+    "ingredients_text": "10g coffee powder, 200ml water",
+    "instructions": "1. Brew coffee powder with hot water. 2. Strain and serve hot."
+  },
+  {
+    "name": "Green Tea",
+    "serving_size": "1 cup (200g)",
+    "ingredients_text": "10g green tea leaves, 200ml water",
+    "instructions": "1. Boil water and add green tea leaves. 2. Steep for a few minutes. 3. Strain and serve hot."
+  },
+  {
+    "name": "Lemon Tea",
+    "serving_size": "1 cup (200g)",
+    "ingredients_text": "200ml water, 10g tea leaves, 10g lemon juice, 10g sugar",
+    "instructions": "1. Boil water and add tea leaves. 2. Simmer for a few minutes. 3. Add lemon juice and sugar. 4. Strain and serve hot."
+  },
+  {
+    "name": "Badam Milk",
+    "serving_size": "1 cup (200g)",
+    "ingredients_text": "200ml milk, 10g almond powder, 10g sugar",
+    "instructions": "1. Boil milk and add almond powder. 2. Add sugar and mix well. 3. Serve hot or cold."
+  },
+  {
+    "name": "Coconut Water",
+    "serving_size": "1 cup (200g)",
+    "ingredients_text": "200ml coconut water",
+    "instructions": "1. Serve fresh coconut water chilled."
+  },
+  {
+    "name": "Aam Panna",
+    "serving_size": "1 glass (250g)",
+    "ingredients_text": "100g raw mango, 50g sugar, 200ml water, salt to taste",
+    "instructions": "1. Boil raw mango until soft and extract pulp. 2. Mix pulp with sugar, water, and salt. 3. Serve chilled."
+  },
+  {
+    "name": "Jaljeera",
+    "serving_size": "1 glass (250g)",
+    "ingredients_text": "200ml water, 10g jaljeera powder, 10g lemon juice, salt to taste",
+    "instructions": "1. Mix jaljeera powder, lemon juice, and salt in water. 2. Stir well. 3. Serve chilled."
+  },
+  {
+    "name": "Lemonade (Shikanji)",
+    "serving_size": "1 glass (250g)",
+    "ingredients_text": "200ml water, 10g lemon juice, 10g sugar, salt to taste",
+    "instructions": "1. Mix lemon juice, sugar, and salt in water. 2. Stir well. 3. Serve chilled."
+  }
+]
