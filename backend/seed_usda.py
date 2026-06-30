@@ -1,7 +1,7 @@
 import os
 import sys
 import pandas as pd
-from sqlmodel import create_engine, Session, SQLModel
+from sqlmodel import create_engine, Session, SQLModel, delete
 from dotenv import load_dotenv
 
 # Load env variables explicitly
@@ -96,7 +96,7 @@ def seed_usda():
     print(f"Seeding {len(db_records)} records into table 'usda_raw'...")
     with Session(engine) as session:
         # Clear existing entries in usda_raw first to prevent duplicates
-        session.query(USDARaw).delete()
+        session.exec(delete(USDARaw))
         session.commit()
         
         # Add all and commit
