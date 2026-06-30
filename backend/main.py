@@ -62,6 +62,17 @@ class Recipe(SQLModel, table=True):
     url: str
 
 
+class USDARaw(SQLModel, table=True):
+    __tablename__ = "usda_raw"
+
+    fdc_id: int = Field(primary_key=True)
+    description: str = Field(index=True)
+    calories: float = Field(default=0.0)
+    protein: float = Field(default=0.0)
+    carbs: float = Field(default=0.0)
+    fat: float = Field(default=0.0)
+
+
 class MealResponse(BaseModel):
     meal_type: str
     calories: float
