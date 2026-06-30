@@ -238,21 +238,49 @@ def retrieve_grounding_templates(logged_items: List[LoggedItem], db: Session) ->
                 "instructions": model.instructions
             }
         else:
-            # Fall back to a raw ingredient template
-            if best_type == "icmr":
-                templates[item.food_name] = {
-                    "type": "raw",
-                    "serving_size": "100g",
-                    "ingredients_text": f"100g {best_model.food_name}",
-                    "instructions": "Consume raw or prep as desired."
-                }
-            elif best_type == "usda":
-                templates[item.food_name] = {
-                    "type": "raw",
-                    "serving_size": "100g",
-                    "ingredients_text": f"100g {best_model.description}",
-                    "instructions": "Consume raw or prep as desired."
-                }
+            # Check if raw fallback matches within strict distance 0.30
+            raw_match_valid = best_distance <= 0.30 if best_type in ("icmr", "usda") else False
+            
+            if raw_match_valid:
+                if best_type == "icmr":
+                    templates[item.food_name] = {
+                        "type": "raw",
+                        "serving_size": "100g",
+                        "ingredients_text": f"100g {best_model.food_name}",
+                        "instructions": "Consume raw or prep as desired."
+                    }
+                elif best_type == "usda":
+                    templates[item.food_name] = {
+                        "type": "raw",
+                        "serving_size": "100g",
+                        "ingredients_text": f"100g {best_model.description}",
+                        "instructions": "Consume raw or prep as desired."
+                    }
+            else:
+                # If it's a cooked dish and we have no close match in database, force decomposition
+                if item.is_cooked_dish:
+                    templates[item.food_name] = {
+                        "type": "unmatched_cooked",
+                        "serving_size": "1 portion",
+                        "ingredients_text": "Unknown cooked recipe (requires decomposition)",
+                        "instructions": "Decompose this dish into raw ingredients."
+                    }
+                else:
+                    # Fallback to raw model even if distance is high, since it cannot be decomposed
+                    if best_type == "icmr":
+                        templates[item.food_name] = {
+                            "type": "raw",
+                            "serving_size": "100g",
+                            "ingredients_text": f"100g {best_model.food_name}",
+                            "instructions": "Consume raw or prep as desired."
+                        }
+                    elif best_type == "usda":
+                        templates[item.food_name] = {
+                            "type": "raw",
+                            "serving_size": "100g",
+                            "ingredients_text": f"100g {best_model.description}",
+                            "instructions": "Consume raw or prep as desired."
+                        }
                 
     return templates
 
@@ -262,14 +290,14 @@ def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[Lo
     for food_name, temp in templates.items():
         item_meta = next((item for item in logged_items if item.food_name == food_name), None)
         is_cooked = item_meta.is_cooked_dish if item_meta else False
-        is_fallback = temp["type"] == "raw"
+        is_fallback = temp["type"] in ("raw", "unmatched_cooked")
         
         context_lines.append(
             f"Database template for '{food_name}':\n"
             f"  Portion baseline: {temp['serving_size']}\n"
             f"  Raw Ingredients: {temp['ingredients_text']}\n"
             f"  Cooking Steps: {temp['instructions']}\n"
-            f"  Metadata: is_cooked_dish={is_cooked}, is_fallback_due_to_missing_template={is_fallback}"
+            f"  Metadata: is_cooked_dish={is_cooked}, is_fallback_due_to_missing_template={is_fallback}, template_type={temp['type']}"
         )
     templates_context = "\n\n".join(context_lines)
     
@@ -281,11 +309,15 @@ def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[Lo
         "1. Categorize the meal (breakfast, lunch, dinner, or snack).\n"
         "2. For each food item the user consumed, match it against the reference templates.\n"
         "3. Estimate the scale factor and output the constituent raw ingredients and their scaled uncooked weights in grams.\n"
-        "4. If a dish matches a template, scale all its raw ingredients proportionally. For example, if the standard "
-        "portion is '2 pieces (100g)' and uses 100g flour, and the user ate 1 piece, scale it to 50g flour. If the user ate 4 pieces, scale it to 200g flour.\n"
-        "5. If a logged item is a raw commodity (like banana or almonds), simply output it with its estimated raw weight.\n"
-        "6. Do NOT include water or salt in the raw ingredients list.\n"
-        "7. NEW STAPLES REVIEW RULE:\n"
+        "4. If a dish matches a staple template, scale all its raw ingredients proportionally.\n"
+        "5. If a food item's template type is `unmatched_cooked`, it has no database recipe. You MUST decompose it into its standard, raw ingredients, and output those ingredients with their scaled uncooked weights in grams based on the user's portion.\n"
+        "6. If a logged item is a raw commodity (like banana or almonds), simply output it with its estimated raw weight.\n"
+        "7. Do NOT include water or salt in the raw ingredients list.\n"
+        "8. PORTION WEIGHT PRIORS FOR RAW FALLBACKS:\n"
+        "   - For raw fallback templates (type='raw') which use a '100g' baseline, use your general knowledge of standard food portions to estimate the weight consumed if the user logged an abstract or non-gram portion.\n"
+        "     * E.g., if a standard order of fries is ~120-150g, and the user 'shared fries with three people' (divided by 4), scale the raw potato/fries ingredient weight to ~30-37g.\n"
+        "     * E.g., if the user ate 'a bite' of a food, scale it down to ~10-15% of its standard serving weight.\n"
+        "9. NEW STAPLES REVIEW RULE:\n"
         "   - If a food item has `is_cooked_dish=True` AND `is_fallback_due_to_missing_template=True`, this is a new cooked dish not in our database.\n"
         "   - You MUST generate a standard, generic 1-person baseline recipe template for this new dish in the `new_candidates` list.\n"
         "   - Specify the standard name, serving size (e.g. '1 plate (350g)'), standard raw ingredients and baseline weights, and 3-step cooking instructions.\n"
@@ -300,7 +332,7 @@ def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[Lo
                     "content": (
                         "You are a precise nutrition scaling assistant. Ground all calculations on the provided database templates. "
                         "Scale raw ingredients and weights proportionally based on the user's portion. "
-                        "Generate standard new recipe templates in the new_candidates list for any new cooked dishes."
+                        "Use general portion weight priors for raw fallbacks and generate standard new recipe templates in the new_candidates list for any new cooked dishes."
                     )
                 },
                 {"role": "user", "content": prompt}
@@ -387,7 +419,7 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
         cooked_fallback_names = {
             item.food_name
             for item in logged_items
-            if item.is_cooked_dish and templates.get(item.food_name, {}).get("type") == "raw"
+            if item.is_cooked_dish and templates.get(item.food_name, {}).get("type") in ("raw", "unmatched_cooked")
         }
         for cand in scaled_res.new_candidates:
             if cand.name not in cooked_fallback_names:
