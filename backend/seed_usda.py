@@ -83,13 +83,22 @@ def seed_usda():
         # Get nutrients from pivot table
         nutrients = pivot_df.loc[fdc_id] if fdc_id in pivot_df.index else None
         
+        calories = float(nutrients["calories"]) if nutrients is not None else 0.0
+        protein = float(nutrients["protein"]) if nutrients is not None else 0.0
+        carbs = float(nutrients["carbs"]) if nutrients is not None else 0.0
+        fat = float(nutrients["fat"]) if nutrients is not None else 0.0
+        
+        # Apply Atwater fallback if calories are missing/zero but macros exist
+        if calories == 0.0 and (protein > 0.0 or carbs > 0.0 or fat > 0.0):
+            calories = round((protein * 4.0) + (carbs * 4.0) + (fat * 9.0), 2)
+            
         record = USDARaw(
             fdc_id=fdc_id,
             description=description,
-            calories=float(nutrients["calories"]) if nutrients is not None else 0.0,
-            protein=float(nutrients["protein"]) if nutrients is not None else 0.0,
-            carbs=float(nutrients["carbs"]) if nutrients is not None else 0.0,
-            fat=float(nutrients["fat"]) if nutrients is not None else 0.0
+            calories=calories,
+            protein=protein,
+            carbs=carbs,
+            fat=fat
         )
         db_records.append(record)
 
