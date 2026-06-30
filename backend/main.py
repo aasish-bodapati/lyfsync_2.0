@@ -143,7 +143,11 @@ def extract_dishes(text: str) -> List[LoggedItem]:
                     "role": "system",
                     "content": (
                         "You are a precise food diary parser. Extract the distinct cooked dishes or raw food items "
-                        "mentioned in the user's log, along with their portion size/quantity."
+                        "mentioned in the user's log, along with their portion size/quantity. "
+                        "If a logged item contains multiple distinct components cooked or served together "
+                        "(e.g., 'pasta with tomato sauce', 'rice and chicken curry', 'roti with paneer') "
+                        "and they are not a single unified staple recipe, decompose them into separate items "
+                        "(e.g., split 'pasta with tomato sauce' into 'pasta' and 'tomato sauce')."
                     )
                 },
                 {"role": "user", "content": text}
