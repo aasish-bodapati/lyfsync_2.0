@@ -53,6 +53,19 @@ class USDARaw(SQLModel, table=True):
     fat: float = Field(default=0.0)
 
 
+class ICMRRaw(SQLModel, table=True):
+    __tablename__ = "icmr_raw"
+
+    id: Optional[int] = Field(default=None, primary_key=True)
+    food_code: str = Field(index=True, unique=True)
+    food_name: str = Field(index=True)
+    category: str
+    calories: float = Field(default=0.0)
+    protein: float = Field(default=0.0)
+    carbs: float = Field(default=0.0)
+    fat: float = Field(default=0.0)
+
+
 class MealResponse(BaseModel):
     meal_type: str
     calories: float
