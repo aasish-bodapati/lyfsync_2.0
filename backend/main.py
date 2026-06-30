@@ -75,6 +75,17 @@ class ICMRRaw(SQLModel, table=True):
     embedding: Optional[List[float]] = Field(sa_column=Column(Vector(1536), nullable=True))
 
 
+class Staple(SQLModel, table=True):
+    __tablename__ = "staples"
+
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str = Field(index=True, unique=True)
+    serving_size: str
+    ingredients_text: str
+    instructions: str
+    embedding: Optional[List[float]] = Field(sa_column=Column(Vector(1536), nullable=True))
+
+
 class MealResponse(BaseModel):
     meal_type: str
     calories: float

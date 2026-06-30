@@ -6,7 +6,7 @@ from openai import OpenAI
 
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"), override=True)
 
-from main import USDARaw, ICMRRaw
+from main import USDARaw, ICMRRaw, Staple
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
@@ -42,6 +42,13 @@ def search(query: str):
             .limit(3)
         ).all()
         
+        # Query Staples Table
+        staples_results = session.exec(
+            select(Staple)
+            .order_by(Staple.embedding.cosine_distance(query_emb))
+            .limit(3)
+        ).all()
+        
         # Display Results
         print("--- USDA raw matches ---")
         for r in usda_results:
@@ -50,6 +57,11 @@ def search(query: str):
         print("--- ICMR raw matches ---")
         for r in icmr_results:
             print(f"  {r.food_name:<50} | Cal={r.calories:<6} | P={r.protein:<5} | C={r.carbs:<5} | F={r.fat:<5}")
+            
+        print("--- Staple matches ---")
+        for r in staples_results:
+            print(f"  {r.name:<50} | Portion={r.serving_size}")
+            print(f"    Ingredients: {r.ingredients_text}")
 
 if __name__ == "__main__":
     test_queries = [
