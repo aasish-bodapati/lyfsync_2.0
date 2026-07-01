@@ -6,7 +6,10 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 # Load env variables explicitly
-load_dotenv(os.path.join(os.path.dirname(__file__), ".env"), override=True)
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", "backend", ".env"), override=True)
+
+# Add backend directory to sys.path for import resolution
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "backend"))
 
 # Import models
 from main import Staple
@@ -26,7 +29,7 @@ openai_client = OpenAI(api_key=api_key)
 
 def seed_staples():
     # 1. Load templates from JSON
-    template_path = os.path.join(os.path.dirname(__file__), "data", "reference_recipe_templates.json")
+    template_path = os.path.join(os.path.dirname(__file__), "..", "backend", "data", "reference_recipe_templates.json")
     if not os.path.exists(template_path):
         print(f"Error: Template file not found at {template_path}")
         sys.exit(1)

@@ -3,8 +3,8 @@ import sys
 from fastapi.testclient import TestClient
 from sqlmodel import Session, select, delete
 
-# Ensure backend directory is in path
-sys.path.append(os.path.dirname(__file__))
+# Ensure backend directory is in path for import resolution
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "backend"))
 
 from main import app, StaplesReview, engine
 

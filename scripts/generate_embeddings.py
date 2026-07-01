@@ -5,7 +5,10 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 # Load env variables explicitly
-load_dotenv(os.path.join(os.path.dirname(__file__), ".env"), override=True)
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", "backend", ".env"), override=True)
+
+# Add backend directory to sys.path for import resolution
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "backend"))
 
 # Import models
 from main import USDARaw, ICMRRaw

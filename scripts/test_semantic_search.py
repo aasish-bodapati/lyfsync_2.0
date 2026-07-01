@@ -4,7 +4,11 @@ from sqlmodel import create_engine, Session, select
 from dotenv import load_dotenv
 from openai import OpenAI
 
-load_dotenv(os.path.join(os.path.dirname(__file__), ".env"), override=True)
+# Load env variables explicitly
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", "backend", ".env"), override=True)
+
+# Add backend directory to sys.path for import resolution
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "backend"))
 
 from main import USDARaw, ICMRRaw, Staple
 

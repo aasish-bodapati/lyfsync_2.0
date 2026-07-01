@@ -4,7 +4,10 @@ from sqlmodel import create_engine, Session, SQLModel, delete
 from dotenv import load_dotenv
 
 # Load env variables explicitly
-load_dotenv(os.path.join(os.path.dirname(__file__), ".env"), override=True)
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", "backend", ".env"), override=True)
+
+# Add backend directory to sys.path for import resolution
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "backend"))
 
 # Import models
 from main import ICMRRaw
