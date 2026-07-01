@@ -317,10 +317,8 @@ def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[Lo
         "   - For raw fallback templates (type='raw') which use a '100g' baseline, use your general knowledge of standard food portions to estimate the weight consumed if the user logged an abstract or non-gram portion.\n"
         "     * E.g., if a standard order of fries is ~120-150g, and the user 'shared fries with three people' (divided by 4), scale the raw potato/fries ingredient weight to ~30-37g.\n"
         "     * E.g., if the user ate 'a bite' of a food, scale it down to ~10-15% of its standard serving weight.\n"
-        "9. NEW STAPLES REVIEW RULE:\n"
-        "   - If a food item has `is_cooked_dish=True` AND `is_fallback_due_to_missing_template=True`, this is a new cooked dish not in our database.\n"
-        "   - You MUST generate a standard, generic 1-person baseline recipe template for this new dish in the `new_candidates` list.\n"
-        "   - Specify the standard name, serving size (e.g. '1 plate (350g)'), standard raw ingredients and baseline weights, and 3-step cooking instructions.\n"
+        "10. EXPLICIT WEIGHT ANCHORING RULE:\n"
+        "    - If the user explicitly mentions the weight or quantity of a specific ingredient (e.g., 'made with 150g of whole wheat flour'), the final output weight for that specific ingredient MUST match the user's specified weight exactly. Do not split, halve, or divide it based on the number of portions.\n"
     )
     
     try:
