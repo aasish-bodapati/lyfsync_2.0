@@ -494,6 +494,11 @@ def parse_meal(request: UserInput, background_tasks: BackgroundTasks, db: Sessio
         candidates.sort(key=lambda x: x[2])
         best_db_type, best_db_model, best_db_dist = candidates[0]
         
+        if best_db_dist > 0.35:
+            match_name = best_db_model.food_name if best_db_type == 'icmr' else best_db_model.description
+            print(f"WARNING: Skipping macro calculation for '{ing.raw_ingredient_name}'. Best match was '{match_name}' with distance {best_db_dist:.3f}")
+            continue
+        
         weight_factor = ing.weight_g / 100.0
         total_calories += best_db_model.calories * weight_factor
         total_protein += best_db_model.protein * weight_factor
