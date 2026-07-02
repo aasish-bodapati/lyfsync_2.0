@@ -97,6 +97,16 @@ class StaplesReview(SQLModel, table=True):
     instructions: str
 
 
+class PortionPrior(SQLModel, table=True):
+    __tablename__ = "portion_priors"
+
+    id: Optional[int] = Field(default=None, primary_key=True)
+    food_name: str = Field(index=True)
+    unit: str
+    gram_weight: float
+    n_samples: int = Field(default=1)
+
+
 class MealResponse(BaseModel):
     meal_type: str
     calories: float
@@ -494,7 +504,7 @@ def parse_meal(request: UserInput, background_tasks: BackgroundTasks, db: Sessio
         candidates.sort(key=lambda x: x[2])
         best_db_type, best_db_model, best_db_dist = candidates[0]
         
-        if best_db_dist > 0.35:
+        if best_db_dist > 0.75:
             match_name = best_db_model.food_name if best_db_type == 'icmr' else best_db_model.description
             print(f"WARNING: Skipping macro calculation for '{ing.raw_ingredient_name}'. Best match was '{match_name}' with distance {best_db_dist:.3f}")
             continue
