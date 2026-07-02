@@ -3,7 +3,8 @@ import json
 from typing import List, Optional
 from datetime import datetime
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException, Depends
+import asyncio
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
 from pydantic import BaseModel
 from sqlmodel import create_engine, Session, Field, SQLModel, select
 from dotenv import load_dotenv
@@ -139,6 +140,10 @@ class RAGScaleResponse(BaseModel):
     meal_type: str
     ingredients: List[ParsedRawIngredient]
     new_candidates: Optional[List[NewStapleCandidate]] = None
+
+
+class SingleRecipeResponse(BaseModel):
+    recipe: NewStapleCandidate
 
 
 # --- AI & Vector Helper Functions ---
@@ -346,9 +351,104 @@ def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[Lo
         raise HTTPException(status_code=500, detail=f"OpenAI portion scaling failed: {str(e)}")
 
 
+def generate_single_draft(dish_name: str) -> NewStapleCandidate:
+    prompt = (
+        f"Generate standard recipe and raw ingredient list for the following dish:\n"
+        f"{dish_name}\n\n"
+        "CRITICAL STAPLE & BASE RULES:\n\n"
+        "1. THE GOLDEN BASELINE RULE:\n"
+        "   - Make the recipe as standard, simple, and generic as possible so that it represents the GOLDEN BASELINE / GOLDEN AVERAGE of the dish.\n"
+        "   - Avoid local variations, specialty recipes, or fancy restaurant-style versions.\n"
+        "   - Focus exclusively on the core, staple ingredients that dictate the baseline caloric and macronutrient structure of the dish.\n\n"
+        "2. STAPLE INGREDIENTS ONLY:\n"
+        "   - Use only common, daily staple ingredients (such as basic flours, rice, standard beans/lentils, common vegetables, milk, cheese, eggs, simple meats, and standard cooking oils/fats).\n"
+        "   - Do NOT include fancy, exotic, or garnish-only ingredients (e.g., saffron, cashews/almonds in basic curries, cream/butter in home-style curries, specific local spices, or food coloring) that are not essential to the staple food profile.\n\n"
+        "3. LITERAL NAME MODIFIERS:\n"
+        "   - If the dish name contains 'Plain' (e.g., 'Plain Dosa', 'Plain Naan', 'Plain Rice', 'Plain Paratha'), it must contain ONLY the absolute base grain/batter/meat. Do NOT include stuffing, gravies, potato masala, or heavy toppings.\n"
+        "   - If the dish name contains a characterizing ingredient (e.g., 'Aloo Paratha' contains 'Aloo', 'Paneer Paratha' contains 'Paneer', 'Matar Paneer' contains 'Matar' and 'Paneer'), those exact raw ingredients MUST be listed in the ingredients list with non-zero weights.\n"
+        "   - If the dish name contains 'Butter' or 'Ghee' (e.g., 'Butter Naan', 'Ghee Rice'), the raw ingredients list MUST contain 'Butter' or 'Ghee'. Otherwise, use standard neutral cooking oil.\n\n"
+        "4. RAW INGREDIENT LISTING:\n"
+        "   - Provide a comma-separated list of raw, uncooked ingredients and weights required to make exactly that 1 serving (e.g., '100g raw chicken breast, 50g raw basmati rice, 15g sunflower oil, 30g onion, 20g tomato, salt to taste').\n"
+        "   - Do NOT list cooked states in the ingredients list.\n\n"
+        "5. COOKING INSTRUCTIONS:\n"
+        "   - Provide short, 3-4 step cooking instructions showing how these raw ingredients are combined to make the final dish.\n\n"
+        "6. PORTION SIZE:\n"
+        "   - Specify a realistic 1-person portion with approximate weight (e.g., '1 piece (30g)', '1 bowl (150g)', '1 plate (350g)').\n\n"
+        "---\n\n"
+        "SELF-CORRECTION PASS:\n"
+        "Before outputting, review the list of generated ingredients for each dish:\n"
+        "- Did 'Plain Dosa' get potato? If yes, remove it.\n"
+        "- Did 'Butter Naan' get butter? If no, add it.\n"
+        "- Did a basic home-style dish get premium cream or saffron? If yes, remove it to keep it as a basic staple.\n"
+        "Only output the corrected, logically verified records in the requested schema."
+    )
+    completion = llm_client.beta.chat.completions.parse(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a precise, research-backed global nutrition and recipe database generator."},
+            {"role": "user", "content": prompt}
+        ],
+        response_format=SingleRecipeResponse,
+        temperature=0.3
+    )
+    return completion.choices[0].message.parsed.recipe
+
+async def generate_jury_baseline(dish_name: str) -> NewStapleCandidate:
+    # Run 3 drafts in parallel
+    drafts = await asyncio.gather(
+        asyncio.to_thread(generate_single_draft, dish_name),
+        asyncio.to_thread(generate_single_draft, dish_name),
+        asyncio.to_thread(generate_single_draft, dish_name)
+    )
+    
+    # Judge call
+    drafts_text = "\n\n".join([f"Draft {i+1}:\n{d.model_dump_json(indent=2)}" for i, d in enumerate(drafts)])
+    
+    judge_prompt = f"""We need the ultimate golden baseline recipe for '{dish_name}'.
+    
+Here are 3 independent drafts generated by our baseline recipe AI:
+
+{drafts_text}
+
+INSTRUCTIONS:
+1. Analyze the 3 drafts. Identify the most statistically sound, common-sense golden baseline values.
+2. If one draft hallucinates a weird ingredient (e.g., cashews in basic dal), ignore it.
+3. Average or pick the most credible ingredient weights and portion sizes.
+4. Output the final, synthesized golden baseline recipe.
+"""
+    
+    def run_judge():
+        completion = llm_client.beta.chat.completions.parse(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are the head judge of a nutrition AI jury. Synthesize the drafts into one perfect golden baseline recipe."},
+                {"role": "user", "content": judge_prompt}
+            ],
+            response_format=SingleRecipeResponse,
+            temperature=0.0
+        )
+        return completion.choices[0].message.parsed.recipe
+        
+    return await asyncio.to_thread(run_judge)
+
+async def run_jury_and_update_review(dish_name: str, review_id: int):
+    try:
+        final_recipe = await generate_jury_baseline(dish_name)
+        with Session(engine) as session:
+            review_row = session.get(StaplesReview, review_id)
+            if review_row:
+                review_row.serving_size = final_recipe.serving_size
+                review_row.ingredients_text = final_recipe.ingredients_text
+                review_row.instructions = final_recipe.instructions
+                session.commit()
+                print(f"Jury successfully updated staples_review for {dish_name}")
+    except Exception as e:
+        print(f"Jury background task failed for {dish_name}: {e}")
+
+
 # --- Endpoints ---
 @app.post("/api/v1/meals/parse", response_model=Meal)
-def parse_meal(request: UserInput, db: Session = Depends(get_db)):
+def parse_meal(request: UserInput, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     """
     Parses natural language meal logs, estimates macros, and persists the meal to the database.
     """
@@ -435,6 +535,8 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
                     instructions=cand.instructions
                 )
                 db.add(review_row)
+                db.flush()
+                background_tasks.add_task(run_jury_and_update_review, cand.name, review_row.id)
                 
     db.commit()
     db.refresh(db_meal)
