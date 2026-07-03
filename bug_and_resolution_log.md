@@ -43,3 +43,24 @@ This document serves as a centralized log of all major systemic problems, data a
 *   **Symptom:** When benchmarking `"200g chicken breast"`, the system predicted 215 kcal instead of the USDA gold standard 332 kcal.
 *   **Root Cause:** The vector search hit the Indian `ICMRRaw` database first. Indian livestock is structurally leaner than American factory-farmed livestock, meaning the baseline calories for 100g of chicken differ drastically between regions.
 *   **Resolution:** This is considered an intended feature, not a bug. LyfSync respects regional dietary baselines. However, for benchmarking purposes, tests must be explicitly calibrated to either US or IN standards.
+
+## 6. Supabase PgBouncer DDL Startup Hang
+
+*   **Symptom:** The FastAPI app (and the benchmark script using `TestClient`) would hang indefinitely on startup, producing no output beyond the deprecation warning.
+*   **Root Cause:** On app startup, the `lifespan` handler was issuing DDL statements (`CREATE EXTENSION IF NOT EXISTS vector` and `SQLModel.metadata.create_all(engine)`) over the Supabase connection pooler. PgBouncer (the pooler) does not support DDL in transaction mode and would hang, causing the application to deadlock on its first connection.
+*   **Resolution:**
+    1. Commented out both DDL statements in the `lifespan` handler in `main.py`. Tables are now managed exclusively via Supabase migrations.
+    2. Fixed `load_dotenv()` to resolve the `.env` path relative to `__file__` so scripts run from any working directory can still find credentials.
+
+## 7. The Logical Negation Bug (0 kcal Meals)
+
+*   **Symptom:** Logging `"I ordered 4 idlis and vada, but I didn't eat the vada."` returned **0 kcal**. Logging `"Made a tuna sandwich. Ate the tuna, threw the bread to the birds."` incorrectly included bread in the calorie calculation.
+*   **Root Cause:** The Stage 1 extraction LLM had no explicit negation instruction. It would sometimes include negated items (idli, vada, bread) in the extraction list, but with 0g weights. The downstream database lookup then summed them to 0 kcal or added full bread calories.
+*   **Resolution:** Added a **NEGATION RULE** as the first instruction in the `extract_dishes` system prompt. The LLM is now explicitly instructed to strip any item the user states they *did not eat, threw away, skipped, or avoided* before it enters the RAG pipeline at all. Result: Pass rate on Level 12 cases improved from 0% to partial; the negation is now handled at the earliest stage.
+
+## 8. The Pizza Fraction Regression
+
+*   **Symptom:** After adding the Fraction & Slice Rule, the error for `"Ate 1/3 of a 12 inch cheese pizza"` *increased* from 260% to 787%. The sanity cap clamped the estimate to 3,500 kcal (vs. expected 380 kcal).
+*   **Root Cause:** The new prompt rule correctly instructed the LLM to estimate the *whole* pizza first (~900g), then scale by 1/3. However, the LLM treated the whole pizza decomposition as a multi-ingredient list (dough, cheese, sauce, toppings each at full 900g scale), and then failed to apply the `1/3` divisor uniformly across all ingredients before summing. The result was a correctly estimated *whole* pizza calorie count (~3,000 kcal) that was never divided.
+*   **Status:** ⚠️ **OPEN** — The sanity cap (3,500 kcal) prevents a catastrophic user-visible error, but the underlying fraction math is still broken for decomposed multi-ingredient dishes. Requires a dedicated pre-scaling step that applies the user's stated fraction *before* decomposing the dish into raw ingredients in Stage 3.
+

@@ -179,6 +179,11 @@ def extract_dishes(text: str) -> List[LoggedItem]:
                     "content": (
                         "You are a precise food diary parser. Extract the distinct cooked dishes or raw food items "
                         "mentioned in the user's log, along with their portion size/quantity.\n\n"
+                        "NEGATION RULE (apply FIRST):\n"
+                        "- If the user explicitly states they did NOT eat, threw away, skipped, or avoided a specific item, "
+                        "DO NOT include that item in the output at all. Only include items that were actually consumed.\n"
+                        "- Examples: 'I had a sandwich but threw the bread to the birds' -> only extract the filling. "
+                        "'I ordered idlis and vada but didn't eat the vada' -> only extract the idlis.\n\n"
                         "CLASSIFICATION RULE:\n"
                         "- Set `is_cooked_dish` to True if the item is a cooked preparation, recipe, or staple made from multiple ingredients "
                         "(e.g., roti, dal tadka, chicken curry, pasta, lasagna, paratha, omelette, dosa).\n"
@@ -360,6 +365,17 @@ def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[Lo
         "   - For portions not in the table, use common sense (e.g., a standard order of fries is ~120-150g).\n"
         "9. EXPLICIT WEIGHT ANCHORING RULE:\n"
         "   - If the user explicitly mentions the weight of an ingredient (e.g., '150g whole wheat flour'), the output weight MUST match exactly.\n"
+        "10. FRACTION & SLICE RULE:\n"
+        "   - If the user says they ate a fraction (e.g., '1/3', 'half', 'two thirds') of a dish, first estimate the WHOLE dish weight, then multiply by the fraction.\n"
+        "   - Standard whole-object weights to use: whole 12-inch pizza = 900g, burger = 200g, sandwich = 250g, cheesecake slice (1/8th) = 125g.\n"
+        "   - A 'slice' of pizza is 1/8th of the whole pizza (roughly 112g). A 'slice' of bread = 30g.\n"
+        "11. COLLOQUIAL UNIT GUIDE (use these when the user does not specify exact weights):\n"
+        "   - 1 handful of nuts/seeds = 30g\n"
+        "   - 1 handful of chips/crisps = 20g\n"
+        "   - 1 glass of liquid = 240ml\n"
+        "   - 1 cup of cooked rice = 200g\n"
+        "   - 1 large plate of biryani or rice dish = 350g\n"
+        "   - 1 huge plate = 450g, 1 tiny portion = 60g, 1 sliver of cake = 60g\n"
     )
 
     try:
@@ -541,7 +557,21 @@ def parse_meal(request: UserInput, background_tasks: BackgroundTasks, db: Sessio
         total_carbs += best_db_model.carbs * weight_factor
         total_fat += best_db_model.fat * weight_factor
         
-    # 5. Persist meal and review candidates
+    # 5. Sanity check: cap implausibly high single-meal calorie estimates
+    SINGLE_MEAL_CAL_CAP = 3500.0
+    if total_calories > SINGLE_MEAL_CAL_CAP:
+        print(
+            f"WARNING: Calorie estimate for '{request.text}' exceeded sanity cap "
+            f"({total_calories:.0f} kcal > {SINGLE_MEAL_CAL_CAP:.0f} kcal). "
+            "Clamping to cap — review scaling logic for this input."
+        )
+        ratio = SINGLE_MEAL_CAL_CAP / total_calories
+        total_calories = SINGLE_MEAL_CAL_CAP
+        total_protein *= ratio
+        total_carbs *= ratio
+        total_fat *= ratio
+
+    # 6. Persist meal and review candidates
     db_meal = Meal(
         raw_text=request.text,
         meal_type=scaled_res.meal_type,
