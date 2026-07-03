@@ -13,7 +13,8 @@ from pgvector.sqlalchemy import Vector
 from openai import OpenAI
 
 # Load environment variables
-load_dotenv(override=True)
+dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
+load_dotenv(dotenv_path, override=True)
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 engine = create_engine(DATABASE_URL)
@@ -24,13 +25,13 @@ def get_db():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Ensure vector extension is enabled before creating tables
-    from sqlalchemy import text
-    with Session(engine) as session:
-        session.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
-        session.commit()
-    # Initialize SQLModel tables on startup
-    SQLModel.metadata.create_all(engine)
+    # Ensure vector extension is enabled before creating tables (Disabled for PgBouncer)
+    # from sqlalchemy import text
+    # with Session(engine) as session:
+    #     session.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
+    #     session.commit()
+    # Initialize SQLModel tables on startup (Disabled to prevent PgBouncer DDL hangs)
+    # SQLModel.metadata.create_all(engine)
     yield
 
 app = FastAPI(title="LyfSync Nutrition Tracking API", version="1.0.0", lifespan=lifespan)
@@ -300,7 +301,7 @@ def retrieve_grounding_templates(logged_items: List[LoggedItem], db: Session) ->
     return templates
 
 
-def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[LoggedItem]) -> RAGScaleResponse:
+def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[LoggedItem], db: Session) -> RAGScaleResponse:
     context_lines = []
     for food_name, temp in templates.items():
         item_meta = next((item for item in logged_items if item.food_name == food_name), None)
@@ -315,11 +316,36 @@ def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[Lo
             f"  Metadata: is_cooked_dish={is_cooked}, is_fallback_due_to_missing_template={is_fallback}, template_type={temp['type']}"
         )
     templates_context = "\n\n".join(context_lines)
-    
+
+    # Fetch relevant portion priors for all food items and their ingredients
+    all_food_tokens = set()
+    for item in logged_items:
+        for word in item.food_name.lower().split():
+            if len(word) > 3:
+                all_food_tokens.add(word)
+
+    all_priors = db.exec(select(PortionPrior)).all()
+    relevant_priors = [
+        p for p in all_priors
+        if any(tok in p.food_name.lower() for tok in all_food_tokens)
+    ]
+    # Always include the most universal priors regardless of dish
+    universal_keywords = {"egg", "milk", "butter", "oil", "rice", "bread", "banana", "onion", "chicken"}
+    universal_priors = [p for p in all_priors if any(kw in p.food_name.lower() for kw in universal_keywords)]
+    combined_priors = {(p.food_name, p.unit): p for p in relevant_priors + universal_priors}
+
+    priors_lines = [
+        f"  1 {p.unit} {p.food_name} = {p.gram_weight}g"
+        for p in combined_priors.values()
+    ]
+    priors_context = "\n".join(priors_lines) if priors_lines else "  (none available)"
+
     prompt = (
         f"User logged: \"{text}\"\n\n"
         f"REFERENCE DATABASE TEMPLATES:\n"
         f"{templates_context}\n\n"
+        f"PORTION WEIGHT REFERENCE TABLE (USDA-sourced):\n"
+        f"{priors_context}\n\n"
         "INSTRUCTIONS:\n"
         "1. Categorize the meal (breakfast, lunch, dinner, or snack).\n"
         "2. For each food item the user consumed, match it against the reference templates.\n"
@@ -328,14 +354,14 @@ def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[Lo
         "5. If a food item's template type is `unmatched_cooked`, it has no database recipe. You MUST decompose it into its standard, raw ingredients, and output those ingredients with their scaled uncooked weights in grams based on the user's portion.\n"
         "6. If a logged item is a raw commodity (like banana or almonds), simply output it with its estimated raw weight.\n"
         "7. Do NOT include water or salt in the raw ingredients list.\n"
-        "8. PORTION WEIGHT PRIORS FOR RAW FALLBACKS:\n"
-        "   - For raw fallback templates (type='raw') which use a '100g' baseline, use your general knowledge of standard food portions to estimate the weight consumed if the user logged an abstract or non-gram portion.\n"
-        "     * E.g., if a standard order of fries is ~120-150g, and the user 'shared fries with three people' (divided by 4), scale the raw potato/fries ingredient weight to ~30-37g.\n"
-        "     * E.g., if the user ate 'a bite' of a food, scale it down to ~10-15% of its standard serving weight.\n"
-        "10. EXPLICIT WEIGHT ANCHORING RULE:\n"
-        "    - If the user explicitly mentions the weight or quantity of a specific ingredient (e.g., 'made with 150g of whole wheat flour'), the final output weight for that specific ingredient MUST match the user's specified weight exactly. Do not split, halve, or divide it based on the number of portions.\n"
+        "8. PORTION WEIGHT ANCHORING:\n"
+        "   - Use the PORTION WEIGHT REFERENCE TABLE above as your primary source of truth for standard weights.\n"
+        "   - E.g., if the table says '1 egg = 53g', use exactly 53g per egg the user consumed.\n"
+        "   - For portions not in the table, use common sense (e.g., a standard order of fries is ~120-150g).\n"
+        "9. EXPLICIT WEIGHT ANCHORING RULE:\n"
+        "   - If the user explicitly mentions the weight of an ingredient (e.g., '150g whole wheat flour'), the output weight MUST match exactly.\n"
     )
-    
+
     try:
         completion = llm_client.beta.chat.completions.parse(
             model="gpt-4o-mini",
@@ -471,7 +497,7 @@ def parse_meal(request: UserInput, background_tasks: BackgroundTasks, db: Sessio
     templates = retrieve_grounding_templates(logged_items, db)
     
     # 3. Scale ingredients
-    scaled_res = scale_ingredients_with_rag(request.text, templates, logged_items)
+    scaled_res = scale_ingredients_with_rag(request.text, templates, logged_items, db)
     
     # 4. Calculate macros mathematically using DB lookups
     total_calories = 0.0

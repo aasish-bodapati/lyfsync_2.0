@@ -85,3 +85,11 @@ graph TD
 1. **Mathematical Accuracy:** Eliminates LLM calculation hallucinations.
 2. **Standardization:** Fixes common volume weights (e.g. 1 tbsp oil = always 15g) to prevent cup/spoon fluctuations.
 3. **No Cooked State Confusion:** Avoids cooked vs. raw meat density errors.
+
+---
+
+## 7. The SOTA Benchmark & Portion Priors
+
+During the execution of a 30-case, 14-level SOTA Benchmark, we identified a critical failure point in LLM scaling logic: **Missing Serving-Size Priors** (The "Egg" Problem).
+* When asked to scale `"Two eggs"`, the LLM (falling back to a generic `100g egg` template) incorrectly assumed `1 egg = 100g`, doubling the calories (296 kcal instead of 150 kcal).
+* **The Fix:** We extracted exactly **311 unique portion metadata priors** (e.g., `1 egg = 53g`, `1 cup milk = 244g`) directly from the USDA `food_portion.csv` dataset, filtering out 10,000+ noisy and lab-grade entries. These priors are stored in a `portion_priors` Supabase table and injected directly into the RAG context, mathematically anchoring the LLM's natural language understanding to real-world serving weights.

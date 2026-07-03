@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-02T19:19:10.145596",
+  "timestamp": "2026-07-03T20:01:09.718916",
   "results": [
     {
       "case_id": "L1_001",
@@ -38,10 +38,10 @@
       "case_id": "L2_002",
       "status": "success",
       "predicted": {
-        "calories": 296.0,
-        "protein": 24.8,
-        "carbs": 1.92,
-        "fat": 19.92,
+        "calories": 137.94,
+        "protein": 11.56,
+        "carbs": 0.89,
+        "fat": 9.28,
         "meal_type": "breakfast"
       }
     },
@@ -49,10 +49,10 @@
       "case_id": "L2_003",
       "status": "success",
       "predicted": {
-        "calories": 85.0,
-        "protein": 0.73,
-        "carbs": 20.1,
-        "fat": 0.22,
+        "calories": 93.5,
+        "protein": 0.8,
+        "carbs": 22.11,
+        "fat": 0.24,
         "meal_type": "snack"
       }
     },
@@ -71,21 +71,21 @@
       "case_id": "L3_001",
       "status": "success",
       "predicted": {
-        "calories": 347.62,
+        "calories": 335.24,
         "protein": 45.05,
         "carbs": 0.0,
-        "fat": 18.87,
-        "meal_type": "lunch"
+        "fat": 17.47,
+        "meal_type": "dinner"
       }
     },
     {
       "case_id": "L3_002",
       "status": "success",
       "predicted": {
-        "calories": 194.65,
-        "protein": 10.7,
-        "carbs": 2.36,
-        "fat": 15.65,
+        "calories": 124.61,
+        "protein": 9.97,
+        "carbs": 2.2,
+        "fat": 8.15,
         "meal_type": "breakfast"
       }
     },
@@ -104,10 +104,10 @@
       "case_id": "L4_002",
       "status": "success",
       "predicted": {
-        "calories": 607.66,
-        "protein": 22.14,
-        "carbs": 78.67,
-        "fat": 23.8,
+        "calories": 607.11,
+        "protein": 22.11,
+        "carbs": 78.65,
+        "fat": 23.76,
         "meal_type": "lunch"
       }
     },
@@ -126,9 +126,9 @@
       "case_id": "L4_004",
       "status": "success",
       "predicted": {
-        "calories": 96.55,
-        "protein": 6.41,
-        "carbs": 1.76,
+        "calories": 171.79,
+        "protein": 21.04,
+        "carbs": 4.99,
         "fat": 7.11,
         "meal_type": "breakfast"
       }
@@ -137,10 +137,10 @@
       "case_id": "L5_001",
       "status": "success",
       "predicted": {
-        "calories": 298.32,
+        "calories": 312.48,
         "protein": 45.05,
-        "carbs": 0.08,
-        "fat": 13.78,
+        "carbs": 0.1,
+        "fat": 15.46,
         "meal_type": "lunch"
       }
     },
@@ -148,10 +148,10 @@
       "case_id": "L5_002",
       "status": "success",
       "predicted": {
-        "calories": 383.0,
-        "protein": 28.12,
-        "carbs": 0.0,
-        "fat": 30.06,
+        "calories": 210.21,
+        "protein": 32.96,
+        "carbs": 0.33,
+        "fat": 8.56,
         "meal_type": "dinner"
       }
     },
@@ -159,10 +159,10 @@
       "case_id": "L5_003",
       "status": "success",
       "predicted": {
-        "calories": 565.45,
-        "protein": 25.73,
-        "carbs": 3.68,
-        "fat": 48.91,
+        "calories": 1346.17,
+        "protein": 61.56,
+        "carbs": 186.33,
+        "fat": 39.19,
         "meal_type": "lunch"
       }
     },
@@ -170,10 +170,10 @@
       "case_id": "L6_001",
       "status": "success",
       "predicted": {
-        "calories": 438.13,
-        "protein": 43.38,
-        "carbs": 56.75,
-        "fat": 4.18,
+        "calories": 292.09,
+        "protein": 28.92,
+        "carbs": 37.83,
+        "fat": 2.79,
         "meal_type": "lunch"
       }
     },
@@ -181,10 +181,10 @@
       "case_id": "L6_002",
       "status": "success",
       "predicted": {
-        "calories": 134.89,
-        "protein": 2.78,
-        "carbs": 18.89,
-        "fat": 5.49,
+        "calories": 102.84,
+        "protein": 1.74,
+        "carbs": 1.37,
+        "fat": 10.05,
         "meal_type": "snack"
       }
     },
@@ -192,10 +192,10 @@
       "case_id": "L6_003",
       "status": "success",
       "predicted": {
-        "calories": 310.0,
-        "protein": 10.2,
-        "carbs": 8.1,
-        "fat": 28.9,
+        "calories": 1240.0,
+        "protein": 40.8,
+        "carbs": 32.4,
+        "fat": 115.6,
         "meal_type": "snack"
       }
     },
@@ -203,10 +203,10 @@
       "case_id": "L7_001",
       "status": "success",
       "predicted": {
-        "calories": 34.0,
-        "protein": 3.43,
-        "carbs": 4.92,
-        "fat": 0.08,
+        "calories": 102.12,
+        "protein": 8.03,
+        "carbs": 12.33,
+        "fat": 2.26,
         "meal_type": "snack"
       }
     },
@@ -214,10 +214,10 @@
       "case_id": "L7_002",
       "status": "success",
       "predicted": {
-        "calories": 562.13,
+        "calories": 645.43,
         "protein": 15.76,
-        "carbs": 94.03,
-        "fat": 13.86,
+        "carbs": 94.12,
+        "fat": 23.77,
         "meal_type": "breakfast"
       }
     },
@@ -225,10 +225,10 @@
       "case_id": "L8_001",
       "status": "success",
       "predicted": {
-        "calories": 405.6,
-        "protein": 26.79,
-        "carbs": 3.49,
-        "fat": 31.65,
+        "calories": 411.35,
+        "protein": 27.04,
+        "carbs": 4.18,
+        "fat": 31.9,
         "meal_type": "lunch"
       }
     },
@@ -236,10 +236,10 @@
       "case_id": "L8_002",
       "status": "success",
       "predicted": {
-        "calories": 400.34,
-        "protein": 19.51,
-        "carbs": 13.95,
-        "fat": 29.79,
+        "calories": 558.6,
+        "protein": 29.89,
+        "carbs": 20.28,
+        "fat": 40.0,
         "meal_type": "dinner"
       }
     },
@@ -247,10 +247,10 @@
       "case_id": "L9_001",
       "status": "success",
       "predicted": {
-        "calories": 662.26,
-        "protein": 23.08,
-        "carbs": 119.06,
-        "fat": 10.98,
+        "calories": 664.76,
+        "protein": 23.21,
+        "carbs": 119.23,
+        "fat": 11.12,
         "meal_type": "lunch"
       }
     },
@@ -258,10 +258,10 @@
       "case_id": "L9_002",
       "status": "success",
       "predicted": {
-        "calories": 1474.03,
-        "protein": 90.11,
-        "carbs": 142.47,
-        "fat": 62.33,
+        "calories": 3695.0,
+        "protein": 158.0,
+        "carbs": 8.2,
+        "fat": 328.8,
         "meal_type": "lunch"
       }
     },
@@ -280,10 +280,10 @@
       "case_id": "L12_001",
       "status": "success",
       "predicted": {
-        "calories": 319.21,
-        "protein": 10.87,
-        "carbs": 65.08,
-        "fat": 1.85,
+        "calories": 0.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 0.0,
         "meal_type": "breakfast"
       }
     },
@@ -291,10 +291,10 @@
       "case_id": "L12_002",
       "status": "success",
       "predicted": {
-        "calories": 101.87,
-        "protein": 24.7,
-        "carbs": -0.1,
-        "fat": 0.39,
+        "calories": 183.4,
+        "protein": 28.65,
+        "carbs": 13.73,
+        "fat": 1.53,
         "meal_type": "lunch"
       }
     },
@@ -302,10 +302,10 @@
       "case_id": "L13_001",
       "status": "success",
       "predicted": {
-        "calories": 857.26,
-        "protein": 62.99,
+        "calories": 984.84,
+        "protein": 85.05,
         "carbs": 150.0,
-        "fat": 5.9,
+        "fat": 8.64,
         "meal_type": "lunch"
       }
     },
@@ -324,10 +324,10 @@
       "case_id": "L14_002",
       "status": "success",
       "predicted": {
-        "calories": 467.7,
-        "protein": 22.95,
-        "carbs": 33.45,
-        "fat": 26.9,
+        "calories": 362.37,
+        "protein": 21.87,
+        "carbs": 31.16,
+        "fat": 16.7,
         "meal_type": "snack"
       }
     }
