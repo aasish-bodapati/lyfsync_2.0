@@ -25,13 +25,6 @@ def get_db():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Ensure vector extension is enabled before creating tables (Disabled for PgBouncer)
-    # from sqlalchemy import text
-    # with Session(engine) as session:
-    #     session.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
-    #     session.commit()
-    # Initialize SQLModel tables on startup (Disabled to prevent PgBouncer DDL hangs)
-    # SQLModel.metadata.create_all(engine)
     yield
 
 app = FastAPI(title="LyfSync Nutrition Tracking API", version="1.0.0", lifespan=lifespan)
@@ -216,11 +209,16 @@ def retrieve_grounding_templates(logged_items: List[LoggedItem], db: Session) ->
     for item in logged_items:
         query_emb = get_embedding(item.food_name)
         
-        # 1. Search staples table first
-        staples_dist = Staple.embedding.cosine_distance(query_emb)
-        best_staple_row = db.exec(
-            select(Staple, staples_dist).order_by(staples_dist).limit(1)
-        ).first()
+        candidates = []
+        
+        # 1. Search staples table first ONLY if the item is classified as a cooked dish
+        if item.is_cooked_dish:
+            staples_dist = Staple.embedding.cosine_distance(query_emb)
+            best_staple_row = db.exec(
+                select(Staple, staples_dist).order_by(staples_dist).limit(1)
+            ).first()
+            if best_staple_row:
+                candidates.append(("staple", best_staple_row[0], best_staple_row[1]))
         
         # 2. Search raw tables for fallback
         icmr_dist = ICMRRaw.embedding.cosine_distance(query_emb)
@@ -233,9 +231,6 @@ def retrieve_grounding_templates(logged_items: List[LoggedItem], db: Session) ->
             select(USDARaw, usda_dist).order_by(usda_dist).limit(1)
         ).first()
         
-        candidates = []
-        if best_staple_row:
-            candidates.append(("staple", best_staple_row[0], best_staple_row[1]))
         if best_icmr_row:
             candidates.append(("icmr", best_icmr_row[0], best_icmr_row[1]))
         if best_usda_row:
@@ -365,9 +360,10 @@ def scale_ingredients_with_rag(text: str, templates: dict, logged_items: List[Lo
         "   - For portions not in the table, use common sense (e.g., a standard order of fries is ~120-150g).\n"
         "9. EXPLICIT WEIGHT ANCHORING RULE:\n"
         "   - If the user explicitly mentions the weight of an ingredient (e.g., '150g whole wheat flour'), the output weight MUST match exactly.\n"
-        "10. FRACTION & SLICE RULE:\n"
-        "   - If the user says they ate a fraction (e.g., '1/3', 'half', 'two thirds') of a dish, first estimate the WHOLE dish weight, then multiply by the fraction.\n"
+        "10. FRACTION & SLICE RULE (CRITICAL):\n"
+        "   - If the user says they ate a fraction (e.g., '1/3', 'half', 'two thirds') of a dish, first estimate the WHOLE dish weight, then MULTIPLY BY THE FRACTION to get the final consumed weight.\n"
         "   - Standard whole-object weights to use: whole 12-inch pizza = 900g, burger = 200g, sandwich = 250g, cheesecake slice (1/8th) = 125g.\n"
+        "   - Example: For '1/3 of a 12 inch pizza', the whole is 900g. The consumed weight is 300g. If decomposing, the sum of all raw ingredient weights MUST equal 300g, NOT 900g.\n"
         "   - A 'slice' of pizza is 1/8th of the whole pizza (roughly 112g). A 'slice' of bread = 30g.\n"
         "11. COLLOQUIAL UNIT GUIDE (use these when the user does not specify exact weights):\n"
         "   - 1 handful of nuts/seeds = 30g\n"

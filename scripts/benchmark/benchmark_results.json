@@ -1,334 +1,1445 @@
 {
-  "timestamp": "2026-07-03T20:36:03.548337",
+  "timestamp": "2026-07-03T21:59:48.653976",
   "results": [
     {
       "case_id": "L1_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "raw oats",
+          "logged_portion": "100g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Oats, whole grain, rolled, old fashioned",
+          "weight_g": 100.0
+        }
+      ],
       "predicted": {
-        "calories": 192.28,
-        "protein": 6.79,
-        "carbs": 34.64,
-        "fat": 2.95,
-        "meal_type": "breakfast"
+        "calories": 381.63
       }
     },
     {
       "case_id": "L1_002",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "chicken breast",
+          "logged_portion": "200g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Chicken, breast, boneless, skinless, raw",
+          "weight_g": 200.0
+        }
+      ],
       "predicted": {
-        "calories": 215.02,
-        "protein": 45.05,
-        "carbs": 0.0,
-        "fat": 3.87,
-        "meal_type": "lunch"
+        "calories": 215.02
       }
     },
     {
       "case_id": "L2_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "oats",
+          "logged_portion": "bowl",
+          "is_cooked_dish": true
+        },
+        {
+          "food_name": "milk",
+          "logged_portion": "100ml",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "oats",
+          "weight_g": 50.0
+        },
+        {
+          "food_name": "milk",
+          "weight_g": 100.0
+        }
+      ],
       "predicted": {
-        "calories": 250.81,
-        "protein": 10.02,
-        "carbs": 38.96,
-        "fat": 6.14,
-        "meal_type": "breakfast"
+        "calories": 250.815
       }
     },
     {
       "case_id": "L2_002",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "eggs",
+          "logged_portion": "2",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Eggs, Grade A, Large, egg whole",
+          "weight_g": 93.2
+        }
+      ],
       "predicted": {
-        "calories": 138.53,
-        "protein": 11.61,
-        "carbs": 0.9,
-        "fat": 9.32,
-        "meal_type": "breakfast"
+        "calories": 137.936
       }
     },
     {
       "case_id": "L2_003",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "banana",
+          "logged_portion": "1 medium",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Bananas, Overripe, Raw",
+          "weight_g": 110.0
+        }
+      ],
       "predicted": {
-        "calories": 93.5,
-        "protein": 0.8,
-        "carbs": 22.11,
-        "fat": 0.24,
-        "meal_type": "snack"
+        "calories": 93.50000000000001
       }
     },
     {
       "case_id": "L2_004",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "cooked white rice",
+          "logged_portion": "150g",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "brown rice",
+          "weight_g": 50.0
+        },
+        {
+          "food_name": "water",
+          "weight_g": 100.0
+        }
+      ],
       "predicted": {
-        "calories": 186.24,
-        "protein": 4.5,
-        "carbs": 38.34,
-        "fat": 1.65,
-        "meal_type": "lunch"
+        "calories": 186.23999999999998
       }
     },
     {
       "case_id": "L3_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "chicken breast",
+          "logged_portion": "200g",
+          "is_cooked_dish": true
+        },
+        {
+          "food_name": "olive oil",
+          "logged_portion": "1 tablespoon",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Chicken Breast, Non-Enhanced, Cooked",
+          "weight_g": 200.0
+        },
+        {
+          "food_name": "Olive Oil, Extra Virgin",
+          "weight_g": 13.6
+        }
+      ],
       "predicted": {
-        "calories": 335.24,
-        "protein": 45.05,
-        "carbs": 0.0,
-        "fat": 17.47,
-        "meal_type": "dinner"
+        "calories": 335.244
       }
     },
     {
       "case_id": "L3_002",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "fried eggs",
+          "logged_portion": "2",
+          "is_cooked_dish": true
+        },
+        {
+          "food_name": "butter",
+          "logged_portion": "10g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Eggs",
+          "weight_g": 93.2
+        },
+        {
+          "food_name": "Sunflower oil",
+          "weight_g": 15.0
+        },
+        {
+          "food_name": "Butter",
+          "weight_g": 10.0
+        }
+      ],
       "predicted": {
-        "calories": 124.61,
-        "protein": 9.97,
-        "carbs": 2.2,
-        "fat": 8.15,
-        "meal_type": "breakfast"
+        "calories": 257.21000000000004
       }
     },
     {
       "case_id": "L4_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "rice",
+          "logged_portion": "150g",
+          "is_cooked_dish": true
+        },
+        {
+          "food_name": "dal tadka",
+          "logged_portion": "100g",
+          "is_cooked_dish": true
+        },
+        {
+          "food_name": "cucumber",
+          "logged_portion": "small",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "rice",
+          "weight_g": 150.0
+        },
+        {
+          "food_name": "split yellow lentils (toor dal)",
+          "weight_g": 40.0
+        },
+        {
+          "food_name": "sunflower oil",
+          "weight_g": 6.0
+        },
+        {
+          "food_name": "onion",
+          "weight_g": 12.0
+        },
+        {
+          "food_name": "tomato",
+          "weight_g": 8.0
+        },
+        {
+          "food_name": "ginger",
+          "weight_g": 2.0
+        },
+        {
+          "food_name": "garlic",
+          "weight_g": 2.0
+        },
+        {
+          "food_name": "green chili",
+          "weight_g": 2.0
+        },
+        {
+          "food_name": "cucumber",
+          "weight_g": 100.0
+        },
+        {
+          "food_name": "cumin seeds",
+          "weight_g": 1.0
+        }
+      ],
       "predicted": {
-        "calories": 763.93,
-        "protein": 22.42,
-        "carbs": 141.02,
-        "fat": 11.99,
-        "meal_type": "lunch"
+        "calories": 777.4354
       }
     },
     {
       "case_id": "L4_002",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "roti",
+          "logged_portion": "2",
+          "is_cooked_dish": true
+        },
+        {
+          "food_name": "palak paneer",
+          "logged_portion": "150g",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "ragi flour",
+          "weight_g": 100.0
+        },
+        {
+          "food_name": "paneer",
+          "weight_g": 60.0
+        },
+        {
+          "food_name": "spinach",
+          "weight_g": 120.0
+        },
+        {
+          "food_name": "sunflower oil",
+          "weight_g": 9.0
+        },
+        {
+          "food_name": "onion",
+          "weight_g": 18.0
+        },
+        {
+          "food_name": "ginger",
+          "weight_g": 3.0
+        },
+        {
+          "food_name": "garlic",
+          "weight_g": 3.0
+        },
+        {
+          "food_name": "green chili",
+          "weight_g": 3.0
+        },
+        {
+          "food_name": "cumin seeds",
+          "weight_g": 0.5
+        }
+      ],
       "predicted": {
-        "calories": 602.21,
-        "protein": 21.95,
-        "carbs": 77.62,
-        "fat": 23.75,
-        "meal_type": "lunch"
+        "calories": 607.1093999999999
       }
     },
     {
       "case_id": "L4_003",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "greek yogurt",
+          "logged_portion": "200g",
+          "is_cooked_dish": false
+        },
+        {
+          "food_name": "almonds",
+          "logged_portion": "30g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Yogurt, Greek, plain, nonfat",
+          "weight_g": 200.0
+        },
+        {
+          "food_name": "Almonds",
+          "weight_g": 30.0
+        }
+      ],
       "predicted": {
-        "calories": 295.7,
-        "protein": 26.96,
-        "carbs": 13.76,
-        "fat": 15.71,
-        "meal_type": "snack"
+        "calories": 295.7
       }
     },
     {
       "case_id": "L4_004",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "omelette",
+          "logged_portion": "made with 3 eggs, 50g spinach, 20g cheese",
+          "is_cooked_dish": true
+        },
+        {
+          "food_name": "spinach",
+          "logged_portion": "50g",
+          "is_cooked_dish": false
+        },
+        {
+          "food_name": "cheese",
+          "logged_portion": "20g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Eggs",
+          "weight_g": 139.8
+        },
+        {
+          "food_name": "Spinach",
+          "weight_g": 50.0
+        },
+        {
+          "food_name": "Cheese, cheddar",
+          "weight_g": 20.0
+        }
+      ],
       "predicted": {
-        "calories": 301.8,
-        "protein": 23.42,
-        "carbs": 3.03,
-        "fat": 21.03,
-        "meal_type": "breakfast"
+        "calories": 171.79000000000002
       }
     },
     {
       "case_id": "L5_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "chicken breast",
+          "logged_portion": "200g",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Chicken Breast",
+          "weight_g": 200.0
+        },
+        {
+          "food_name": "Oil",
+          "weight_g": 11.7
+        }
+      ],
       "predicted": {
-        "calories": 312.48,
-        "protein": 45.05,
-        "carbs": 0.1,
-        "fat": 15.46,
-        "meal_type": "lunch"
+        "calories": 312.481
       }
     },
     {
       "case_id": "L5_002",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "ribeye steak",
+          "logged_portion": "150g",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Ribeye Steak",
+          "weight_g": 150.0
+        }
+      ],
       "predicted": {
-        "calories": 210.21,
-        "protein": 32.96,
-        "carbs": 0.33,
-        "fat": 8.56,
-        "meal_type": "dinner"
+        "calories": 210.20999999999998
       }
     },
     {
       "case_id": "L5_003",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "cheese pizza",
+          "logged_portion": "1/3 of a 12 inch",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Pizza Dough",
+          "weight_g": 150.0
+        },
+        {
+          "food_name": "Tomato Sauce",
+          "weight_g": 75.0
+        },
+        {
+          "food_name": "Mozzarella Cheese",
+          "weight_g": 150.0
+        },
+        {
+          "food_name": "Parmesan Cheese",
+          "weight_g": 30.0
+        }
+      ],
       "predicted": {
-        "calories": 3372.0,
-        "protein": 122.4,
-        "carbs": 470.52,
-        "fat": 111.84,
-        "meal_type": "lunch"
+        "calories": 1135.935
       }
     },
     {
       "case_id": "L6_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "chicken biryani",
+          "logged_portion": "a huge plate",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "basmati rice",
+          "weight_g": 100.0
+        },
+        {
+          "food_name": "chicken",
+          "weight_g": 225.0
+        }
+      ],
       "predicted": {
-        "calories": 657.2,
-        "protein": 65.07,
-        "carbs": 85.13,
-        "fat": 6.27,
-        "meal_type": "lunch"
+        "calories": 611.0575
       }
     },
     {
       "case_id": "L6_002",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "chocolate cake",
+          "logged_portion": "tiny sliver",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "chocolate cake",
+          "weight_g": 60.0
+        }
+      ],
       "predicted": {
-        "calories": 230.8,
-        "protein": 3.17,
-        "carbs": 48.27,
-        "fat": 2.78,
-        "meal_type": "snack"
+        "calories": 230.802
       }
     },
     {
       "case_id": "L6_003",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "roasted peanuts",
+          "logged_portion": "two handfuls",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "roasted peanuts",
+          "weight_g": 60.0
+        }
+      ],
       "predicted": {
-        "calories": 372.0,
-        "protein": 12.24,
-        "carbs": 9.72,
-        "fat": 34.68,
-        "meal_type": "snack"
+        "calories": 372.0
       }
     },
     {
       "case_id": "L7_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "skim milk",
+          "logged_portion": "1 glass",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)",
+          "weight_g": 100.0
+        }
+      ],
       "predicted": {
-        "calories": 80.75,
-        "protein": 8.15,
-        "carbs": 11.69,
-        "fat": 0.19,
-        "meal_type": "snack"
+        "calories": 34.0
       }
     },
     {
       "case_id": "L7_002",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "plain dosa",
+          "logged_portion": "1",
+          "is_cooked_dish": true
+        },
+        {
+          "food_name": "ghee",
+          "logged_portion": "extra",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "rice",
+          "weight_g": 100.0
+        },
+        {
+          "food_name": "urad dal",
+          "weight_g": 30.0
+        },
+        {
+          "food_name": "ghee",
+          "weight_g": 10.0
+        },
+        {
+          "food_name": "oil",
+          "weight_g": 10.0
+        }
+      ],
       "predicted": {
-        "calories": 645.43,
-        "protein": 15.76,
-        "carbs": 94.12,
-        "fat": 23.77,
-        "meal_type": "breakfast"
+        "calories": 645.4300000000001
       }
     },
     {
       "case_id": "L8_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "cheeseburger",
+          "logged_portion": "1",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Ground Beef, Cooked",
+          "weight_g": 113.0
+        },
+        {
+          "food_name": "Cheddar Cheese, Shredded",
+          "weight_g": 28.0
+        },
+        {
+          "food_name": "Pickles, Sliced",
+          "weight_g": 30.0
+        },
+        {
+          "food_name": "Onion, Raw, Chopped",
+          "weight_g": 30.0
+        },
+        {
+          "food_name": "Tomato, Raw, Sliced",
+          "weight_g": 30.0
+        }
+      ],
       "predicted": {
-        "calories": 413.39,
-        "protein": 26.99,
-        "carbs": 5.24,
-        "fat": 31.84,
-        "meal_type": "lunch"
+        "calories": 413.3917
       }
     },
     {
       "case_id": "L8_002",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "meat sauce",
+          "logged_portion": "plate",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Ground Beef, Cooked",
+          "weight_g": 150.0
+        },
+        {
+          "food_name": "Tomato Sauce",
+          "weight_g": 100.0
+        },
+        {
+          "food_name": "Onion, Raw",
+          "weight_g": 30.0
+        },
+        {
+          "food_name": "Garlic, Raw",
+          "weight_g": 10.0
+        },
+        {
+          "food_name": "Olive Oil",
+          "weight_g": 10.0
+        },
+        {
+          "food_name": "Carrot, Raw",
+          "weight_g": 20.0
+        },
+        {
+          "food_name": "Celery, Raw",
+          "weight_g": 20.0
+        }
+      ],
       "predicted": {
-        "calories": 556.35,
-        "protein": 29.82,
-        "carbs": 19.88,
-        "fat": 39.93,
-        "meal_type": "lunch"
+        "calories": 526.509
       }
     },
     {
       "case_id": "L9_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "dal makhani",
+          "logged_portion": "150g",
+          "is_cooked_dish": true
+        },
+        {
+          "food_name": "french fries",
+          "logged_portion": "100g",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "black lentils (urad dal)",
+          "weight_g": 60.0
+        },
+        {
+          "food_name": "sunflower oil",
+          "weight_g": 9.0
+        },
+        {
+          "food_name": "onion",
+          "weight_g": 18.0
+        },
+        {
+          "food_name": "tomato",
+          "weight_g": 12.0
+        },
+        {
+          "food_name": "ginger",
+          "weight_g": 3.0
+        },
+        {
+          "food_name": "garlic",
+          "weight_g": 3.0
+        },
+        {
+          "food_name": "green chili",
+          "weight_g": 3.0
+        },
+        {
+          "food_name": "cumin seeds",
+          "weight_g": 0.6
+        },
+        {
+          "food_name": "french fries",
+          "weight_g": 100.0
+        }
+      ],
       "predicted": {
-        "calories": 659.26,
-        "protein": 23.04,
-        "carbs": 118.09,
-        "fat": 11.09,
-        "meal_type": "lunch"
+        "calories": 664.7592
       }
     },
     {
       "case_id": "L9_002",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "pepperoni pizza",
+          "logged_portion": "2 slices",
+          "is_cooked_dish": true
+        },
+        {
+          "food_name": "samosas",
+          "logged_portion": "2",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "raw chicken",
+          "weight_g": 300.0
+        },
+        {
+          "food_name": "onion",
+          "weight_g": 100.0
+        },
+        {
+          "food_name": "tomato",
+          "weight_g": 60.0
+        },
+        {
+          "food_name": "sunflower oil",
+          "weight_g": 30.0
+        },
+        {
+          "food_name": "ginger-garlic paste",
+          "weight_g": 20.0
+        },
+        {
+          "food_name": "all-purpose flour",
+          "weight_g": 100.0
+        },
+        {
+          "food_name": "oil",
+          "weight_g": 20.0
+        },
+        {
+          "food_name": "potato",
+          "weight_g": 60.0
+        },
+        {
+          "food_name": "cumin seeds",
+          "weight_g": 10.0
+        }
+      ],
       "predicted": {
-        "calories": 1362.6,
-        "protein": 62.8,
-        "carbs": 3.44,
-        "fat": 119.36,
-        "meal_type": "lunch"
+        "calories": 1474.0339999999999
       }
     },
     {
       "case_id": "L11_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "chicken breast",
+          "logged_portion": "200g",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Chicken Breast",
+          "weight_g": 200.0
+        }
+      ],
       "predicted": {
-        "calories": 215.02,
-        "protein": 45.05,
-        "carbs": 0.0,
-        "fat": 3.87,
-        "meal_type": "lunch"
+        "calories": 215.02
       }
     },
     {
       "case_id": "L12_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "idli",
+          "logged_portion": "4",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "idli",
+          "weight_g": 200.0
+        }
+      ],
       "predicted": {
-        "calories": 0.0,
-        "protein": 0.0,
-        "carbs": 0.0,
-        "fat": 0.0,
-        "meal_type": "breakfast"
+        "calories": 0.0
       }
     },
     {
       "case_id": "L12_002",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "tuna",
+          "logged_portion": "Ate",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Tuna, ahi or yellowfin, frozen, wild caught",
+          "weight_g": 100.0
+        }
+      ],
       "predicted": {
-        "calories": 215.66,
-        "protein": 30.21,
-        "carbs": 19.2,
-        "fat": 1.98,
-        "meal_type": "lunch"
+        "calories": 101.87
       }
     },
     {
       "case_id": "L13_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "wheat pasta",
+          "logged_portion": "big bowl",
+          "is_cooked_dish": true
+        },
+        {
+          "food_name": "chicken",
+          "logged_portion": "portion",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Wheat Pasta",
+          "weight_g": 200.0
+        },
+        {
+          "food_name": "Chicken Breast, Non-Enhanced, Braised",
+          "weight_g": 174.0
+        }
+      ],
       "predicted": {
-        "calories": 984.84,
-        "protein": 85.05,
-        "carbs": 150.0,
-        "fat": 8.64,
-        "meal_type": "lunch"
+        "calories": 984.8399999999999
       }
     },
     {
       "case_id": "L14_001",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "biryani",
+          "logged_portion": "massive plate",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "basmati rice",
+          "weight_g": 87.5
+        },
+        {
+          "food_name": "chicken",
+          "weight_g": 175.0
+        },
+        {
+          "food_name": "water",
+          "weight_g": 100.0
+        }
+      ],
       "predicted": {
-        "calories": 511.16,
-        "protein": 50.61,
-        "carbs": 66.21,
-        "fat": 4.88,
-        "meal_type": "dinner"
+        "calories": 514.6375
       }
     },
     {
       "case_id": "L14_002",
       "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "whey",
+          "logged_portion": "3 scoops",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Whey Protein",
+          "weight_g": 300.0
+        },
+        {
+          "food_name": "Yogurt, plain, whole milk",
+          "weight_g": 300.0
+        }
+      ],
       "predicted": {
-        "calories": 349.29,
-        "protein": 22.11,
-        "carbs": 20.6,
-        "fat": 19.83,
-        "meal_type": "snack"
+        "calories": 362.37
+      }
+    },
+    {
+      "case_id": "L1_100",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "oats",
+          "logged_portion": "100g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Oats, whole grain, rolled, old fashioned",
+          "weight_g": 100.0
+        }
+      ],
+      "predicted": {
+        "calories": 381.63
+      }
+    },
+    {
+      "case_id": "L1_101",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "oats",
+          "logged_portion": "250g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Oats, whole grain, rolled, old fashioned",
+          "weight_g": 250.0
+        }
+      ],
+      "predicted": {
+        "calories": 954.075
+      }
+    },
+    {
+      "case_id": "L1_102",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "oats",
+          "logged_portion": "75g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Oats, whole grain, rolled, old fashioned",
+          "weight_g": 75.0
+        }
+      ],
+      "predicted": {
+        "calories": 286.22249999999997
+      }
+    },
+    {
+      "case_id": "L1_103",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "oats",
+          "logged_portion": "40g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Oats, whole grain, rolled, old fashioned",
+          "weight_g": 40.0
+        }
+      ],
+      "predicted": {
+        "calories": 152.65200000000002
+      }
+    },
+    {
+      "case_id": "L1_104",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "oats",
+          "logged_portion": "0.5 cup",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Oats, whole grain, rolled, old fashioned",
+          "weight_g": 50.0
+        }
+      ],
+      "predicted": {
+        "calories": 190.815
+      }
+    },
+    {
+      "case_id": "L1_105",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "oats",
+          "logged_portion": "1 cup",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Oats, whole grain, rolled, old fashioned",
+          "weight_g": 100.0
+        }
+      ],
+      "predicted": {
+        "calories": 381.63
+      }
+    },
+    {
+      "case_id": "L1_106",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "rolled oats",
+          "logged_portion": "",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Oats, whole grain, rolled, old fashioned",
+          "weight_g": 100.0
+        }
+      ],
+      "predicted": {
+        "calories": 381.63
+      }
+    },
+    {
+      "case_id": "L1_107",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "raw oats",
+          "logged_portion": "1 serving",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Oats, whole grain, rolled, old fashioned",
+          "weight_g": 100.0
+        }
+      ],
+      "predicted": {
+        "calories": 381.63
+      }
+    },
+    {
+      "case_id": "L1_108",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "steel cut oats",
+          "logged_portion": "",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Oats, whole grain, steel cut",
+          "weight_g": 100.0
+        }
+      ],
+      "predicted": {
+        "calories": 381.25
+      }
+    },
+    {
+      "case_id": "L1_109",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "raw chicken breast",
+          "logged_portion": "100g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Chicken, breast, boneless, skinless, raw",
+          "weight_g": 100.0
+        }
+      ],
+      "predicted": {
+        "calories": 107.51
+      }
+    },
+    {
+      "case_id": "L1_110",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "raw chicken breast",
+          "logged_portion": "250g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Chicken, breast, boneless, skinless, raw",
+          "weight_g": 250.0
+        }
+      ],
+      "predicted": {
+        "calories": 268.77500000000003
+      }
+    },
+    {
+      "case_id": "L1_111",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "cooked chicken breast",
+          "logged_portion": "100g",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Chicken, breast, boneless, skinless, raw",
+          "weight_g": 100.0
+        }
+      ],
+      "predicted": {
+        "calories": 107.51
+      }
+    },
+    {
+      "case_id": "L1_112",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "chicken",
+          "logged_portion": "50g",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Chicken Breast, Non-Enhanced, Cooked",
+          "weight_g": 50.0
+        }
+      ],
+      "predicted": {
+        "calories": 53.755
+      }
+    },
+    {
+      "case_id": "L1_113",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "chicken breast",
+          "logged_portion": "1 pound",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Chicken, breast, boneless, skinless, raw",
+          "weight_g": 453.6
+        }
+      ],
+      "predicted": {
+        "calories": 487.6653600000001
+      }
+    },
+    {
+      "case_id": "L1_114",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "chicken",
+          "logged_portion": "half a pound",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Chicken Breast, Non-Enhanced, Cooked",
+          "weight_g": 226.8
+        },
+        {
+          "food_name": "Chicken Thigh, Non-Enhanced, Cooked",
+          "weight_g": 226.8
+        }
+      ],
+      "predicted": {
+        "calories": 574.2576000000001
+      }
+    },
+    {
+      "case_id": "L1_115",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "banana",
+          "logged_portion": "100g",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Bananas, Overripe, Raw",
+          "weight_g": 100.0
+        }
+      ],
+      "predicted": {
+        "calories": 85.0
+      }
+    },
+    {
+      "case_id": "L1_116",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "banana",
+          "logged_portion": "1 medium",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Bananas, Overripe, Raw",
+          "weight_g": 110.0
+        }
+      ],
+      "predicted": {
+        "calories": 93.50000000000001
+      }
+    },
+    {
+      "case_id": "L1_117",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "banana",
+          "logged_portion": "2 large",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Bananas, Overripe, Raw",
+          "weight_g": 220.0
+        }
+      ],
+      "predicted": {
+        "calories": 187.00000000000003
+      }
+    },
+    {
+      "case_id": "L1_118",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "banana",
+          "logged_portion": "half",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Bananas, Overripe, Raw",
+          "weight_g": 55.0
+        }
+      ],
+      "predicted": {
+        "calories": 46.75000000000001
+      }
+    },
+    {
+      "case_id": "L1_119",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "banana",
+          "logged_portion": "sliced",
+          "is_cooked_dish": false
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "Bananas, Overripe, Raw",
+          "weight_g": 110.0
+        }
+      ],
+      "predicted": {
+        "calories": 93.50000000000001
+      }
+    },
+    {
+      "case_id": "L1_120",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "cooked white rice",
+          "logged_portion": "100g",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "brown rice",
+          "weight_g": 33.33
+        },
+        {
+          "food_name": "water",
+          "weight_g": 66.67
+        }
+      ],
+      "predicted": {
+        "calories": 124.14793199999998
+      }
+    },
+    {
+      "case_id": "L1_121",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "cooked rice",
+          "logged_portion": "200g",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "brown rice",
+          "weight_g": 66.67
+        },
+        {
+          "food_name": "water",
+          "weight_g": 133.33
+        }
+      ],
+      "predicted": {
+        "calories": 248.33206800000002
+      }
+    },
+    {
+      "case_id": "L1_122",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "cooked white rice",
+          "logged_portion": "1 cup",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "brown rice",
+          "weight_g": 50.0
+        },
+        {
+          "food_name": "water",
+          "weight_g": 100.0
+        }
+      ],
+      "predicted": {
+        "calories": 186.23999999999998
+      }
+    },
+    {
+      "case_id": "L1_123",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "cooked rice",
+          "logged_portion": "half cup",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "brown rice",
+          "weight_g": 25.0
+        },
+        {
+          "food_name": "water",
+          "weight_g": 0.0
+        }
+      ],
+      "predicted": {
+        "calories": 91.38
+      }
+    },
+    {
+      "case_id": "L1_124",
+      "status": "success",
+      "extracted_items": [
+        {
+          "food_name": "cooked rice",
+          "logged_portion": "a bowl",
+          "is_cooked_dish": true
+        }
+      ],
+      "scaled_ingredients": [
+        {
+          "food_name": "brown rice",
+          "weight_g": 50.0
+        },
+        {
+          "food_name": "water",
+          "weight_g": 100.0
+        }
+      ],
+      "predicted": {
+        "calories": 186.23999999999998
       }
     }
   ]
