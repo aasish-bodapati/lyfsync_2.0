@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import time
 from datetime import datetime
 
 # Ensure backend directory is in path for import resolution
@@ -8,11 +9,13 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "..", "..", "backend"))
 from dotenv import load_dotenv
 load_dotenv(os.path.join(os.path.dirname(__file__), "..", "..", "backend", ".env"))
 
-from sqlmodel import Session, create_engine, select
-from main import (
-    DATABASE_URL, get_embedding, extract_dishes, retrieve_grounding_templates,
-    scale_ingredients_with_rag, ICMRRaw, USDARaw
-)
+from sqlmodel import Session, create_engine
+from fastapi import BackgroundTasks
+from main import DATABASE_URL, MealPipeline
+
+class MockBackgroundTasks(BackgroundTasks):
+    def add_task(self, func, *args, **kwargs):
+        pass  # Ignore background tasks during benchmarking
 
 def run_benchmark():
     cases_path = os.path.join(os.path.dirname(__file__), "cases.json")
@@ -39,70 +42,91 @@ def run_benchmark():
                 "status": "success",
                 "extracted_items": [],
                 "scaled_ingredients": [],
-                "predicted": {}
+                "predicted": {},
+                "latency_ms": {}
             }
             
             try:
+                t0 = time.perf_counter()
+                
+                pipeline = MealPipeline(case["input"], db, MockBackgroundTasks())
+                
                 # 1. Extraction
-                logged_items = extract_dishes(case["input"])
+                t_step = time.perf_counter()
+                pipeline.extract()
+                result["latency_ms"]["extraction"] = (time.perf_counter() - t_step) * 1000
+                
                 result["extracted_items"] = [
                     {
-                        "food_name": item.food_name, 
-                        "logged_portion": item.logged_portion,
-                        "is_cooked_dish": item.is_cooked_dish
-                    } for item in logged_items
+                        "food_name": node.original_name, 
+                        "logged_portion": node.logged_portion,
+                        "is_cooked_dish": node.is_cooked_dish
+                    } for node in pipeline.nodes
                 ]
                 
-                # 2. Retrieve Templates
-                templates = retrieve_grounding_templates(logged_items, db)
+                # 2. Retrieve Templates (Grounding)
+                t_step = time.perf_counter()
+                pipeline.ground()
+                result["latency_ms"]["templates"] = (time.perf_counter() - t_step) * 1000
                 
-                # 3. Scale Ingredients
-                scaled_res = scale_ingredients_with_rag(case["input"], templates, logged_items, db)
-                result["scaled_ingredients"] = [
-                    {
-                        "food_name": ing.raw_ingredient_name,
-                        "weight_g": ing.weight_g
-                    } for ing in scaled_res.ingredients
-                ]
+                # 3. Parse Portions
+                t_step = time.perf_counter()
+                pipeline.parse_portions()
+                result["latency_ms"]["parse_portions"] = (time.perf_counter() - t_step) * 1000
                 
-                # 4. DB Macro Lookup
-                total_cal = 0
-                for ing in scaled_res.ingredients:
-                    ing_emb = get_embedding(ing.raw_ingredient_name)
-                    
-                    icmr_dist = ICMRRaw.embedding.cosine_distance(ing_emb)
-                    best_icmr = db.exec(select(ICMRRaw, icmr_dist).order_by(icmr_dist).limit(1)).first()
-                    
-                    usda_dist = USDARaw.embedding.cosine_distance(ing_emb)
-                    best_usda = db.exec(select(USDARaw, usda_dist).order_by(usda_dist).limit(1)).first()
-                    
-                    candidates = []
-                    if best_icmr: candidates.append(("ICMR", best_icmr[0], best_icmr[1]))
-                    if best_usda: candidates.append(("USDA", best_usda[0], best_usda[1]))
-                    
-                    if not candidates: continue
-                    candidates.sort(key=lambda x: x[2])
-                    best_db_type, best_db_model, best_db_dist = candidates[0]
-                    
-                    if best_db_dist > 0.75: continue
+                # 4. Convert and Lookup
+                t_step = time.perf_counter()
+                pipeline.convert()
+                result["latency_ms"]["conversion"] = (time.perf_counter() - t_step) * 1000
+                
+                t_step = time.perf_counter()
+                pipeline.nutrition()
+                result["latency_ms"]["db_lookup"] = (time.perf_counter() - t_step) * 1000
+                
+                result["latency_ms"]["total"] = (time.perf_counter() - t0) * 1000
+                
+                # Format scaled ingredients from nodes
+                resolved = []
+                total_cal = 0.0
+                for node in pipeline.nodes:
+                    resolved.append({
+                        "food_name": node.original_name,
+                        "quantity": node.quantity,
+                        "unit": node.unit,
+                        "state": node.state,
+                        "weight_g": node.weight_g,
+                        "food_id": node.food_id
+                    })
+                    if node.calories:
+                        total_cal += node.calories
                         
-                    factor = ing.weight_g / 100.0
-                    total_cal += best_db_model.calories * factor
-                    
+                result["scaled_ingredients"] = resolved
+                
+                # Simulate the cap from persist
                 SINGLE_MEAL_CAL_CAP = 3500.0
                 if total_cal > SINGLE_MEAL_CAL_CAP:
                     total_cal = SINGLE_MEAL_CAL_CAP
                     
                 result["predicted"]["calories"] = total_cal
+                
+                # Rollback transaction so benchmark doesn't insert meals into DB
+                db.rollback()
+                
                 results.append(result)
                 
             except Exception as e:
+                import traceback
                 print(f"  Exception: {str(e)}")
+                traceback.print_exc()
+                print("  Nodes state:")
+                for idx, node in enumerate(pipeline.nodes):
+                    print(f"    Node {idx}: original_name={node.original_name}, is_cooked_dish={node.is_cooked_dish}, db_type={node.db_type}, food_id={node.food_id}, weight_g={node.weight_g}")
                 results.append({
                     "case_id": case["id"],
                     "status": "exception",
                     "error": str(e)
                 })
+                db.rollback()
             
     with open(results_path, "w", encoding="utf-8") as f:
         json.dump({

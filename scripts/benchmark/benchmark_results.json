@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-03T21:59:48.653976",
+  "timestamp": "2026-07-06T20:27:44.212022",
   "results": [
     {
       "case_id": "L1_001",
@@ -13,12 +13,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Oats, whole grain, rolled, old fashioned",
-          "weight_g": 100.0
+          "food_name": "Oats",
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2346396"
         }
       ],
       "predicted": {
         "calories": 381.63
+      },
+      "latency_ms": {
+        "extraction": 4248.677041963674,
+        "templates": 7828.461249941029,
+        "parse_portions": 2253.1112079741433,
+        "conversion": 1.486915978603065,
+        "db_lookup": 305.6432919111103,
+        "total": 14637.390916002914
       }
     },
     {
@@ -26,19 +38,31 @@
       "status": "success",
       "extracted_items": [
         {
-          "food_name": "chicken breast",
+          "food_name": "raw chicken breast",
           "logged_portion": "200g",
           "is_cooked_dish": false
         }
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Chicken, breast, boneless, skinless, raw",
-          "weight_g": 200.0
+          "food_name": "Chicken, breast, boneless, skinless",
+          "quantity": 200.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 200.0,
+          "food_id": "USDA_2646170"
         }
       ],
       "predicted": {
         "calories": 215.02
+      },
+      "latency_ms": {
+        "extraction": 1236.342916963622,
+        "templates": 1547.9237920371816,
+        "parse_portions": 1565.312249935232,
+        "conversion": 0.021332991309463978,
+        "db_lookup": 464.094249997288,
+        "total": 4813.753208029084
       }
     },
     {
@@ -59,15 +83,31 @@
       "scaled_ingredients": [
         {
           "food_name": "oats",
-          "weight_g": 50.0
+          "quantity": 50.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 50.0,
+          "food_id": "USDA_2346396"
         },
         {
           "food_name": "milk",
-          "weight_g": 100.0
+          "quantity": 100.0,
+          "unit": "ml",
+          "state": "raw",
+          "weight_g": 103.0,
+          "food_id": "USDA_746782"
         }
       ],
       "predicted": {
-        "calories": 250.815
+        "calories": 252.615
+      },
+      "latency_ms": {
+        "extraction": 1095.9697080543265,
+        "templates": 2581.129083991982,
+        "parse_portions": 2532.135874964297,
+        "conversion": 0.021999934688210487,
+        "db_lookup": 2301.5897910809144,
+        "total": 8510.880458983593
       }
     },
     {
@@ -82,12 +122,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Eggs, Grade A, Large, egg whole",
-          "weight_g": 93.2
+          "food_name": "eggs",
+          "quantity": 2.0,
+          "unit": "piece",
+          "state": "raw",
+          "weight_g": 1600.0,
+          "food_id": "USDA_748967"
         }
       ],
       "predicted": {
-        "calories": 137.936
+        "calories": 2368.0
+      },
+      "latency_ms": {
+        "extraction": 1859.238374978304,
+        "templates": 2294.961499981582,
+        "parse_portions": 1509.3490419676527,
+        "conversion": 475.8811250794679,
+        "db_lookup": 316.6107500437647,
+        "total": 6456.078624934889
       }
     },
     {
@@ -102,12 +154,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Bananas, Overripe, Raw",
-          "weight_g": 110.0
+          "food_name": "banana",
+          "quantity": 1.0,
+          "unit": "medium",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": "USDA_790774"
         }
       ],
       "predicted": {
-        "calories": 93.50000000000001
+        "calories": 0.0
+      },
+      "latency_ms": {
+        "extraction": 1211.9867081055418,
+        "templates": 1662.1973750879988,
+        "parse_portions": 1666.7607079725713,
+        "conversion": 212.9124590428546,
+        "db_lookup": 0.001750071533024311,
+        "total": 4753.895708010532
       }
     },
     {
@@ -123,15 +187,31 @@
       "scaled_ingredients": [
         {
           "food_name": "brown rice",
-          "weight_g": 50.0
+          "quantity": 50.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 50.0,
+          "food_id": "USDA_2512380"
         },
         {
           "food_name": "water",
-          "weight_g": 100.0
+          "quantity": 100.0,
+          "unit": "ml",
+          "state": "unknown",
+          "weight_g": 100.0,
+          "food_id": "USDA_2747675"
         }
       ],
       "predicted": {
         "calories": 186.23999999999998
+      },
+      "latency_ms": {
+        "extraction": 1000.0179579947144,
+        "templates": 1912.8116250503808,
+        "parse_portions": 1511.364792007953,
+        "conversion": 0.017915968783199787,
+        "db_lookup": 2390.9178749891,
+        "total": 6815.157957957126
       }
     },
     {
@@ -151,16 +231,32 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Chicken Breast, Non-Enhanced, Cooked",
-          "weight_g": 200.0
+          "food_name": "chicken breast",
+          "quantity": 200.0,
+          "unit": "g",
+          "state": "cooked",
+          "weight_g": 200.0,
+          "food_id": "UNMATCHED"
         },
         {
-          "food_name": "Olive Oil, Extra Virgin",
-          "weight_g": 13.6
+          "food_name": "olive oil",
+          "quantity": 1.0,
+          "unit": "tbsp",
+          "state": "raw",
+          "weight_g": 13.65,
+          "food_id": "USDA_748608"
         }
       ],
       "predicted": {
-        "calories": 335.244
+        "calories": 120.66600000000001
+      },
+      "latency_ms": {
+        "extraction": 1387.5577499857172,
+        "templates": 2938.4375419467688,
+        "parse_portions": 1874.4193750899285,
+        "conversion": 0.025541987270116806,
+        "db_lookup": 296.6808750061318,
+        "total": 6497.154749929905
       }
     },
     {
@@ -180,20 +276,32 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Eggs",
-          "weight_g": 93.2
+          "food_name": "eggs",
+          "quantity": 2.0,
+          "unit": "piece",
+          "state": "raw",
+          "weight_g": 1600.0,
+          "food_id": "USDA_748967"
         },
         {
-          "food_name": "Sunflower oil",
-          "weight_g": 15.0
-        },
-        {
-          "food_name": "Butter",
-          "weight_g": 10.0
+          "food_name": "butter",
+          "quantity": 10.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 10.0,
+          "food_id": "USDA_789828"
         }
       ],
       "predicted": {
-        "calories": 257.21000000000004
+        "calories": 2441.35
+      },
+      "latency_ms": {
+        "extraction": 1194.5142920594662,
+        "templates": 2187.461333000101,
+        "parse_portions": 2316.5325419977307,
+        "conversion": 139.3798339413479,
+        "db_lookup": 1752.0422500092536,
+        "total": 7589.963666978292
       }
     },
     {
@@ -203,7 +311,7 @@
         {
           "food_name": "rice",
           "logged_portion": "150g",
-          "is_cooked_dish": true
+          "is_cooked_dish": false
         },
         {
           "food_name": "dal tadka",
@@ -219,47 +327,95 @@
       "scaled_ingredients": [
         {
           "food_name": "rice",
-          "weight_g": 150.0
+          "quantity": 150.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 150.0,
+          "food_id": "USDA_2710838"
         },
         {
           "food_name": "split yellow lentils (toor dal)",
-          "weight_g": 40.0
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "cooked",
+          "weight_g": 100.0,
+          "food_id": "ICMR_15"
         },
         {
           "food_name": "sunflower oil",
-          "weight_g": 6.0
+          "quantity": 15.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 15.0,
+          "food_id": "USDA_1750349"
         },
         {
           "food_name": "onion",
-          "weight_g": 12.0
+          "quantity": 30.0,
+          "unit": "g",
+          "state": "unknown",
+          "weight_g": 30.0,
+          "food_id": "USDA_790577"
         },
         {
           "food_name": "tomato",
-          "weight_g": 8.0
+          "quantity": 20.0,
+          "unit": "g",
+          "state": "unknown",
+          "weight_g": 20.0,
+          "food_id": "USDA_1999634"
         },
         {
           "food_name": "ginger",
-          "weight_g": 2.0
+          "quantity": 5.0,
+          "unit": "g",
+          "state": "unknown",
+          "weight_g": 5.0,
+          "food_id": "USDA_2747655"
         },
         {
           "food_name": "garlic",
-          "weight_g": 2.0
+          "quantity": 5.0,
+          "unit": "g",
+          "state": "unknown",
+          "weight_g": 5.0,
+          "food_id": "USDA_1104647"
         },
         {
           "food_name": "green chili",
-          "weight_g": 2.0
-        },
-        {
-          "food_name": "cucumber",
-          "weight_g": 100.0
+          "quantity": 5.0,
+          "unit": "g",
+          "state": "unknown",
+          "weight_g": 5.0,
+          "food_id": "USDA_2747662"
         },
         {
           "food_name": "cumin seeds",
-          "weight_g": 1.0
+          "quantity": 1.0,
+          "unit": "g",
+          "state": "unknown",
+          "weight_g": 1.0,
+          "food_id": "USDA_2515380"
+        },
+        {
+          "food_name": "cucumber",
+          "quantity": 1.0,
+          "unit": "piece",
+          "state": "raw",
+          "weight_g": 800.0,
+          "food_id": "USDA_2346406"
         }
       ],
       "predicted": {
-        "calories": 777.4354
+        "calories": 1190.6570000000002
+      },
+      "latency_ms": {
+        "extraction": 1415.8905410440639,
+        "templates": 3695.0733750127256,
+        "parse_portions": 5244.110208004713,
+        "conversion": 239.85075007658452,
+        "db_lookup": 16357.430499978364,
+        "total": 26952.397333923727
       }
     },
     {
@@ -268,7 +424,7 @@
       "extracted_items": [
         {
           "food_name": "roti",
-          "logged_portion": "2",
+          "logged_portion": "2 plain",
           "is_cooked_dish": true
         },
         {
@@ -279,44 +435,88 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "ragi flour",
-          "weight_g": 100.0
+          "food_name": "roti",
+          "quantity": 2.0,
+          "unit": "piece",
+          "state": "cooked",
+          "weight_g": 1600.0,
+          "food_id": "ICMR_8"
         },
         {
           "food_name": "paneer",
-          "weight_g": 60.0
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "ICMR_1"
         },
         {
           "food_name": "spinach",
-          "weight_g": 120.0
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_1750352"
         },
         {
           "food_name": "sunflower oil",
-          "weight_g": 9.0
+          "quantity": 15.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 15.0,
+          "food_id": "USDA_1750349"
         },
         {
           "food_name": "onion",
-          "weight_g": 18.0
+          "quantity": 30.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 30.0,
+          "food_id": "USDA_790577"
         },
         {
           "food_name": "ginger",
-          "weight_g": 3.0
+          "quantity": 5.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 5.0,
+          "food_id": "USDA_2747655"
         },
         {
           "food_name": "garlic",
-          "weight_g": 3.0
+          "quantity": 5.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 5.0,
+          "food_id": "USDA_1104647"
         },
         {
           "food_name": "green chili",
-          "weight_g": 3.0
+          "quantity": 5.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 5.0,
+          "food_id": "USDA_2747662"
         },
         {
           "food_name": "cumin seeds",
-          "weight_g": 0.5
+          "quantity": 1.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 1.0,
+          "food_id": "USDA_2515380"
         }
       ],
       "predicted": {
-        "calories": 607.1093999999999
+        "calories": 3500.0
+      },
+      "latency_ms": {
+        "extraction": 4234.906541998498,
+        "templates": 3774.5070420205593,
+        "parse_portions": 4190.080999978818,
+        "conversion": 155.58895806316286,
+        "db_lookup": 17232.259916956536,
+        "total": 29587.39204099402
       }
     },
     {
@@ -337,15 +537,31 @@
       "scaled_ingredients": [
         {
           "food_name": "Yogurt, Greek, plain, nonfat",
-          "weight_g": 200.0
+          "quantity": 200.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 200.0,
+          "food_id": "USDA_330137"
         },
         {
           "food_name": "Almonds",
-          "weight_g": 30.0
+          "quantity": 30.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 30.0,
+          "food_id": "ICMR_33"
         }
       ],
       "predicted": {
         "calories": 295.7
+      },
+      "latency_ms": {
+        "extraction": 1123.4834579518065,
+        "templates": 2326.5416669892147,
+        "parse_portions": 1674.7525839600712,
+        "conversion": 0.030375085771083832,
+        "db_lookup": 479.2141659418121,
+        "total": 5604.084791964851
       }
     },
     {
@@ -370,20 +586,40 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Eggs",
-          "weight_g": 139.8
+          "food_name": "eggs",
+          "quantity": 3.0,
+          "unit": "piece",
+          "state": "raw",
+          "weight_g": 2400.0,
+          "food_id": "USDA_748967"
         },
         {
-          "food_name": "Spinach",
-          "weight_g": 50.0
+          "food_name": "spinach",
+          "quantity": 50.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 50.0,
+          "food_id": "USDA_1750352"
         },
         {
-          "food_name": "Cheese, cheddar",
-          "weight_g": 20.0
+          "food_name": "cheese",
+          "quantity": 20.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 20.0,
+          "food_id": "USDA_328637"
         }
       ],
       "predicted": {
-        "calories": 171.79000000000002
+        "calories": 3500.0
+      },
+      "latency_ms": {
+        "extraction": 1604.3938338989392,
+        "templates": 4685.273417038843,
+        "parse_portions": 2361.7285420186818,
+        "conversion": 161.39262495562434,
+        "db_lookup": 3028.199249994941,
+        "total": 11841.033249977045
       }
     },
     {
@@ -398,16 +634,32 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Chicken Breast",
-          "weight_g": 200.0
+          "food_name": "chicken breast",
+          "quantity": 200.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 200.0,
+          "food_id": "UNMATCHED"
         },
         {
-          "food_name": "Oil",
-          "weight_g": 11.7
+          "food_name": "oil",
+          "quantity": 0.01,
+          "unit": "liter",
+          "state": "raw",
+          "weight_g": 9.3,
+          "food_id": "USDA_330458"
         }
       ],
       "predicted": {
-        "calories": 312.481
+        "calories": 77.46900000000001
+      },
+      "latency_ms": {
+        "extraction": 867.0707079581916,
+        "templates": 1879.5213329140097,
+        "parse_portions": 2092.5683330278844,
+        "conversion": 0.05254207644611597,
+        "db_lookup": 1881.6632500384003,
+        "total": 6720.922709093429
       }
     },
     {
@@ -422,12 +674,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Ribeye Steak",
-          "weight_g": 150.0
+          "food_name": "ribeye steak",
+          "quantity": 150.0,
+          "unit": "g",
+          "state": "cooked",
+          "weight_g": 150.0,
+          "food_id": "UNMATCHED"
         }
       ],
       "predicted": {
-        "calories": 210.20999999999998
+        "calories": 0.0
+      },
+      "latency_ms": {
+        "extraction": 1053.4724580356851,
+        "templates": 2474.677999969572,
+        "parse_portions": 1809.9191249348223,
+        "conversion": 0.025417073629796505,
+        "db_lookup": 0.005166977643966675,
+        "total": 5338.14133296255
       }
     },
     {
@@ -442,24 +706,48 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Pizza Dough",
-          "weight_g": 150.0
+          "food_name": "cheese pizza",
+          "quantity": 0.333,
+          "unit": "pizza_whole",
+          "state": "cooked",
+          "weight_g": 299.7,
+          "food_id": "UNMATCHED"
         },
         {
-          "food_name": "Tomato Sauce",
-          "weight_g": 75.0
+          "food_name": "pizza dough",
+          "quantity": 0.333,
+          "unit": "pizza_whole",
+          "state": "unknown",
+          "weight_g": 299.7,
+          "food_id": "USDA_2759006"
         },
         {
-          "food_name": "Mozzarella Cheese",
-          "weight_g": 150.0
+          "food_name": "cheese",
+          "quantity": 0.333,
+          "unit": "pizza_whole",
+          "state": "raw",
+          "weight_g": 299.7,
+          "food_id": "USDA_328637"
         },
         {
-          "food_name": "Parmesan Cheese",
-          "weight_g": 30.0
+          "food_name": "tomato sauce",
+          "quantity": 0.333,
+          "unit": "pizza_whole",
+          "state": "unknown",
+          "weight_g": 299.7,
+          "food_id": "USDA_2685579"
         }
       ],
       "predicted": {
-        "calories": 1135.935
+        "calories": 2793.7434599999997
+      },
+      "latency_ms": {
+        "extraction": 985.2917090756819,
+        "templates": 2089.110792032443,
+        "parse_portions": 3176.9646250177175,
+        "conversion": 1121.347332955338,
+        "db_lookup": 6506.052291952074,
+        "total": 13878.808625042439
       }
     },
     {
@@ -475,15 +763,31 @@
       "scaled_ingredients": [
         {
           "food_name": "basmati rice",
-          "weight_g": 100.0
+          "quantity": 50.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 50.0,
+          "food_id": "USDA_2710821"
         },
         {
           "food_name": "chicken",
-          "weight_g": 225.0
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2646170"
         }
       ],
       "predicted": {
-        "calories": 611.0575
+        "calories": 292.09000000000003
+      },
+      "latency_ms": {
+        "extraction": 1119.5937080774456,
+        "templates": 2248.736625071615,
+        "parse_portions": 1741.4251660229638,
+        "conversion": 0.03170792479068041,
+        "db_lookup": 4170.431999955326,
+        "total": 9280.269250040874
       }
     },
     {
@@ -492,18 +796,30 @@
       "extracted_items": [
         {
           "food_name": "chocolate cake",
-          "logged_portion": "tiny sliver",
+          "logged_portion": "a tiny sliver",
           "is_cooked_dish": true
         }
       ],
       "scaled_ingredients": [
         {
           "food_name": "chocolate cake",
-          "weight_g": 60.0
+          "quantity": 0.1,
+          "unit": "cake_whole",
+          "state": "cooked",
+          "weight_g": 100.0,
+          "food_id": "UNMATCHED"
         }
       ],
       "predicted": {
-        "calories": 230.802
+        "calories": 0.0
+      },
+      "latency_ms": {
+        "extraction": 1207.2844579815865,
+        "templates": 1490.0494170142338,
+        "parse_portions": 3324.8917079763487,
+        "conversion": 168.63000008743256,
+        "db_lookup": 0.007916940376162529,
+        "total": 6190.909332945012
       }
     },
     {
@@ -519,11 +835,23 @@
       "scaled_ingredients": [
         {
           "food_name": "roasted peanuts",
-          "weight_g": 60.0
+          "quantity": 2.0,
+          "unit": "handful",
+          "state": "cooked",
+          "weight_g": 60.0,
+          "food_id": "USDA_323294"
         }
       ],
       "predicted": {
         "calories": 372.0
+      },
+      "latency_ms": {
+        "extraction": 1360.799332964234,
+        "templates": 1532.77008398436,
+        "parse_portions": 1410.4077499359846,
+        "conversion": 136.65700005367398,
+        "db_lookup": 400.1036669360474,
+        "total": 4840.778540936299
       }
     },
     {
@@ -532,18 +860,30 @@
       "extracted_items": [
         {
           "food_name": "skim milk",
-          "logged_portion": "1 glass",
+          "logged_portion": "a glass",
           "is_cooked_dish": false
         }
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)",
-          "weight_g": 100.0
+          "food_name": "skim milk",
+          "quantity": 1.0,
+          "unit": "glass",
+          "state": "raw",
+          "weight_g": 240.0,
+          "food_id": "USDA_746776"
         }
       ],
       "predicted": {
-        "calories": 34.0
+        "calories": 81.6
+      },
+      "latency_ms": {
+        "extraction": 1031.6696669906378,
+        "templates": 1824.1887079784647,
+        "parse_portions": 2166.1157499765977,
+        "conversion": 142.86045799963176,
+        "db_lookup": 541.064125020057,
+        "total": 5705.94070898369
       }
     },
     {
@@ -552,35 +892,46 @@
       "extracted_items": [
         {
           "food_name": "plain dosa",
-          "logged_portion": "1",
+          "logged_portion": "with extra ghee",
           "is_cooked_dish": true
-        },
-        {
-          "food_name": "ghee",
-          "logged_portion": "extra",
-          "is_cooked_dish": false
         }
       ],
       "scaled_ingredients": [
         {
           "food_name": "rice",
-          "weight_g": 100.0
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2710838"
         },
         {
           "food_name": "urad dal",
-          "weight_g": 30.0
+          "quantity": 30.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 30.0,
+          "food_id": "ICMR_19"
         },
         {
           "food_name": "ghee",
-          "weight_g": 10.0
-        },
-        {
-          "food_name": "oil",
-          "weight_g": 10.0
+          "quantity": 1.0,
+          "unit": "tbsp",
+          "state": "raw",
+          "weight_g": 13.950000000000001,
+          "food_id": "ICMR_2"
         }
       ],
       "predicted": {
-        "calories": 645.4300000000001
+        "calories": 597.6800000000001
+      },
+      "latency_ms": {
+        "extraction": 1087.357041076757,
+        "templates": 1808.9945419924334,
+        "parse_portions": 2048.3542500296608,
+        "conversion": 0.0350830378010869,
+        "db_lookup": 4830.626624985598,
+        "total": 9775.408667046577
       }
     },
     {
@@ -589,34 +940,62 @@
       "extracted_items": [
         {
           "food_name": "cheeseburger",
-          "logged_portion": "1",
+          "logged_portion": "",
           "is_cooked_dish": true
         }
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Ground Beef, Cooked",
-          "weight_g": 113.0
+          "food_name": "beef patty",
+          "quantity": 1.0,
+          "unit": "piece",
+          "state": "cooked",
+          "weight_g": 800.0,
+          "food_id": "USDA_2514744"
         },
         {
-          "food_name": "Cheddar Cheese, Shredded",
-          "weight_g": 28.0
+          "food_name": "cheese",
+          "quantity": 1.0,
+          "unit": "slice",
+          "state": "raw",
+          "weight_g": 20.8,
+          "food_id": "USDA_328637"
         },
         {
-          "food_name": "Pickles, Sliced",
-          "weight_g": 30.0
+          "food_name": "lettuce",
+          "quantity": 1.0,
+          "unit": "leaf",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": null
         },
         {
-          "food_name": "Onion, Raw, Chopped",
-          "weight_g": 30.0
+          "food_name": "tomato",
+          "quantity": 1.0,
+          "unit": "slice",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": null
         },
         {
-          "food_name": "Tomato, Raw, Sliced",
-          "weight_g": 30.0
+          "food_name": "onion",
+          "quantity": 1.0,
+          "unit": "slice",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": null
         }
       ],
       "predicted": {
-        "calories": 413.3917
+        "calories": 2045.584
+      },
+      "latency_ms": {
+        "extraction": 907.7844590647146,
+        "templates": 1711.5072089945897,
+        "parse_portions": 3331.3417499884963,
+        "conversion": 890.8594170352444,
+        "db_lookup": 3242.2942080302164,
+        "total": 10083.833999931812
       }
     },
     {
@@ -631,36 +1010,88 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Ground Beef, Cooked",
-          "weight_g": 150.0
+          "food_name": "ground beef",
+          "quantity": 1.0,
+          "unit": "portion",
+          "state": "cooked",
+          "weight_g": null,
+          "food_id": null
         },
         {
-          "food_name": "Tomato Sauce",
-          "weight_g": 100.0
+          "food_name": "onion",
+          "quantity": 1.0,
+          "unit": "piece",
+          "state": "raw",
+          "weight_g": 16.2,
+          "food_id": "USDA_790577"
         },
         {
-          "food_name": "Onion, Raw",
-          "weight_g": 30.0
+          "food_name": "garlic",
+          "quantity": 1.0,
+          "unit": "clove",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": null
         },
         {
-          "food_name": "Garlic, Raw",
-          "weight_g": 10.0
+          "food_name": "tomato",
+          "quantity": 1.0,
+          "unit": "piece",
+          "state": "raw",
+          "weight_g": 800.0,
+          "food_id": "USDA_1999634"
         },
         {
-          "food_name": "Olive Oil",
-          "weight_g": 10.0
+          "food_name": "carrot",
+          "quantity": 1.0,
+          "unit": "piece",
+          "state": "raw",
+          "weight_g": 800.0,
+          "food_id": "USDA_2258587"
         },
         {
-          "food_name": "Carrot, Raw",
-          "weight_g": 20.0
+          "food_name": "celery",
+          "quantity": 1.0,
+          "unit": "stalk",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": null
         },
         {
-          "food_name": "Celery, Raw",
-          "weight_g": 20.0
+          "food_name": "olive oil",
+          "quantity": 1.0,
+          "unit": "tbsp",
+          "state": "raw",
+          "weight_g": 13.65,
+          "food_id": "USDA_748608"
+        },
+        {
+          "food_name": "red wine",
+          "quantity": 1.0,
+          "unit": "cup",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": null
+        },
+        {
+          "food_name": "herbs",
+          "quantity": 1.0,
+          "unit": "handful",
+          "state": "raw",
+          "weight_g": 30.0,
+          "food_id": "USDA_2747655"
         }
       ],
       "predicted": {
-        "calories": 526.509
+        "calories": 637.701
+      },
+      "latency_ms": {
+        "extraction": 892.3226660117507,
+        "templates": 2047.783249989152,
+        "parse_portions": 3789.124459028244,
+        "conversion": 1104.6680830186233,
+        "db_lookup": 8998.877374920994,
+        "total": 16832.834417000413
       }
     },
     {
@@ -681,43 +1112,87 @@
       "scaled_ingredients": [
         {
           "food_name": "black lentils (urad dal)",
-          "weight_g": 60.0
+          "quantity": 60.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 60.0,
+          "food_id": "ICMR_20"
         },
         {
           "food_name": "sunflower oil",
-          "weight_g": 9.0
+          "quantity": 9.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 9.0,
+          "food_id": "USDA_1750349"
         },
         {
           "food_name": "onion",
-          "weight_g": 18.0
+          "quantity": 12.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 12.0,
+          "food_id": "USDA_790577"
         },
         {
           "food_name": "tomato",
-          "weight_g": 12.0
+          "quantity": 8.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 8.0,
+          "food_id": "USDA_1999634"
         },
         {
           "food_name": "ginger",
-          "weight_g": 3.0
+          "quantity": 2.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 2.0,
+          "food_id": "USDA_2747655"
         },
         {
           "food_name": "garlic",
-          "weight_g": 3.0
+          "quantity": 2.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 2.0,
+          "food_id": "USDA_1104647"
         },
         {
           "food_name": "green chili",
-          "weight_g": 3.0
+          "quantity": 2.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 2.0,
+          "food_id": "USDA_2747662"
         },
         {
           "food_name": "cumin seeds",
-          "weight_g": 0.6
+          "quantity": 0.6,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 0.6,
+          "food_id": "USDA_2515380"
         },
         {
-          "food_name": "french fries",
-          "weight_g": 100.0
+          "food_name": "potato",
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2261422"
         }
       ],
       "predicted": {
-        "calories": 664.7592
+        "calories": 659.262
+      },
+      "latency_ms": {
+        "extraction": 1195.7116250414401,
+        "templates": 3136.9004159932956,
+        "parse_portions": 6168.655709014274,
+        "conversion": 0.06550003308802843,
+        "db_lookup": 13661.910832975991,
+        "total": 24163.304917048663
       }
     },
     {
@@ -738,43 +1213,103 @@
       "scaled_ingredients": [
         {
           "food_name": "raw chicken",
-          "weight_g": 300.0
+          "quantity": 300.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 300.0,
+          "food_id": "USDA_2646170"
         },
         {
           "food_name": "onion",
-          "weight_g": 100.0
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_790577"
         },
         {
           "food_name": "tomato",
-          "weight_g": 60.0
+          "quantity": 60.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 60.0,
+          "food_id": "USDA_1999634"
         },
         {
           "food_name": "sunflower oil",
-          "weight_g": 30.0
+          "quantity": 30.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 30.0,
+          "food_id": "USDA_1750349"
         },
         {
           "food_name": "ginger-garlic paste",
-          "weight_g": 20.0
+          "quantity": 20.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 20.0,
+          "food_id": "USDA_1104647"
+        },
+        {
+          "food_name": "turmeric powder",
+          "quantity": 2.0,
+          "unit": "tsp",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": null
+        },
+        {
+          "food_name": "black pepper powder",
+          "quantity": 2.0,
+          "unit": "tsp",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": null
         },
         {
           "food_name": "all-purpose flour",
-          "weight_g": 100.0
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_790018"
         },
         {
           "food_name": "oil",
-          "weight_g": 20.0
+          "quantity": 20.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 20.0,
+          "food_id": "USDA_330458"
         },
         {
           "food_name": "potato",
-          "weight_g": 60.0
+          "quantity": 60.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 60.0,
+          "food_id": "USDA_2261422"
         },
         {
           "food_name": "cumin seeds",
-          "weight_g": 10.0
+          "quantity": 10.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 10.0,
+          "food_id": "USDA_2515380"
         }
       ],
       "predicted": {
         "calories": 1474.0339999999999
+      },
+      "latency_ms": {
+        "extraction": 1175.7789999246597,
+        "templates": 3498.361458070576,
+        "parse_portions": 11452.723667025566,
+        "conversion": 0.1275420654565096,
+        "db_lookup": 13972.399083082564,
+        "total": 30099.467167048715
       }
     },
     {
@@ -784,17 +1319,29 @@
         {
           "food_name": "chicken breast",
           "logged_portion": "200g",
-          "is_cooked_dish": true
+          "is_cooked_dish": false
         }
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Chicken Breast",
-          "weight_g": 200.0
+          "food_name": "chicken breast",
+          "quantity": 200.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 200.0,
+          "food_id": "USDA_2646170"
         }
       ],
       "predicted": {
         "calories": 215.02
+      },
+      "latency_ms": {
+        "extraction": 941.9649170013145,
+        "templates": 1123.8718749955297,
+        "parse_portions": 1706.6194579238072,
+        "conversion": 0.029249931685626507,
+        "db_lookup": 426.36458296328783,
+        "total": 4198.893291992135
       }
     },
     {
@@ -810,11 +1357,23 @@
       "scaled_ingredients": [
         {
           "food_name": "idli",
-          "weight_g": 200.0
+          "quantity": 4.0,
+          "unit": "piece",
+          "state": "cooked",
+          "weight_g": 3200.0,
+          "food_id": "UNMATCHED"
         }
       ],
       "predicted": {
         "calories": 0.0
+      },
+      "latency_ms": {
+        "extraction": 805.4442499997094,
+        "templates": 2017.2043750062585,
+        "parse_portions": 1629.7580839600414,
+        "conversion": 146.8087499961257,
+        "db_lookup": 0.0068749068304896355,
+        "total": 4599.26050005015
       }
     },
     {
@@ -823,18 +1382,30 @@
       "extracted_items": [
         {
           "food_name": "tuna",
-          "logged_portion": "Ate",
+          "logged_portion": "ate",
           "is_cooked_dish": false
         }
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Tuna, ahi or yellowfin, frozen, wild caught",
-          "weight_g": 100.0
+          "food_name": "Tuna",
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2747673"
         }
       ],
       "predicted": {
         "calories": 101.87
+      },
+      "latency_ms": {
+        "extraction": 888.8172500301152,
+        "templates": 1494.20283397194,
+        "parse_portions": 1612.8942500799894,
+        "conversion": 0.025792047381401062,
+        "db_lookup": 276.9613330019638,
+        "total": 4272.944167023525
       }
     },
     {
@@ -848,22 +1419,38 @@
         },
         {
           "food_name": "chicken",
-          "logged_portion": "portion",
+          "logged_portion": "big bowl",
           "is_cooked_dish": true
         }
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Wheat Pasta",
-          "weight_g": 200.0
+          "food_name": "wheat pasta",
+          "quantity": 1.0,
+          "unit": "bowl",
+          "state": "cooked",
+          "weight_g": 145.0,
+          "food_id": "UNMATCHED"
         },
         {
-          "food_name": "Chicken Breast, Non-Enhanced, Braised",
-          "weight_g": 174.0
+          "food_name": "chicken",
+          "quantity": 1.0,
+          "unit": "portion",
+          "state": "cooked",
+          "weight_g": null,
+          "food_id": "UNMATCHED"
         }
       ],
       "predicted": {
-        "calories": 984.8399999999999
+        "calories": 0.0
+      },
+      "latency_ms": {
+        "extraction": 1076.510375016369,
+        "templates": 3236.367707955651,
+        "parse_portions": 2026.2314579449594,
+        "conversion": 326.5228330856189,
+        "db_lookup": 0.00900006853044033,
+        "total": 6665.682791965082
       }
     },
     {
@@ -879,19 +1466,31 @@
       "scaled_ingredients": [
         {
           "food_name": "basmati rice",
-          "weight_g": 87.5
+          "quantity": 50.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 50.0,
+          "food_id": "USDA_2710821"
         },
         {
           "food_name": "chicken",
-          "weight_g": 175.0
-        },
-        {
-          "food_name": "water",
-          "weight_g": 100.0
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2646170"
         }
       ],
       "predicted": {
-        "calories": 514.6375
+        "calories": 292.09000000000003
+      },
+      "latency_ms": {
+        "extraction": 1169.0665829228237,
+        "templates": 2603.4523339476436,
+        "parse_portions": 2021.638499922119,
+        "conversion": 0.023333937861025333,
+        "db_lookup": 3651.236959034577,
+        "total": 9445.44224999845
       }
     },
     {
@@ -906,16 +1505,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Whey Protein",
-          "weight_g": 300.0
-        },
-        {
-          "food_name": "Yogurt, plain, whole milk",
-          "weight_g": 300.0
+          "food_name": "whey",
+          "quantity": 3.0,
+          "unit": "scoop",
+          "state": "unknown",
+          "weight_g": 93.0,
+          "food_id": "USDA_2259793"
         }
       ],
       "predicted": {
-        "calories": 362.37
+        "calories": 72.49350000000001
+      },
+      "latency_ms": {
+        "extraction": 1172.4434579955414,
+        "templates": 1391.412208089605,
+        "parse_portions": 1437.8610419807956,
+        "conversion": 153.24920904822648,
+        "db_lookup": 282.6482499949634,
+        "total": 4437.657332979143
       }
     },
     {
@@ -930,12 +1537,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Oats, whole grain, rolled, old fashioned",
-          "weight_g": 100.0
+          "food_name": "oats",
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2346396"
         }
       ],
       "predicted": {
         "calories": 381.63
+      },
+      "latency_ms": {
+        "extraction": 3143.1490840623155,
+        "templates": 1671.3641670066863,
+        "parse_portions": 1553.7075409665704,
+        "conversion": 0.01816696021705866,
+        "db_lookup": 354.8705409048125,
+        "total": 6723.151250043884
       }
     },
     {
@@ -950,12 +1569,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Oats, whole grain, rolled, old fashioned",
-          "weight_g": 250.0
+          "food_name": "oats",
+          "quantity": 250.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 250.0,
+          "food_id": "USDA_2346396"
         }
       ],
       "predicted": {
         "calories": 954.075
+      },
+      "latency_ms": {
+        "extraction": 854.20854203403,
+        "templates": 2107.595333014615,
+        "parse_portions": 1677.993500023149,
+        "conversion": 0.028166919946670532,
+        "db_lookup": 293.4279160108417,
+        "total": 4933.291916968301
       }
     },
     {
@@ -970,12 +1601,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Oats, whole grain, rolled, old fashioned",
-          "weight_g": 75.0
+          "food_name": "oats",
+          "quantity": 75.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 75.0,
+          "food_id": "USDA_2346396"
         }
       ],
       "predicted": {
         "calories": 286.22249999999997
+      },
+      "latency_ms": {
+        "extraction": 1135.9789590351284,
+        "templates": 1626.013332977891,
+        "parse_portions": 1561.903083929792,
+        "conversion": 0.026208930648863316,
+        "db_lookup": 291.9828749727458,
+        "total": 4615.94495899044
       }
     },
     {
@@ -990,12 +1633,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Oats, whole grain, rolled, old fashioned",
-          "weight_g": 40.0
+          "food_name": "oats",
+          "quantity": 40.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 40.0,
+          "food_id": "USDA_2346396"
         }
       ],
       "predicted": {
         "calories": 152.65200000000002
+      },
+      "latency_ms": {
+        "extraction": 877.8400409501046,
+        "templates": 1455.3080840269104,
+        "parse_portions": 1713.6978750349954,
+        "conversion": 0.02920802216976881,
+        "db_lookup": 301.1965409386903,
+        "total": 4348.1080828933045
       }
     },
     {
@@ -1010,12 +1665,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Oats, whole grain, rolled, old fashioned",
-          "weight_g": 50.0
+          "food_name": "oats",
+          "quantity": 0.5,
+          "unit": "cup",
+          "state": "raw",
+          "weight_g": 39.6,
+          "food_id": "USDA_2346396"
         }
       ],
       "predicted": {
-        "calories": 190.815
+        "calories": 151.12548
+      },
+      "latency_ms": {
+        "extraction": 873.4418749809265,
+        "templates": 3055.4386670701206,
+        "parse_portions": 1435.6804579729214,
+        "conversion": 0.03450002986937761,
+        "db_lookup": 917.9702089168131,
+        "total": 6282.610166934319
       }
     },
     {
@@ -1024,18 +1691,30 @@
       "extracted_items": [
         {
           "food_name": "oats",
-          "logged_portion": "1 cup",
+          "logged_portion": "one cup",
           "is_cooked_dish": false
         }
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Oats, whole grain, rolled, old fashioned",
-          "weight_g": 100.0
+          "food_name": "oats",
+          "quantity": 1.0,
+          "unit": "cup",
+          "state": "raw",
+          "weight_g": 79.2,
+          "food_id": "USDA_2346396"
         }
       ],
       "predicted": {
-        "calories": 381.63
+        "calories": 302.25096
+      },
+      "latency_ms": {
+        "extraction": 1052.7944159694016,
+        "templates": 1347.25375007838,
+        "parse_portions": 1518.7227500136942,
+        "conversion": 0.02675002906471491,
+        "db_lookup": 285.60491697862744,
+        "total": 4204.444041009992
       }
     },
     {
@@ -1051,11 +1730,23 @@
       "scaled_ingredients": [
         {
           "food_name": "Oats, whole grain, rolled, old fashioned",
-          "weight_g": 100.0
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2346396"
         }
       ],
       "predicted": {
         "calories": 381.63
+      },
+      "latency_ms": {
+        "extraction": 839.8881669854745,
+        "templates": 1685.2876669727266,
+        "parse_portions": 1696.2227909825742,
+        "conversion": 0.02883397974073887,
+        "db_lookup": 409.58195796702057,
+        "total": 4631.050249910913
       }
     },
     {
@@ -1064,18 +1755,30 @@
       "extracted_items": [
         {
           "food_name": "raw oats",
-          "logged_portion": "1 serving",
+          "logged_portion": "",
           "is_cooked_dish": false
         }
       ],
       "scaled_ingredients": [
         {
           "food_name": "Oats, whole grain, rolled, old fashioned",
-          "weight_g": 100.0
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2346396"
         }
       ],
       "predicted": {
         "calories": 381.63
+      },
+      "latency_ms": {
+        "extraction": 880.3132079774514,
+        "templates": 2037.4507079832256,
+        "parse_portions": 1434.715084033087,
+        "conversion": 0.034791999496519566,
+        "db_lookup": 299.75491599179804,
+        "total": 4652.309791999869
       }
     },
     {
@@ -1091,11 +1794,23 @@
       "scaled_ingredients": [
         {
           "food_name": "Oats, whole grain, steel cut",
-          "weight_g": 100.0
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2346397"
         }
       ],
       "predicted": {
         "calories": 381.25
+      },
+      "latency_ms": {
+        "extraction": 933.6860419716686,
+        "templates": 2256.1637500766665,
+        "parse_portions": 2170.245375018567,
+        "conversion": 0.02695806324481964,
+        "db_lookup": 1498.2098329346627,
+        "total": 6858.372749993578
       }
     },
     {
@@ -1110,12 +1825,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Chicken, breast, boneless, skinless, raw",
-          "weight_g": 100.0
+          "food_name": "chicken breast",
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2646170"
         }
       ],
       "predicted": {
         "calories": 107.51
+      },
+      "latency_ms": {
+        "extraction": 869.5111670531332,
+        "templates": 1738.9338749926537,
+        "parse_portions": 1333.4852500120178,
+        "conversion": 0.026417081244289875,
+        "db_lookup": 315.7562920823693,
+        "total": 4257.750459015369
       }
     },
     {
@@ -1130,12 +1857,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Chicken, breast, boneless, skinless, raw",
-          "weight_g": 250.0
+          "food_name": "chicken breast",
+          "quantity": 250.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 250.0,
+          "food_id": "USDA_2646170"
         }
       ],
       "predicted": {
         "calories": 268.77500000000003
+      },
+      "latency_ms": {
+        "extraction": 1189.9563329061493,
+        "templates": 1677.2390420082957,
+        "parse_portions": 1777.5608750525862,
+        "conversion": 0.009167008101940155,
+        "db_lookup": 279.09070800524205,
+        "total": 4923.891416983679
       }
     },
     {
@@ -1150,12 +1889,32 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Chicken, breast, boneless, skinless, raw",
-          "weight_g": 100.0
+          "food_name": "Chicken",
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2646171"
+        },
+        {
+          "food_name": "breast",
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_2646170"
         }
       ],
       "predicted": {
-        "calories": 107.51
+        "calories": 253.2
+      },
+      "latency_ms": {
+        "extraction": 1306.1770000495017,
+        "templates": 2228.5729170544073,
+        "parse_portions": 2380.0032089930028,
+        "conversion": 0.03083399496972561,
+        "db_lookup": 5289.494958007708,
+        "total": 11204.318541917019
       }
     },
     {
@@ -1163,19 +1922,31 @@
       "status": "success",
       "extracted_items": [
         {
-          "food_name": "chicken",
+          "food_name": "cooked chicken",
           "logged_portion": "50g",
           "is_cooked_dish": true
         }
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Chicken Breast, Non-Enhanced, Cooked",
-          "weight_g": 50.0
+          "food_name": "chicken",
+          "quantity": 50.0,
+          "unit": "g",
+          "state": "cooked",
+          "weight_g": 50.0,
+          "food_id": "USDA_2646170"
         }
       ],
       "predicted": {
         "calories": 53.755
+      },
+      "latency_ms": {
+        "extraction": 1004.2574999388307,
+        "templates": 2558.4212919929996,
+        "parse_portions": 1435.0617500022054,
+        "conversion": 0.03183400258421898,
+        "db_lookup": 1890.2972911018878,
+        "total": 6888.122832984664
       }
     },
     {
@@ -1184,18 +1955,30 @@
       "extracted_items": [
         {
           "food_name": "chicken breast",
-          "logged_portion": "1 pound",
+          "logged_portion": "one pound",
           "is_cooked_dish": false
         }
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Chicken, breast, boneless, skinless, raw",
-          "weight_g": 453.6
+          "food_name": "chicken breast",
+          "quantity": 1.0,
+          "unit": "pound",
+          "state": "raw",
+          "weight_g": 453.6,
+          "food_id": "USDA_2646170"
         }
       ],
       "predicted": {
         "calories": 487.6653600000001
+      },
+      "latency_ms": {
+        "extraction": 1036.992041976191,
+        "templates": 1980.2640420384705,
+        "parse_portions": 1488.6460829293355,
+        "conversion": 0.028833048418164253,
+        "db_lookup": 281.6522920038551,
+        "total": 4787.625416996889
       }
     },
     {
@@ -1203,23 +1986,31 @@
       "status": "success",
       "extracted_items": [
         {
-          "food_name": "chicken",
+          "food_name": "cooked chicken",
           "logged_portion": "half a pound",
           "is_cooked_dish": true
         }
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Chicken Breast, Non-Enhanced, Cooked",
-          "weight_g": 226.8
-        },
-        {
-          "food_name": "Chicken Thigh, Non-Enhanced, Cooked",
-          "weight_g": 226.8
+          "food_name": "chicken",
+          "quantity": 0.5,
+          "unit": "pound",
+          "state": "cooked",
+          "weight_g": 226.8,
+          "food_id": "USDA_2646170"
         }
       ],
       "predicted": {
-        "calories": 574.2576000000001
+        "calories": 243.83268000000004
+      },
+      "latency_ms": {
+        "extraction": 957.6570419594646,
+        "templates": 1686.454416019842,
+        "parse_portions": 1406.0643339762464,
+        "conversion": 0.029125018045306206,
+        "db_lookup": 1590.7904580235481,
+        "total": 5641.032291925512
       }
     },
     {
@@ -1234,12 +2025,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Bananas, Overripe, Raw",
-          "weight_g": 100.0
+          "food_name": "Bananas",
+          "quantity": 100.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 100.0,
+          "food_id": "USDA_790774"
         }
       ],
       "predicted": {
         "calories": 85.0
+      },
+      "latency_ms": {
+        "extraction": 1064.9487499613315,
+        "templates": 1250.0852500088513,
+        "parse_portions": 1613.7025409843773,
+        "conversion": 0.021999934688210487,
+        "db_lookup": 688.9149589696899,
+        "total": 4617.717124987394
       }
     },
     {
@@ -1254,12 +2057,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Bananas, Overripe, Raw",
-          "weight_g": 110.0
+          "food_name": "banana",
+          "quantity": 1.0,
+          "unit": "medium",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": "USDA_790774"
         }
       ],
       "predicted": {
-        "calories": 93.50000000000001
+        "calories": 0.0
+      },
+      "latency_ms": {
+        "extraction": 845.4510829178616,
+        "templates": 1289.6304170135409,
+        "parse_portions": 1335.7773749157786,
+        "conversion": 151.39258303679526,
+        "db_lookup": 0.0029170187190175056,
+        "total": 3622.292749932967
       }
     },
     {
@@ -1274,12 +2089,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Bananas, Overripe, Raw",
-          "weight_g": 220.0
+          "food_name": "banana",
+          "quantity": 2.0,
+          "unit": "large",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": "USDA_790774"
         }
       ],
       "predicted": {
-        "calories": 187.00000000000003
+        "calories": 0.0
+      },
+      "latency_ms": {
+        "extraction": 1231.919167097658,
+        "templates": 1438.380541978404,
+        "parse_portions": 1635.0983750307932,
+        "conversion": 139.1588340047747,
+        "db_lookup": 0.0028329668566584587,
+        "total": 4444.60916693788
       }
     },
     {
@@ -1294,12 +2121,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Bananas, Overripe, Raw",
-          "weight_g": 55.0
+          "food_name": "banana",
+          "quantity": 0.5,
+          "unit": "piece",
+          "state": "raw",
+          "weight_g": 400.0,
+          "food_id": "USDA_790774"
         }
       ],
       "predicted": {
-        "calories": 46.75000000000001
+        "calories": 340.0
+      },
+      "latency_ms": {
+        "extraction": 949.0889590233564,
+        "templates": 1576.0013329563662,
+        "parse_portions": 2008.2770419539884,
+        "conversion": 145.39704099297523,
+        "db_lookup": 467.44712500367314,
+        "total": 5146.254000021145
       }
     },
     {
@@ -1314,12 +2153,24 @@
       ],
       "scaled_ingredients": [
         {
-          "food_name": "Bananas, Overripe, Raw",
-          "weight_g": 110.0
+          "food_name": "banana",
+          "quantity": 1.0,
+          "unit": "slice",
+          "state": "raw",
+          "weight_g": null,
+          "food_id": "USDA_790774"
         }
       ],
       "predicted": {
-        "calories": 93.50000000000001
+        "calories": 0.0
+      },
+      "latency_ms": {
+        "extraction": 923.6936669331044,
+        "templates": 1303.448916063644,
+        "parse_portions": 1666.3702910300344,
+        "conversion": 208.1125839613378,
+        "db_lookup": 0.009124982170760632,
+        "total": 4101.676458027214
       }
     },
     {
@@ -1335,15 +2186,31 @@
       "scaled_ingredients": [
         {
           "food_name": "brown rice",
-          "weight_g": 33.33
+          "quantity": 50.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 50.0,
+          "food_id": "USDA_2512380"
         },
         {
           "food_name": "water",
-          "weight_g": 66.67
+          "quantity": 100.0,
+          "unit": "ml",
+          "state": "unknown",
+          "weight_g": 100.0,
+          "food_id": "USDA_2747675"
         }
       ],
       "predicted": {
-        "calories": 124.14793199999998
+        "calories": 186.23999999999998
+      },
+      "latency_ms": {
+        "extraction": 970.3864170005545,
+        "templates": 1554.2167080566287,
+        "parse_portions": 1814.6719170035794,
+        "conversion": 0.07166701834648848,
+        "db_lookup": 4290.1077499846,
+        "total": 8629.488290986046
       }
     },
     {
@@ -1359,15 +2226,31 @@
       "scaled_ingredients": [
         {
           "food_name": "brown rice",
-          "weight_g": 66.67
+          "quantity": 50.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 50.0,
+          "food_id": "USDA_2512380"
         },
         {
           "food_name": "water",
-          "weight_g": 133.33
+          "quantity": 100.0,
+          "unit": "ml",
+          "state": "unknown",
+          "weight_g": 100.0,
+          "food_id": "USDA_2747675"
         }
       ],
       "predicted": {
-        "calories": 248.33206800000002
+        "calories": 186.23999999999998
+      },
+      "latency_ms": {
+        "extraction": 1006.2777909915894,
+        "templates": 2108.572082943283,
+        "parse_portions": 1946.5117499930784,
+        "conversion": 0.03766699228435755,
+        "db_lookup": 3647.8747919900343,
+        "total": 8709.325458970852
       }
     },
     {
@@ -1383,15 +2266,31 @@
       "scaled_ingredients": [
         {
           "food_name": "brown rice",
-          "weight_g": 50.0
+          "quantity": 50.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 50.0,
+          "food_id": "USDA_2512380"
         },
         {
           "food_name": "water",
-          "weight_g": 100.0
+          "quantity": 100.0,
+          "unit": "ml",
+          "state": "unknown",
+          "weight_g": 100.0,
+          "food_id": "USDA_2747675"
         }
       ],
       "predicted": {
         "calories": 186.23999999999998
+      },
+      "latency_ms": {
+        "extraction": 1005.5042089661583,
+        "templates": 2253.4426249330863,
+        "parse_portions": 2254.4273750390857,
+        "conversion": 0.0415419926866889,
+        "db_lookup": 3889.70108400099,
+        "total": 9403.149915975519
       }
     },
     {
@@ -1407,15 +2306,31 @@
       "scaled_ingredients": [
         {
           "food_name": "brown rice",
-          "weight_g": 25.0
+          "quantity": 0.25,
+          "unit": "cup",
+          "state": "raw",
+          "weight_g": 37.8,
+          "food_id": "USDA_2512380"
         },
         {
           "food_name": "water",
-          "weight_g": 0.0
+          "quantity": 0.0,
+          "unit": "ml",
+          "state": "unknown",
+          "weight_g": 0.0,
+          "food_id": "USDA_2747675"
         }
       ],
       "predicted": {
-        "calories": 91.38
+        "calories": 138.16655999999998
+      },
+      "latency_ms": {
+        "extraction": 1075.0304160173982,
+        "templates": 2612.2277500107884,
+        "parse_portions": 1732.9298330005258,
+        "conversion": 0.04650000482797623,
+        "db_lookup": 3183.781374944374,
+        "total": 8604.05675007496
       }
     },
     {
@@ -1431,15 +2346,31 @@
       "scaled_ingredients": [
         {
           "food_name": "brown rice",
-          "weight_g": 50.0
+          "quantity": 50.0,
+          "unit": "g",
+          "state": "raw",
+          "weight_g": 50.0,
+          "food_id": "USDA_2512380"
         },
         {
           "food_name": "water",
-          "weight_g": 100.0
+          "quantity": 100.0,
+          "unit": "ml",
+          "state": "unknown",
+          "weight_g": 100.0,
+          "food_id": "USDA_2747675"
         }
       ],
       "predicted": {
         "calories": 186.23999999999998
+      },
+      "latency_ms": {
+        "extraction": 995.7952909171581,
+        "templates": 1605.7400420540944,
+        "parse_portions": 2112.777916016057,
+        "conversion": 0.04012498538941145,
+        "db_lookup": 2326.7017499310896,
+        "total": 7041.090540937148
       }
     }
   ]
