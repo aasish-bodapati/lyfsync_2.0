@@ -1,13 +1,15 @@
 import os
-from typing import List, Optional
-from datetime import datetime
+from typing import List
 from contextlib import asynccontextmanager
-
+from fastapi.responses import JSONResponse
 from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from sqlmodel import create_engine, Session, Field, SQLModel, select
 from dotenv import load_dotenv
 from openai import OpenAI
+import openai
+from datetime import datetime, timezone
+
 
 from prompts import SYSTEM_PROMPT
 
@@ -15,10 +17,13 @@ from prompts import SYSTEM_PROMPT
 # DATABASE & APP SETUP
 # ##############################################################################
 
-load_dotenv()
+dotenv_path = os.path.dirname(__file__)
 
-# We use a local SQLite database file in the same directory
-DATABASE_URL = "sqlite:///./local_db.db"
+load_dotenv(os.path.join(dotenv_path, ".env"))
+
+# We use an absolute path so the DB is always found in the backend directory
+backend_dir = os.path.dirname(os.path.abspath(__file__))
+DATABASE_URL = f"sqlite:///{os.path.join(backend_dir, 'local_db.db')}"
 # check_same_thread=False is needed for SQLite to run safely in multi-threaded FastAPI
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 
@@ -37,6 +42,17 @@ app = FastAPI(title="LyfSync Nutrition Tracking API (Simplified)", version="1.0.
 llm_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
+# Whenever ANY endpoint raises an OpenAI error, this function intercepts it:
+@app.exception_handler(Exception)
+async def generic_exception_handler(request, exc):
+    # Log the real error to your terminal so you can debug it:
+    print(f"CRITICAL ERROR: {str(exc)}")
+    
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "An unexpected error occurred. Our team has been notified."}
+    )
+
 # ##############################################################################
 # DATABASE TABLE
 # ##############################################################################
@@ -45,14 +61,14 @@ class Meal(SQLModel, table=True):
     """Represents a completed meal log saved by the user."""
     __tablename__ = "meals"
 
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: int | None = Field(default=None, primary_key=True)
     raw_text: str             
     meal_type: str            # breakfast, lunch, dinner, snack
     calories: float
     protein: float
     carbs: float
     fat: float
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory= lambda: datetime.now(timezone.utc))
 
 
 # ##############################################################################
@@ -68,7 +84,7 @@ class FoodItem(BaseModel):
     carbohydrates: float
     fats: float
 
-class MealParseResponse(BaseModel):
+class MealItem(BaseModel):
     """The complete structured response expected from the LLM."""
     meal_type: str
     foods: List[FoodItem]
@@ -82,24 +98,18 @@ class UserInput(BaseModel):
 # HELPER FUNCTIONS
 # ##############################################################################
 
-def parse_nutrition_from_text(text: str) -> MealParseResponse:
+def parse_nutrition_from_text(text: str) -> MealItem:
     """Sends the user text to OpenAI and returns structured nutrition data."""
-    try:
-        completion = llm_client.beta.chat.completions.parse(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": text}
-            ],
-            response_format=MealParseResponse,
-            temperature=0.0
-        )
-        parsed = completion.choices[0].message.parsed
-        if not parsed:
-            raise ValueError("Failed to parse response structure from OpenAI.")
-        return parsed
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"OpenAI parsing failed: {str(e)}")
+    completion = llm_client.beta.chat.completions.parse(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": text}
+        ],
+        response_format=MealItem,
+        temperature=0.0
+    )
+    return completion.choices[0].message.parsed
 
 
 # ##############################################################################
@@ -114,9 +124,6 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     """
     # 1. Ask the LLM to parse the text and estimate macros
     llm_result = parse_nutrition_from_text(request.text)
-    
-    if not llm_result.foods:
-        raise HTTPException(status_code=400, detail="No food items could be extracted from your query.")
 
     # 2. Sum up the macros from all identified foods
     total_cal = sum(item.calories for item in llm_result.foods)
