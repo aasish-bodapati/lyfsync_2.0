@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 
 
 from prompts import SYSTEM_PROMPT
+from embeddings import find_closest_food
 
 # ##############################################################################
 # DATABASE & APP SETUP
@@ -128,11 +129,28 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     # 1. Ask the LLM to parse the text and estimate macros
     llm_result = parse_nutrition_from_text(request.text)
 
-    # 2. Sum up the macros from all identified foods
-    total_cal = sum(item.calories for item in llm_result.foods)
-    total_prot = sum(item.protein for item in llm_result.foods)
-    total_carb = sum(item.carbohydrates for item in llm_result.foods)
-    total_fat = sum(item.fats for item in llm_result.foods)
+    # 2. Sum up the macros from all identified foods (checking local database for semantic matches)
+    total_cal = 0.0
+    total_prot = 0.0
+    total_carb = 0.0
+    total_fat = 0.0
+
+    for item in llm_result.foods:
+        # Check if we have a semantic vector match in our local food database
+        match = find_closest_food(item.food_name, db)
+        if match:
+            # Scale database nutritional values (stored per 100g) by the LLM-determined weight
+            scale = item.weight_grams / 100.0
+            total_cal += match["calories"] * scale
+            total_prot += match["protein"] * scale
+            total_carb += match["carbs"] * scale
+            total_fat += match["fat"] * scale
+        else:
+            # Fall back to LLM estimations
+            total_cal += item.calories
+            total_prot += item.protein
+            total_carb += item.carbohydrates
+            total_fat += item.fats
 
     # 3. Create and save the DB record
     db_meal = Meal(
