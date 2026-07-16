@@ -1,2 +1,4 @@
 [tool.pyrefly]
 python-interpreter-path = "backend/.venv/bin/python"
+project-includes = ["backend"]
+search-path = ["backend"]

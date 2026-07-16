@@ -59,7 +59,7 @@ async def generic_exception_handler(request, exc):
 
 class Meal(SQLModel, table=True):
     """Represents a completed meal log saved by the user."""
-    __tablename__ = "meals"
+    __tablename__ = "meals"  # type: ignore
 
     id: int | None = Field(default=None, primary_key=True)
     raw_text: str             
@@ -109,7 +109,10 @@ def parse_nutrition_from_text(text: str) -> MealItem:
         response_format=MealItem,
         temperature=0.0
     )
-    return completion.choices[0].message.parsed
+    parsed = completion.choices[0].message.parsed
+    if parsed is None:
+        raise ValueError("Failed to parse nutrition data from text.")
+    return parsed
 
 
 # ##############################################################################
