@@ -73,6 +73,20 @@ class Meal(SQLModel, table=True):
     fat: float
     created_at: datetime = Field(default_factory= lambda: datetime.now(timezone.utc))
 
+class MealItem(SQLModel, table=True):
+    """Represents a single food item in a meal."""
+    __tablename__ = "meal_items"  # type: ignore
+
+    id: int | None = Field(default=None, primary_key=True)
+    meal_id: int = Field(foreign_key="meals.id")
+    name: str
+    weight_grams: float
+    calories: float
+    protein: float
+    carbs: float
+    fat: float
+    source: str
+
 
 # ##############################################################################
 # PYDANTIC SCHEMAS (For API Validation & LLM Output)
@@ -87,7 +101,7 @@ class FoodItem(BaseModel):
     carbohydrates: float
     fats: float
 
-class MealItem(BaseModel):
+class ParsedMeal(BaseModel):
     """The complete structured response expected from the LLM."""
     meal_type: str
     foods: List[FoodItem]
@@ -101,7 +115,7 @@ class UserInput(BaseModel):
 # HELPER FUNCTIONS
 # ##############################################################################
 
-def parse_nutrition_from_text(text: str) -> MealItem:
+def parse_nutrition_from_text(text: str) -> ParsedMeal:
     """Sends the user text to OpenAI and returns structured nutrition data."""
     completion = llm_client.beta.chat.completions.parse(
         model="gpt-4o-mini",
@@ -109,7 +123,7 @@ def parse_nutrition_from_text(text: str) -> MealItem:
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": text}
         ],
-        response_format=MealItem,
+        response_format=ParsedMeal,
         temperature=0.0
     )
     parsed = completion.choices[0].message.parsed

@@ -13,7 +13,7 @@ dotenv_path= os.path.dirname(os.path.dirname(__file__))
 sys.path.append(dotenv_path)
 
 
-from main import app, get_db, Meal, MealItem, FoodItem
+from main import app, get_db, Meal, ParsedMeal, FoodItem
 
 
 load_dotenv(os.path.join(dotenv_path, ".env"))
@@ -50,7 +50,7 @@ def test_health_check(client):
 
 def test_parse_meal(client, monkeypatch):
     def mock_parse(text):
-        return MealItem(
+        return ParsedMeal(
             meal_type="breakfast",
             foods=[
                 FoodItem(food_name="egg", weight_grams=100.0, calories=140.0, protein=12.0, carbohydrates=1.0, fats=10.0)
