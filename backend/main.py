@@ -80,6 +80,7 @@ class MealItemTable(SQLModel, table=True):
     carbs: float
     fat: float
     source: str
+    confidence: float | None = None
 
 
 # ##############################################################################
@@ -93,6 +94,8 @@ class MealItem(BaseModel):
     protein: float
     carbs: float
     fat: float
+    source: str | None = None
+    confidence: float | None = None
 
 class Meal(BaseModel):
     meal_type: str
@@ -217,7 +220,8 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
             protein=round(item_prot, 2),
             carbs=round(item_carb, 2),
             fat=round(item_fat, 2),
-            source=source
+            source=source,
+            confidence=match["similarity_score"] if match else None
         )
         db.add(db_item)
         
@@ -229,7 +233,9 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
                 calories=db_item.calories,
                 protein=db_item.protein,
                 carbs=db_item.carbs,
-                fat=db_item.fat
+                fat=db_item.fat,
+                source=db_item.source,
+                confidence=db_item.confidence
             )
         )
     try:
