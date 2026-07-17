@@ -72,6 +72,7 @@ def import_and_denormalize():
         protein REAL NOT NULL DEFAULT 0.0,
         carbs REAL NOT NULL DEFAULT 0.0,
         fat REAL NOT NULL DEFAULT 0.0,
+        source TEXT NOT NULL DEFAULT 'usda',
         vector_embedding VECTOR(1536)
     );
     """)
@@ -138,14 +139,15 @@ def import_and_denormalize():
     print("Pivoting data into flat 'food_nutrition' table...")
     cursor.execute("BEGIN TRANSACTION;")
     cursor.execute("""
-    INSERT INTO food_nutrition (fdc_id, description, calories, protein, carbs, fat)
+    INSERT INTO food_nutrition (fdc_id, description, calories, protein, carbs, fat, source)
     SELECT 
         f.fdc_id,
         f.description,
         MAX(CASE WHEN fn.nutrient_id = 1008 THEN fn.amount ELSE 0.0 END) as calories,
         MAX(CASE WHEN fn.nutrient_id = 1003 THEN fn.amount ELSE 0.0 END) as protein,
         MAX(CASE WHEN fn.nutrient_id = 1005 THEN fn.amount ELSE 0.0 END) as carbs,
-        MAX(CASE WHEN fn.nutrient_id = 1004 THEN fn.amount ELSE 0.0 END) as fat
+        MAX(CASE WHEN fn.nutrient_id = 1004 THEN fn.amount ELSE 0.0 END) as fat,
+        'usda' as source
     FROM food f
     LEFT JOIN food_nutrient fn ON f.fdc_id = fn.fdc_id
     GROUP BY f.fdc_id, f.description;

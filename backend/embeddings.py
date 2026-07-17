@@ -22,6 +22,7 @@ class FoodNutrition(SQLModel, table=True):
     carbs: float
     fat: float
     vector_embedding: Any = Field(default=None, sa_column=Column(Vector(1536)))
+    source: str = Field(default="usda")
 
 
 def get_embedding(text_to_embed: str) -> List[float]:
