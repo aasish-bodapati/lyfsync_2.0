@@ -35,9 +35,9 @@ def get_db():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Enable pgvector and create tables on startup if they don't exist
-    with Session(engine) as session:
-        session.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
-        session.commit()
+    with engine.connect() as conn:
+        conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
+        conn.commit()
     SQLModel.metadata.create_all(engine)
     yield
 
