@@ -2,7 +2,7 @@ import os
 import json
 from typing import List, Dict, Any, Optional
 from openai import OpenAI
-from sqlmodel import Session, select, SQLModel, Field
+from sqlmodel import Session, select, SQLModel, Field, text
 from dotenv import load_dotenv
 
 # Ensure environment variables are loaded
@@ -47,7 +47,7 @@ def cosine_similarity(v1: List[float], v2: List[float]) -> float:
 
 def find_closest_food(query: str, db: Session, threshold: float = 0.80) -> Optional[Dict[str, Any]]:
     """
-    Computes query embedding, compares it to all foods in the DB, 
+    Computes query embedding, compares it to all foods in the DB natively using sqlite-vec,
     and returns the best match if its similarity score exceeds the threshold.
     """
     try:
@@ -56,46 +56,50 @@ def find_closest_food(query: str, db: Session, threshold: float = 0.80) -> Optio
         print(f"Error generating query embedding: {e}")
         return None
 
-    # Fetch all foods with their embeddings
-    result = db.exec(select(FoodNutrition)).all()
+    # Load sqlite-vec extension on demand
+    import sqlite_vec
+    raw_conn = db.connection().connection.dbapi_connection
+    try:
+        raw_conn.execute("SELECT vec_version()")
+    except Exception:
+        raw_conn.enable_load_extension(True)
+        sqlite_vec.load(raw_conn)
+        raw_conn.enable_load_extension(False)
 
-    best_match = None
-    best_score = -1.0
+    # Convert query vector to JSON string for sqlite-vec
+    import json
+    query_vector_json = json.dumps(query_vector)
 
-    for food in result:
-        fdc_id = food.fdc_id
-        description = food.description
-        calories = food.calories
-        protein = food.protein
-        carbs = food.carbs
-        fat = food.fat
-        vector_embedding_json = food.vector_embedding
-        
-        if not vector_embedding_json:
-            continue
-            
-        try:
-            food_vector = json.loads(vector_embedding_json)
-        except Exception:
-            continue  # Skip corrupt records
-            
-        score = cosine_similarity(query_vector, food_vector)
-        
-        if score > best_score:
-            best_score = score
-            best_match = {
-                "fdc_id": fdc_id,
-                "description": description,
-                "calories": calories,
-                "protein": protein,
-                "carbs": carbs,
-                "fat": fat,
-                "similarity_score": score
-            }
+    # Cosine distance = 1.0 - Cosine similarity
+    # We want similarity >= threshold, which translates to distance <= 1.0 - threshold
+    max_distance = 1.0 - threshold
 
-    if best_match and best_score >= threshold:
-        print(f"FOUND LOCAL MATCH: '{best_match['description']}' with score {best_score:.4f}")
-        return best_match
+    result = db.execute(
+        text(
+            "SELECT fdc_id, description, calories, protein, carbs, fat, "
+            "vec_distance_cosine(vector_embedding, :query_vec) as distance "
+            "FROM food_nutrition "
+            "WHERE vector_embedding IS NOT NULL "
+            "AND vec_distance_cosine(vector_embedding, :query_vec) <= :max_dist "
+            "ORDER BY distance "
+            "LIMIT 1"
+        ),
+        {"query_vec": query_vector_json, "max_dist": max_distance}
+    ).fetchone()
 
-    print(f"NO LOCAL MATCH ABOVE THRESHOLD. Best score was: {best_score:.4f}")
+    if result:
+        fdc_id, description, calories, protein, carbs, fat, distance = result
+        similarity_score = 1.0 - distance
+        print(f"FOUND LOCAL MATCH: '{description}' with score {similarity_score:.4f}")
+        return {
+            "fdc_id": fdc_id,
+            "description": description,
+            "calories": calories,
+            "protein": protein,
+            "carbs": carbs,
+            "fat": fat,
+            "similarity_score": similarity_score
+        }
+
+    print(f"NO LOCAL MATCH ABOVE THRESHOLD.")
     return None
