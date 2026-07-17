@@ -52,8 +52,26 @@ def find_closest_food(query: str, db: Session, threshold: float = 0.60) -> Optio
     Computes query embedding, compares it to all foods in the DB natively using pgvector,
     and returns the best match if its similarity score exceeds the threshold.
     """
+    ALIASES = {
+        "curd": "yogurt",
+        "roti": "chapati",
+        "kadhai": "wok",
+        "paneer": "cheese", # or "cottage cheese" but paneer might already exist, though alias helps if it doesn't
+        "dal": "lentils",
+        "chana": "chickpeas",
+        "rajma": "kidney beans"
+    }
+
+    # Normalize query for alias lookup
+    query_lower = query.lower().strip()
+    
+    import re
+    # Simple word replacement for known aliases using word boundaries
+    for alias, replacement in ALIASES.items():
+        query_lower = re.sub(rf'\b{alias}\b', replacement, query_lower)
+
     try:
-        query_vector = get_embedding(query)
+        query_vector = get_embedding(query_lower)
     except Exception as e:
         print(f"Error generating query embedding: {e}")
         return None
