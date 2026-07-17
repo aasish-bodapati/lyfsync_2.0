@@ -69,11 +69,11 @@ def test_parse_meal(client, monkeypatch):
     assert response.status_code == 200
     data = response.json()
 
-    assert data["raw_text"] == "I ate 2 eggs and a banana for breakfast"
     assert data["meal_type"] == "breakfast"
-    assert data["calories"] > 0
-    assert data["protein"] > 0
-    assert data["id"] is not None
+    assert data["total_calories"] > 0
+    assert data["total_protein"] > 0
+    assert len(data["items"]) == 1
+    assert data["items"][0]["name"] == "egg"
     
 
 def test_list_meals(client, session):

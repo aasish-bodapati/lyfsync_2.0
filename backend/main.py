@@ -36,7 +36,7 @@ def get_db():
 async def lifespan(app: FastAPI):
     # Enable pgvector and create tables on startup if they don't exist
     with Session(engine) as session:
-        session.exec(text("CREATE EXTENSION IF NOT EXISTS vector;"))
+        session.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
         session.commit()
     SQLModel.metadata.create_all(engine)
     yield
@@ -101,6 +101,21 @@ class FoodItem(BaseModel):
     carbohydrates: float
     fats: float
 
+class MealItemResponse(BaseModel):
+    name: str
+    calories: float
+    protein: float
+    carbs: float
+    fat: float
+
+class MealResponse(BaseModel):
+    meal_type: str
+    items: List[MealItemResponse]
+    total_calories: float
+    total_protein: float
+    total_carbs: float
+    total_fat: float
+
 class ParsedMeal(BaseModel):
     """The complete structured response expected from the LLM."""
     meal_type: str
@@ -136,7 +151,7 @@ def parse_nutrition_from_text(text: str) -> ParsedMeal:
 # API ENDPOINTS
 # ##############################################################################
 
-@app.post("/api/v1/meals/parse", response_model=Meal)
+@app.post("/api/v1/meals/parse", response_model=MealResponse)
 def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     """
     Parses a natural language meal log, sums up the estimated macros, 
@@ -168,7 +183,7 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
             total_carb += item.carbohydrates
             total_fat += item.fats
 
-    # 3. Create and save the DB record
+    # 3. Create and save the DB record for the meal
     db_meal = Meal(
         raw_text=request.text,
         meal_type=llm_result.meal_type,
@@ -182,7 +197,59 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_meal)
     
-    return db_meal
+    # 4. Save the individual meal items
+    response_items = []
+    for item in llm_result.foods:
+        match = find_closest_food(item.food_name, db)
+        source = "db_match" if match else "llm_fallback"
+        
+        # Recalculate scaled macros just for this item
+        if match:
+            scale = item.weight_grams / 100.0
+            item_cal = match["calories"] * scale
+            item_prot = match["protein"] * scale
+            item_carb = match["carbs"] * scale
+            item_fat = match["fat"] * scale
+        else:
+            item_cal = item.calories
+            item_prot = item.protein
+            item_carb = item.carbohydrates
+            item_fat = item.fats
+            
+        db_item = MealItem(
+            meal_id=db_meal.id,
+            name=item.food_name,
+            weight_grams=item.weight_grams,
+            calories=round(item_cal, 2),
+            protein=round(item_prot, 2),
+            carbs=round(item_carb, 2),
+            fat=round(item_fat, 2),
+            source=source
+        )
+        db.add(db_item)
+        
+        # Build the response object for this item
+        response_items.append(
+            MealItemResponse(
+                name=db_item.name,
+                calories=db_item.calories,
+                protein=db_item.protein,
+                carbs=db_item.carbs,
+                fat=db_item.fat
+            )
+        )
+        
+    db.commit()
+    
+    # 5. Return the expected API schema
+    return MealResponse(
+        meal_type=db_meal.meal_type,
+        items=response_items,
+        total_calories=db_meal.calories,
+        total_protein=db_meal.protein,
+        total_carbs=db_meal.carbs,
+        total_fat=db_meal.fat
+    )
 
 
 @app.get("/api/v1/meals", response_model=List[Meal])
