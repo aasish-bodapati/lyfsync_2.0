@@ -45,16 +45,6 @@ app = FastAPI(title="LyfSync Nutrition Tracking API (Simplified)", version="1.0.
 llm_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
-# Whenever ANY endpoint raises an OpenAI error, this function intercepts it:
-@app.exception_handler(Exception)
-async def generic_exception_handler(request, exc):
-    # Log the real error to your terminal so you can debug it:
-    print(f"CRITICAL ERROR: {str(exc)}")
-    
-    return JSONResponse(
-        status_code=500,
-        content={"detail": "An unexpected error occurred. Our team has been notified."}
-    )
 
 # ##############################################################################
 # DATABASE TABLE
@@ -158,7 +148,14 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     and saves it to the local SQLite database.
     """
     # 1. Ask the LLM to parse the text and estimate macros
-    llm_result = parse_nutrition_from_text(request.text)
+    try:
+        llm_result = parse_nutrition_from_text(request.text)
+    except openai.APIError as e:
+        print(f"OpenAI API Error: {e}")
+        raise HTTPException(status_code=502, detail="AI service unavailable")
+    except ValueError as e:
+        print(f"Parsing Error: {e}")
+        raise HTTPException(status_code=400, detail="Failed to parse meal description")
 
     # 2. Sum up the macros from all identified foods (checking local database for semantic matches)
     total_cal = 0.0
@@ -238,8 +235,12 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
                 fat=db_item.fat
             )
         )
-        
-    db.commit()
+    try:
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        print(f"Database error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to save meal")
     
     # 5. Return the expected API schema
     return MealResponse(
