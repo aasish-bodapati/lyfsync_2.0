@@ -86,17 +86,9 @@ class MealItemTable(SQLModel, table=True):
 # PYDANTIC SCHEMAS (For API Validation & LLM Output)
 # ##############################################################################
 
-class FoodItem(BaseModel):
-    """Represents a single parsed food item with estimated macros."""
-    food_name: str
-    weight_grams: float
-    calories: float
-    protein: float
-    carbohydrates: float
-    fats: float
-
 class MealItem(BaseModel):
     name: str
+    weight_grams: float
     calories: float
     protein: float
     carbs: float
@@ -113,7 +105,7 @@ class Meal(BaseModel):
 class ParsedMeal(BaseModel):
     """The complete structured response expected from the LLM."""
     meal_type: str
-    foods: List[FoodItem]
+    items: List[MealItem]
 
 class UserInput(BaseModel):
     """API request schema containing user raw text log."""
@@ -167,9 +159,9 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     total_carb = 0.0
     total_fat = 0.0
 
-    for item in llm_result.foods:
+    for item in llm_result.items:
         # Check if we have a semantic vector match in our local food database
-        match = find_closest_food(item.food_name, db)
+        match = find_closest_food(item.name, db)
         if match:
             # Scale database nutritional values (stored per 100g) by the LLM-determined weight
             scale = item.weight_grams / 100.0
@@ -181,8 +173,8 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
             # Fall back to LLM estimations
             total_cal += item.calories
             total_prot += item.protein
-            total_carb += item.carbohydrates
-            total_fat += item.fats
+            total_carb += item.carbs
+            total_fat += item.fat
 
     # 3. Create and save the DB record for the meal
     db_meal = MealTable(
@@ -200,8 +192,8 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     
     # 4. Save the individual meal items
     response_items = []
-    for item in llm_result.foods:
-        match = find_closest_food(item.food_name, db)
+    for item in llm_result.items:
+        match = find_closest_food(item.name, db)
         source = "db_match" if match else "llm_fallback"
         
         # Recalculate scaled macros just for this item
@@ -214,12 +206,12 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
         else:
             item_cal = item.calories
             item_prot = item.protein
-            item_carb = item.carbohydrates
-            item_fat = item.fats
+            item_carb = item.carbs
+            item_fat = item.fat
             
         db_item = MealItemTable(
             meal_id=db_meal.id,
-            name=item.food_name,
+            name=item.name,
             weight_grams=item.weight_grams,
             calories=round(item_cal, 2),
             protein=round(item_prot, 2),
@@ -233,6 +225,7 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
         response_items.append(
             MealItem(
                 name=db_item.name,
+                weight_grams=db_item.weight_grams,
                 calories=db_item.calories,
                 protein=db_item.protein,
                 carbs=db_item.carbs,
