@@ -47,7 +47,7 @@ def cosine_similarity(v1: List[float], v2: List[float]) -> float:
         
     return dot_product / (mag1 * mag2)
 
-def find_closest_food(query: str, db: Session, threshold: float = 0.80) -> Optional[Dict[str, Any]]:
+def find_closest_food(query: str, db: Session, threshold: float = 0.60) -> Optional[Dict[str, Any]]:
     """
     Computes query embedding, compares it to all foods in the DB natively using pgvector,
     and returns the best match if its similarity score exceeds the threshold.
@@ -58,12 +58,17 @@ def find_closest_food(query: str, db: Session, threshold: float = 0.80) -> Optio
         print(f"Error generating query embedding: {e}")
         return None
 
-    result = db.execute(
+    results = db.execute(
         select(FoodNutrition)
         .where(FoodNutrition.vector_embedding.is_not(None))
         .order_by(FoodNutrition.vector_embedding.cosine_distance(query_vector))
-        .limit(1)
-    ).scalars().first()
+        .limit(3)
+    ).scalars().all()
+    
+    if not results:
+        return None
+        
+    result = results[0]
 
     if result and result.vector_embedding is not None:
         # Re-compute distance in Python or extract from query if possible.

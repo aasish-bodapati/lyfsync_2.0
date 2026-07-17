@@ -197,7 +197,14 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     response_items = []
     for item in llm_result.items:
         match = find_closest_food(item.name, db)
-        source = "db_match" if match else "llm_fallback"
+        
+        if match:
+            if match["similarity_score"] >= 0.80:
+                source = "db_match_high"
+            else:
+                source = "db_match_low"
+        else:
+            source = "llm_fallback"
         
         # Recalculate scaled macros just for this item
         if match:
