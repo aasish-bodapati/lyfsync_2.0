@@ -54,7 +54,7 @@ llm_client = OpenAI(api_key=settings.openai_api_key)
 # DATABASE TABLE
 # ##############################################################################
 
-class Meal(SQLModel, table=True):
+class MealTable(SQLModel, table=True):
     """Represents a completed meal log saved by the user."""
     __tablename__ = "meals"  # type: ignore
 
@@ -67,7 +67,7 @@ class Meal(SQLModel, table=True):
     fat: float
     created_at: datetime = Field(default_factory= lambda: datetime.now(timezone.utc))
 
-class MealItem(SQLModel, table=True):
+class MealItemTable(SQLModel, table=True):
     """Represents a single food item in a meal."""
     __tablename__ = "meal_items"  # type: ignore
 
@@ -95,16 +95,16 @@ class FoodItem(BaseModel):
     carbohydrates: float
     fats: float
 
-class MealItemResponse(BaseModel):
+class MealItem(BaseModel):
     name: str
     calories: float
     protein: float
     carbs: float
     fat: float
 
-class MealResponse(BaseModel):
+class Meal(BaseModel):
     meal_type: str
-    items: List[MealItemResponse]
+    items: List[MealItem]
     total_calories: float
     total_protein: float
     total_carbs: float
@@ -145,7 +145,7 @@ def parse_nutrition_from_text(text: str) -> ParsedMeal:
 # API ENDPOINTS
 # ##############################################################################
 
-@app.post("/api/v1/meals/parse", response_model=MealResponse)
+@app.post("/api/v1/meals/parse", response_model=Meal)
 def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     """
     Parses a natural language meal log, sums up the estimated macros, 
@@ -185,7 +185,7 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
             total_fat += item.fats
 
     # 3. Create and save the DB record for the meal
-    db_meal = Meal(
+    db_meal = MealTable(
         raw_text=request.text,
         meal_type=llm_result.meal_type,
         calories=round(total_cal, 2),
@@ -217,7 +217,7 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
             item_carb = item.carbohydrates
             item_fat = item.fats
             
-        db_item = MealItem(
+        db_item = MealItemTable(
             meal_id=db_meal.id,
             name=item.food_name,
             weight_grams=item.weight_grams,
@@ -231,7 +231,7 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
         
         # Build the response object for this item
         response_items.append(
-            MealItemResponse(
+            MealItem(
                 name=db_item.name,
                 calories=db_item.calories,
                 protein=db_item.protein,
@@ -247,7 +247,7 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail="Failed to save meal")
     
     # 5. Return the expected API schema
-    return MealResponse(
+    return Meal(
         meal_type=db_meal.meal_type,
         items=response_items,
         total_calories=db_meal.calories,
@@ -257,10 +257,10 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     )
 
 
-@app.get("/api/v1/meals", response_model=List[Meal])
+@app.get("/api/v1/meals", response_model=List[MealTable])
 def list_meals(db: Session = Depends(get_db)):
     """Retrieves all previously logged meals from the SQLite database."""
-    meals = db.exec(select(Meal)).all()
+    meals = db.exec(select(MealTable)).all()
     return meals
 
 

@@ -13,7 +13,7 @@ dotenv_path= os.path.dirname(os.path.dirname(__file__))
 sys.path.append(dotenv_path)
 
 
-from main import app, get_db, Meal, ParsedMeal, FoodItem
+from main import app, get_db, MealTable, ParsedMeal, FoodItem
 
 
 load_dotenv(os.path.join(dotenv_path, ".env"))
@@ -77,7 +77,7 @@ def test_parse_meal(client, monkeypatch):
     
 
 def test_list_meals(client, session):
-    test_meal = Meal(raw_text="2 eggs", meal_type="breakfast", calories=140.0, protein=12.0, carbs=1.0, fat=10.0)
+    test_meal = MealTable(raw_text="2 eggs", meal_type="breakfast", calories=140.0, protein=12.0, carbs=1.0, fat=10.0)
     session.add(test_meal)
     session.commit()
 
