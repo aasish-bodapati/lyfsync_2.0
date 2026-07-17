@@ -1,16 +1,25 @@
 import os
 import csv
-import sqlite3
+import psycopg2
+from psycopg2.extras import execute_values
+from dotenv import load_dotenv
 
 # Define absolute paths
 BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(BACKEND_DIR, "local_db.db")
 DATA_DIR = os.path.join(BACKEND_DIR, "data", "FoodData_Central_foundation_food_csv_2026-04-30")
 
+load_dotenv(os.path.join(BACKEND_DIR, ".env"))
+DATABASE_URL = os.getenv("DATABASE_URL")
+
 def import_and_denormalize():
-    print(f"Connecting to database: {DB_PATH}")
-    conn = sqlite3.connect(DB_PATH)
+    print(f"Connecting to database: {DATABASE_URL}")
+    conn = psycopg2.connect(DATABASE_URL)
     cursor = conn.cursor()
+
+    # 0. Enable pgvector extension
+    print("Enabling pgvector extension...")
+    cursor.execute("CREATE EXTENSION IF NOT EXISTS vector;")
+    conn.commit()
 
     # 1. Drop and Recreate Raw/Flat Tables
     print("Recreating database tables...")
@@ -34,7 +43,7 @@ def import_and_denormalize():
         id INTEGER PRIMARY KEY,
         name TEXT,
         unit_name TEXT,
-        nutrient_nbr INTEGER,
+        nutrient_nbr TEXT,
         rank REAL
     );
     """)
@@ -62,7 +71,8 @@ def import_and_denormalize():
         calories REAL NOT NULL DEFAULT 0.0,
         protein REAL NOT NULL DEFAULT 0.0,
         carbs REAL NOT NULL DEFAULT 0.0,
-        fat REAL NOT NULL DEFAULT 0.0
+        fat REAL NOT NULL DEFAULT 0.0,
+        vector_embedding VECTOR(1536)
     );
     """)
     conn.commit()
@@ -77,12 +87,13 @@ def import_and_denormalize():
         header = next(reader)
         for row in reader:
             if row[1] == "foundation_food":
+                row = [None if val == "" else val for val in row]
                 foundation_foods.append(row)
                 foundation_fdc_ids.add(int(row[0]))
                 
-        cursor.execute("BEGIN TRANSACTION;")
-        cursor.executemany(
-            "INSERT OR REPLACE INTO food (fdc_id, data_type, description, food_category_id, publication_date) VALUES (?, ?, ?, ?, ?);",
+        execute_values(
+            cursor,
+            "INSERT INTO food (fdc_id, data_type, description, food_category_id, publication_date) VALUES %s",
             foundation_foods
         )
         conn.commit()
@@ -93,10 +104,14 @@ def import_and_denormalize():
     with open(nutrient_path, mode="r", encoding="utf-8") as f:
         reader = csv.reader(f)
         header = next(reader)
-        cursor.execute("BEGIN TRANSACTION;")
-        cursor.executemany(
-            "INSERT OR REPLACE INTO nutrient (id, name, unit_name, nutrient_nbr, rank) VALUES (?, ?, ?, ?, ?);",
-            reader
+        
+        # Convert empty strings to None for proper NULL insertion
+        nutrients = [[None if val == "" else val for val in row] for row in reader]
+        
+        execute_values(
+            cursor,
+            "INSERT INTO nutrient (id, name, unit_name, nutrient_nbr, rank) VALUES %s",
+            nutrients
         )
         conn.commit()
 
@@ -109,11 +124,12 @@ def import_and_denormalize():
         header = next(reader)
         for row in reader:
             if int(row[1]) in foundation_fdc_ids:
+                row = [None if val == "" else val for val in row]
                 foundation_nutrients.append(row)
                 
-        cursor.execute("BEGIN TRANSACTION;")
-        cursor.executemany(
-            "INSERT OR REPLACE INTO food_nutrient (id, fdc_id, nutrient_id, amount, data_points, derivation_id, min, max, median, footnote, min_year_acquired) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        execute_values(
+            cursor,
+            "INSERT INTO food_nutrient (id, fdc_id, nutrient_id, amount, data_points, derivation_id, min, max, median, footnote, min_year_acquired) VALUES %s",
             foundation_nutrients
         )
         conn.commit()
@@ -122,7 +138,7 @@ def import_and_denormalize():
     print("Pivoting data into flat 'food_nutrition' table...")
     cursor.execute("BEGIN TRANSACTION;")
     cursor.execute("""
-    INSERT OR REPLACE INTO food_nutrition (fdc_id, description, calories, protein, carbs, fat)
+    INSERT INTO food_nutrition (fdc_id, description, calories, protein, carbs, fat)
     SELECT 
         f.fdc_id,
         f.description,
@@ -144,13 +160,16 @@ def import_and_denormalize():
     conn.commit()
 
     # 7. Show the final results
-    count = cursor.execute("SELECT COUNT(*) FROM food_nutrition").fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM food_nutrition")
+    row = cursor.fetchone()
+    count = row[0] if row else 0
     print(f"\nAll-in-one Seeding & Denormalization completed successfully!")
     print(f"  * Table 'food_nutrition' created with {count} rows.")
     
     # Print the first 5 records as a sample
     print("\nSample records:")
-    sample = cursor.execute("SELECT fdc_id, description, calories, protein, carbs, fat FROM food_nutrition LIMIT 5").fetchall()
+    cursor.execute("SELECT fdc_id, description, calories, protein, carbs, fat FROM food_nutrition LIMIT 5")
+    sample = cursor.fetchall()
     for row in sample:
         print(f"  ID: {row[0]} | Name: {row[1][:40]} | Calories: {row[2]} kcal | P: {row[3]}g | C: {row[4]}g | F: {row[5]}g")
 

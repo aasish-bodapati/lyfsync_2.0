@@ -1,39 +1,38 @@
 import os
 import csv
-import sqlite3
+import psycopg2
 import json
 from openai import OpenAI
 from dotenv import load_dotenv
 
 # Define absolute paths
 BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(BACKEND_DIR, "local_db.db")
 
 # Load environment variables
 load_dotenv(os.path.join(BACKEND_DIR, ".env"))
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 def generate_embeddings():
-    print(f"Connecting to database: {DB_PATH}")
-    conn = sqlite3.connect(DB_PATH)
+    print(f"Connecting to database: {DATABASE_URL}")
+    conn = psycopg2.connect(DATABASE_URL)
     cursor = conn.cursor()
 
     # 1. Add vector_embedding column if it doesn't exist
     print("Checking if 'vector_embedding' column exists...")
     try:
-        cursor.execute("ALTER TABLE food_nutrition ADD COLUMN vector_embedding TEXT;")
+        cursor.execute("ALTER TABLE food_nutrition ADD COLUMN IF NOT EXISTS vector_embedding VECTOR(1536);")
         conn.commit()
-        print("  * Added 'vector_embedding' column to 'food_nutrition' table.")
-    except sqlite3.OperationalError as e:
-        if "duplicate column name" in str(e).lower() or "already exists" in str(e).lower():
-            print("  * 'vector_embedding' column already exists. Skipping column addition.")
-        else:
-            raise e
+        print("  * Ensured 'vector_embedding' column exists in 'food_nutrition' table.")
+    except Exception as e:
+        print(f"  * Warning: {e}")
+        conn.rollback()
 
     # 2. Fetch foods that need embeddings
     print("Fetching foods that need vector embeddings...")
-    foods = cursor.execute(
+    cursor.execute(
         "SELECT fdc_id, description FROM food_nutrition WHERE vector_embedding IS NULL"
-    ).fetchall()
+    )
+    foods = cursor.fetchall()
     
     total_foods = len(foods)
     if total_foods == 0:
@@ -71,7 +70,7 @@ def generate_embeddings():
             for food_id, embedding_data in zip(ids, response.data):
                 vector_json = json.dumps(embedding_data.embedding)
                 cursor.execute(
-                    "UPDATE food_nutrition SET vector_embedding = ? WHERE fdc_id = ?;",
+                    "UPDATE food_nutrition SET vector_embedding = %s WHERE fdc_id = %s;",
                     (vector_json, food_id)
                 )
             conn.commit()

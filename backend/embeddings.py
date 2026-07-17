@@ -2,7 +2,8 @@ import os
 import json
 from typing import List, Dict, Any, Optional
 from openai import OpenAI
-from sqlmodel import Session, select, SQLModel, Field, text
+from sqlmodel import Session, select, SQLModel, Field, text, Column
+from pgvector.sqlalchemy import Vector
 from dotenv import load_dotenv
 
 # Ensure environment variables are loaded
@@ -20,7 +21,7 @@ class FoodNutrition(SQLModel, table=True):
     protein: float
     carbs: float
     fat: float
-    vector_embedding: str | None = Field(default=None)
+    vector_embedding: Any = Field(default=None, sa_column=Column(Vector(1536)))
 
 
 def get_embedding(text_to_embed: str) -> List[float]:
@@ -47,7 +48,7 @@ def cosine_similarity(v1: List[float], v2: List[float]) -> float:
 
 def find_closest_food(query: str, db: Session, threshold: float = 0.80) -> Optional[Dict[str, Any]]:
     """
-    Computes query embedding, compares it to all foods in the DB natively using sqlite-vec,
+    Computes query embedding, compares it to all foods in the DB natively using pgvector,
     and returns the best match if its similarity score exceeds the threshold.
     """
     try:
@@ -56,50 +57,31 @@ def find_closest_food(query: str, db: Session, threshold: float = 0.80) -> Optio
         print(f"Error generating query embedding: {e}")
         return None
 
-    # Load sqlite-vec extension on demand
-    import sqlite_vec
-    raw_conn = db.connection().connection.dbapi_connection
-    try:
-        raw_conn.execute("SELECT vec_version()")
-    except Exception:
-        raw_conn.enable_load_extension(True)
-        sqlite_vec.load(raw_conn)
-        raw_conn.enable_load_extension(False)
-
-    # Convert query vector to JSON string for sqlite-vec
-    import json
-    query_vector_json = json.dumps(query_vector)
-
-    # Cosine distance = 1.0 - Cosine similarity
-    # We want similarity >= threshold, which translates to distance <= 1.0 - threshold
-    max_distance = 1.0 - threshold
-
     result = db.execute(
-        text(
-            "SELECT fdc_id, description, calories, protein, carbs, fat, "
-            "vec_distance_cosine(vector_embedding, :query_vec) as distance "
-            "FROM food_nutrition "
-            "WHERE vector_embedding IS NOT NULL "
-            "AND vec_distance_cosine(vector_embedding, :query_vec) <= :max_dist "
-            "ORDER BY distance "
-            "LIMIT 1"
-        ),
-        {"query_vec": query_vector_json, "max_dist": max_distance}
-    ).fetchone()
+        select(FoodNutrition)
+        .where(FoodNutrition.vector_embedding.is_not(None))
+        .order_by(FoodNutrition.vector_embedding.cosine_distance(query_vector))
+        .limit(1)
+    ).scalars().first()
 
-    if result:
-        fdc_id, description, calories, protein, carbs, fat, distance = result
-        similarity_score = 1.0 - distance
-        print(f"FOUND LOCAL MATCH: '{description}' with score {similarity_score:.4f}")
-        return {
-            "fdc_id": fdc_id,
-            "description": description,
-            "calories": calories,
-            "protein": protein,
-            "carbs": carbs,
-            "fat": fat,
-            "similarity_score": similarity_score
-        }
+    if result and result.vector_embedding is not None:
+        # Re-compute distance in Python or extract from query if possible.
+        # But we can also compute it directly if we do it in python.
+        distance = cosine_similarity(query_vector, result.vector_embedding)
+        # Wait, pgvector cosine distance = 1 - cosine similarity. Let's just use cosine_similarity since it's exact.
+        similarity_score = cosine_similarity(query_vector, result.vector_embedding)
 
-    print(f"NO LOCAL MATCH ABOVE THRESHOLD.")
+        if similarity_score >= threshold:
+            print(f"FOUND MATCH: '{result.description}' with score {similarity_score:.4f}")
+            return {
+                "fdc_id": result.fdc_id,
+                "description": result.description,
+                "calories": result.calories,
+                "protein": result.protein,
+                "carbs": result.carbs,
+                "fat": result.fat,
+                "similarity_score": similarity_score
+            }
+
+    print(f"NO MATCH ABOVE THRESHOLD.")
     return None

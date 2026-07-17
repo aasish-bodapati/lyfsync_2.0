@@ -6,16 +6,15 @@ dotenv_path= os.path.dirname(os.path.dirname(__file__))
 sys.path.append(dotenv_path)
 
 from sqlmodel import SQLModel, Session, create_engine, select
-from main import Meal, DATABASE_URL
-
+from main import Meal
 
 load_dotenv(os.path.join(dotenv_path, ".env"))
 
-engine= create_engine(DATABASE_URL)
+TEST_DATABASE_URL = "sqlite:///:memory:"
+engine = create_engine(TEST_DATABASE_URL, connect_args={"check_same_thread": False})
 SQLModel.metadata.create_all(engine)
 
-
-print(DATABASE_URL)
+print(TEST_DATABASE_URL)
 
 
 def test_meal_database_write_and_read():

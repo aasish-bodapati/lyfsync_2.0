@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi.responses import JSONResponse
 from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
-from sqlmodel import create_engine, Session, Field, SQLModel, select
+from sqlmodel import create_engine, Session, Field, SQLModel, select, text
 from dotenv import load_dotenv
 from openai import OpenAI
 import openai
@@ -22,11 +22,10 @@ dotenv_path = os.path.dirname(__file__)
 
 load_dotenv(os.path.join(dotenv_path, ".env"))
 
-# We use an absolute path so the DB is always found in the backend directory
-backend_dir = os.path.dirname(os.path.abspath(__file__))
-DATABASE_URL = f"sqlite:///{os.path.join(backend_dir, 'local_db.db')}"
-# check_same_thread=False is needed for SQLite to run safely in multi-threaded FastAPI
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set")
+engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 
 def get_db():
     """Dependency to provide a database session to FastAPI endpoints."""
@@ -35,7 +34,10 @@ def get_db():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Automatically create the SQLite database tables on startup if they don't exist
+    # Enable pgvector and create tables on startup if they don't exist
+    with Session(engine) as session:
+        session.exec(text("CREATE EXTENSION IF NOT EXISTS vector;"))
+        session.commit()
     SQLModel.metadata.create_all(engine)
     yield
 

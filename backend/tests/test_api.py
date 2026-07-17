@@ -60,6 +60,10 @@ def test_parse_meal(client, monkeypatch):
     import main
     monkeypatch.setattr(main, "parse_nutrition_from_text", mock_parse)
 
+    def mock_find_closest_food(query, db, threshold=0.80):
+        return None
+    monkeypatch.setattr(main, "find_closest_food", mock_find_closest_food)
+
     response = client.post("/api/v1/meals/parse", json={"text": "I ate 2 eggs and a banana for breakfast"})
     
     assert response.status_code == 200

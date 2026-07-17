@@ -8,4 +8,3 @@ pgvector
 fastapi[standard]
 pytest
 pytest-cov
-sqlite-vec
