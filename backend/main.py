@@ -141,7 +141,7 @@ def parse_nutrition_from_text(text: str) -> ParsedMeal:
 def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     """
     Parses a natural language meal log, sums up the estimated macros, 
-    and saves it to the local SQLite database.
+    and saves it to the database.
     """
     # 1. Ask the LLM to parse the text and estimate macros
     try:
@@ -252,7 +252,7 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
 
 @app.get("/api/v1/meals", response_model=List[MealTable])
 def list_meals(db: Session = Depends(get_db)):
-    """Retrieves all previously logged meals from the SQLite database."""
+    """Retrieves all previously logged meals from the database."""
     meals = db.exec(select(MealTable)).all()
     return meals
 

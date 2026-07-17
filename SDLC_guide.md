@@ -54,7 +54,7 @@ Before writing any code, create a **Product Requirements Document (PRD)**. For e
 Collaborate with AI to design the architecture before asking it to generate code.
 
 **Example Prompt to AI:**
-> *"Design the backend architecture for offline meal logging using FastAPI, SQLite, PostgreSQL (Supabase), and background sync."*
+> *"Design the backend architecture for offline meal logging using FastAPI, PostgreSQL (Supabase), and background sync."*
 
 **Required Deliverables:**
 * **Database Schema:** Tables, columns, foreign keys, and indexes.
@@ -73,7 +73,7 @@ Avoid broad monolithic prompts like *"Build meal logging."* Instead, break the d
 ### Example Ticket Breakdown:
 * **Ticket 1:** Create `Meal` and `MealItem` database models.
 * **Ticket 2:** Meal CRUD API endpoints.
-* **Ticket 3:** Offline SQLite local storage setup.
+* **Ticket 3:** Offline Supabase cloud storage setup.
 * **Ticket 4:** Background sync worker background job.
 * **Ticket 5:** Conflict resolution logic (last-write-wins or versioned).
 * **Ticket 6:** Mobile UI screen and form binding.

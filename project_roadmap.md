@@ -14,7 +14,7 @@ gantt
     Complete API Integration Test    :active, p1, 2026-07-16, 1d
     section Phase 2: RAG Memory
     Embeddings & Vector Database Setup : p2_1, after p1, 2d
-    SQLite Similarity Search (RAG)    : p2_2, after p2_1, 2d
+    Supabase Similarity Search (RAG)  : p2_2, after p2_1, 2d
     section Phase 3: Architecture
     Refactor using APIRouter & Config : p3, after p2_2, 3d
     section Phase 4: Auth & Scope
@@ -28,7 +28,7 @@ gantt
 ## Phase 1: Testing & Foundations (Current Phase)
 *Goal: Ensure the codebase is fully tested, error-free, and stable.*
 
-*   [x] **SQLite database migration:** Switch from heavy PostgreSQL to lightweight, file-based SQLite.
+*   [x] **Database configuration:** Set up SQLAlchemy to connect to Supabase (PostgreSQL).
 *   [x] **Single-stage AI parsing:** Optimize macro extraction in a single OpenAI request.
 *   [x] **DB unit testing (`test_db.py`):** Direct database write and read validation.
 *   [ ] **API integration testing (`test_api.py`):** Fully complete the `/parse` endpoint test with assertions.
@@ -38,10 +38,10 @@ gantt
 ---
 
 ## Phase 2: Vector Search & Local RAG (AI Memory)
-*Goal: Implement a simple local Retrieval-Augmented Generation (RAG) memory in SQLite.*
+*Goal: Implement a simple Retrieval-Augmented Generation (RAG) memory in Supabase.*
 
-*   **Step 1: Text Embeddings:** When a user logs a meal, generate a vector embedding of the text using OpenAI's `text-embedding-3-small` model.
-*   **Step 2: SQLite Schema Upgrade:** Add a `vector_embedding` column to the `Meal` model.
+*   **Step 1: Embedding Generation:** Use `text-embedding-3-small` or `all-MiniLM-L6-v2` to vectorize foods.
+*   **Step 2: Database Schema Upgrade:** Add a `vector_embedding` column to the `Meal` model.
 *   **Step 3: Cosine Similarity in Python:** Write a helper function that calculates the cosine similarity between two lists of floats (embeddings) using pure Python/NumPy math.
 *   **Step 4: Past Meal Retrieval (RAG):** When a user logs a meal, query their historical meals, calculate the most similar past meals, and feed that context back to the LLM.
     *   *Example:* If they write "Same sandwich as last Tuesday," the vector search finds last Tuesday's sandwich, retrieves its macros, and instantly copies them over.
@@ -76,7 +76,7 @@ gantt
 *   **Step 2: Gunicorn/Uvicorn configuration:** Set up Uvicorn worker settings for production stability.
 *   **Step 3: Showcase README:** Write an outstanding `README.md` containing:
     *   System Architecture Diagram (using Mermaid).
-    *   A list of "Technical Decisions & Tradeoffs" (e.g., SQLite vs Postgres, Sync vs Async threadpools).
+    *   A list of "Technical Decisions & Tradeoffs" (e.g., Supabase Postgres, Sync vs Async threadpools).
     *   Clear instructions on how to run tests, checks, and coverage.
 *   **Interview Value:** Shows you have empathy for operations engineers and can document your decisions clearly.
 
