@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import openai
 from datetime import datetime, timezone
-
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from prompts import SYSTEM_PROMPT
 from embeddings import find_closest_food
@@ -20,12 +20,15 @@ from embeddings import find_closest_food
 
 dotenv_path = os.path.dirname(__file__)
 
-load_dotenv(os.path.join(dotenv_path, ".env"))
+class Settings(BaseSettings):
+    database_url: str
+    openai_api_key: str
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-if not DATABASE_URL:
-    raise ValueError("DATABASE_URL environment variable is not set")
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+    model_config = SettingsConfigDict(env_file=os.path.join(dotenv_path, ".env"))
+
+settings = Settings()
+
+engine = create_engine(settings.database_url, pool_pre_ping=True)
 
 def get_db():
     """Dependency to provide a database session to FastAPI endpoints."""
@@ -35,14 +38,15 @@ def get_db():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Enable pgvector and create tables on startup if they don't exist
-    with engine.connect() as conn:
-        conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
-        conn.commit()
+    if "postgresql" in settings.database_url:
+        with engine.connect() as conn:
+            conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
+            conn.commit()
     SQLModel.metadata.create_all(engine)
     yield
 
 app = FastAPI(title="LyfSync Nutrition Tracking API (Simplified)", version="1.0.0", lifespan=lifespan)
-llm_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+llm_client = OpenAI(api_key=settings.openai_api_key)
 
 
 
