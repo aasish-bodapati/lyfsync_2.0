@@ -13,6 +13,27 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from prompts import SYSTEM_PROMPT
 from embeddings import find_closest_food
 
+PORTION_PRIORS = {
+    "roti": 60.0,
+    "chapati": 60.0,
+    "bowl": 150.0,
+    "katori": 150.0,
+    "glass": 250.0,
+    "cup": 240.0,
+    "tbsp": 15.0,
+    "tablespoon": 15.0,
+    "tsp": 5.0,
+    "teaspoon": 5.0,
+    "piece": 50.0,
+    "slice": 30.0,
+    "handful": 30.0,
+    "plate": 250.0,
+    "grams": 1.0,
+    "gram": 1.0,
+    "g": 1.0,
+    "ml": 1.0
+}
+
 # ##############################################################################
 # DATABASE & APP SETUP
 # ##############################################################################
@@ -81,6 +102,12 @@ class MealItemTable(SQLModel, table=True):
     fat: float
     source: str
     confidence: float | None = None
+    quantity: float | None = None
+    unit: str | None = None
+    raw_or_cooked: str | None = None
+    assumption_made: str | None = None
+    ambiguity_reason: str | None = None
+    needs_clarification: bool = False
 
 
 # ##############################################################################
@@ -96,7 +123,12 @@ class MealItem(BaseModel):
     fat: float
     source: str | None = None
     confidence: float | None = None
-
+    quantity: float | None = None
+    unit: str | None = None
+    raw_or_cooked: str | None = None
+    assumption_made: str | None = None
+    ambiguity_reason: str | None = None
+    needs_clarification: bool = False
 class Meal(BaseModel):
     meal_type: str
     items: List[MealItem]
@@ -105,10 +137,20 @@ class Meal(BaseModel):
     total_carbs: float
     total_fat: float
 
+class ExtractionItem(BaseModel):
+    name: str
+    quantity: float
+    unit: str
+    estimated_weight_grams: float
+    raw_or_cooked: str
+    assumption_made: str | None = None
+    ambiguity_reason: str | None = None
+    needs_clarification: bool = False
+
 class ParsedMeal(BaseModel):
     """The complete structured response expected from the LLM."""
     meal_type: str
-    items: List[MealItem]
+    items: List[ExtractionItem]
 
 class UserInput(BaseModel):
     """API request schema containing user raw text log."""
@@ -156,23 +198,30 @@ def resolve_nutrition(parsed_meal: ParsedMeal, db: Session, client: OpenAI) -> t
     resolved_items = []
     
     for item in parsed_meal.items:
+        unit_lower = item.unit.lower()
+        if unit_lower in PORTION_PRIORS:
+            actual_weight = item.quantity * PORTION_PRIORS[unit_lower]
+            assumption = item.assumption_made or f"Used deterministic prior for {item.unit}"
+        else:
+            actual_weight = item.estimated_weight_grams
+            assumption = item.assumption_made
+
         match = find_closest_food(item.name, db, client)
         
         if match:
-            scale = item.weight_grams / 100.0
+            scale = actual_weight / 100.0
             item_cal = match["calories"] * scale
             item_prot = match["protein"] * scale
             item_carb = match["carbs"] * scale
             item_fat = match["fat"] * scale
             confidence = match["similarity_score"]
             source = "db_match_high" if confidence >= 0.80 else "db_match_low"
+            needs_clarification = item.needs_clarification
         else:
-            item_cal = item.calories
-            item_prot = item.protein
-            item_carb = item.carbs
-            item_fat = item.fat
+            item_cal = item_prot = item_carb = item_fat = 0.0
             confidence = None
-            source = "llm_fallback"
+            source = "unresolved"
+            needs_clarification = True
             
         total_cal += item_cal
         total_prot += item_prot
@@ -181,13 +230,19 @@ def resolve_nutrition(parsed_meal: ParsedMeal, db: Session, client: OpenAI) -> t
         
         resolved_items.append(MealItem(
             name=item.name,
-            weight_grams=item.weight_grams,
+            weight_grams=actual_weight,
             calories=round(item_cal, 2),
             protein=round(item_prot, 2),
             carbs=round(item_carb, 2),
             fat=round(item_fat, 2),
             source=source,
-            confidence=confidence
+            confidence=confidence,
+            quantity=item.quantity,
+            unit=item.unit,
+            raw_or_cooked=item.raw_or_cooked,
+            assumption_made=assumption,
+            ambiguity_reason=item.ambiguity_reason,
+            needs_clarification=needs_clarification
         ))
         
     return total_cal, total_prot, total_carb, total_fat, resolved_items
@@ -215,7 +270,13 @@ def persist_meal(db: Session, text: str, meal_type: str, totals: tuple[float, fl
                 carbs=item.carbs,
                 fat=item.fat,
                 source=item.source,
-                confidence=item.confidence
+                confidence=item.confidence,
+                quantity=item.quantity,
+                unit=item.unit,
+                raw_or_cooked=item.raw_or_cooked,
+                assumption_made=item.assumption_made,
+                ambiguity_reason=item.ambiguity_reason,
+                needs_clarification=item.needs_clarification
             )
             db.add(db_item)
             

@@ -1,0 +1,62 @@
+[
+  {
+    "input": "I had 2 rotis and a bowl of dal",
+    "expected_items": ["roti", "dal"]
+  },
+  {
+    "input": "bhai aaj subah maine 3 ande khaye aur 1 glass doodh piya",
+    "expected_items": ["egg", "milk"]
+  },
+  {
+    "input": "I ate a lot of rice and some chicken",
+    "expected_items": ["rice", "chicken"]
+  },
+  {
+    "input": "I made dal makhani using 100g urad dal and 20g butter",
+    "expected_items": ["urad dal", "butter"]
+  },
+  {
+    "input": "1 katori chana masala",
+    "expected_items": ["chana masala"]
+  },
+  {
+    "input": "3 slices of whole wheat bread with 1 tbsp peanut butter",
+    "expected_items": ["whole wheat bread", "peanut butter"]
+  },
+  {
+    "input": "200g chicken biryani with 50g raita",
+    "expected_items": ["chicken biryani", "raita"]
+  },
+  {
+    "input": "a plate of idli sambar",
+    "expected_items": ["idli", "sambar"]
+  },
+  {
+    "input": "150g oats cooked in 250ml milk with 1 banana",
+    "expected_items": ["oats", "milk", "banana"]
+  },
+  {
+    "input": "handful of almonds and 2 walnuts",
+    "expected_items": ["almond", "walnut"]
+  },
+  {
+    "input": "I had paneer tikka masala (used 200g paneer, 1 tbsp oil, 50g onion)",
+    "expected_items": ["paneer", "oil", "onion"]
+  },
+  {
+    "input": "1 large dosa",
+    "expected_items": ["dosa"]
+  },
+  {
+    "input": "a piece of cake",
+    "expected_items": ["cake"]
+  },
+  {
+    "input": "100 grams of raw spinach and 50g tomatoes",
+    "expected_items": ["spinach", "tomato"]
+  },
+  {
+    "input": "1 cup of green tea",
+    "expected_items": ["green tea"]
+  }
+]

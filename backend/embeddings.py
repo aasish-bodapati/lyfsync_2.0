@@ -58,9 +58,10 @@ def normalize_food_name(query: str) -> str:
         
     return query_lower
 
-def find_closest_food(query: str, db: Session, client: OpenAI, threshold: float = 0.60) -> Optional[Dict[str, Any]]:
+def find_closest_food(query: str, db: Session, client: OpenAI, threshold: float = 0.70) -> Optional[Dict[str, Any]]:
     """
     Computes query embedding, compares it to all foods in the DB natively using pgvector,
+    retrieves the top 5 matches, reranks them using substring heuristics,
     and returns the best match if its similarity score exceeds the threshold.
     """
     query_normalized = normalize_food_name(query)
@@ -71,30 +72,48 @@ def find_closest_food(query: str, db: Session, client: OpenAI, threshold: float 
         logger.error(f"Error generating query embedding: {e}")
         return None
 
-    result = db.execute(
+    results = db.execute(
         select(FoodNutrition)
         .where(FoodNutrition.vector_embedding.is_not(None))
         .order_by(FoodNutrition.vector_embedding.cosine_distance(query_vector))
-        .limit(1)
-    ).scalars().first()
+        .limit(5)
+    ).scalars().all()
     
-    if not result:
+    if not results:
         return None
 
-    if result and result.vector_embedding is not None:
-        similarity_score = cosine_similarity(query_vector, result.vector_embedding)
-        
-        if similarity_score >= threshold:
-            logger.info(f"FOUND MATCH: '{result.description}' with score {similarity_score:.4f}")
-            return {
-                "fdc_id": result.fdc_id,
-                "description": result.description,
-                "calories": result.calories,
-                "protein": result.protein,
-                "carbs": result.carbs,
-                "fat": result.fat,
-                "similarity_score": similarity_score
-            }
+    best_match = None
+    best_score = -1.0
 
-    logger.info("NO MATCH ABOVE THRESHOLD.")
+    for result in results:
+        if result.vector_embedding is None:
+            continue
+            
+        base_score = cosine_similarity(query_vector, result.vector_embedding)
+        desc_lower = result.description.lower()
+        
+        # Reranking logic
+        reranked_score = base_score
+        if query_normalized == desc_lower:
+            reranked_score += 0.20  # Exact match bonus
+        elif query_normalized in desc_lower:
+            reranked_score += 0.10  # Substring match bonus
+            
+        if reranked_score > best_score:
+            best_score = reranked_score
+            best_match = result
+
+    if best_match and best_score >= threshold:
+        logger.info(f"FOUND MATCH: '{best_match.description}' with reranked score {best_score:.4f}")
+        return {
+            "fdc_id": best_match.fdc_id,
+            "description": best_match.description,
+            "calories": best_match.calories,
+            "protein": best_match.protein,
+            "carbs": best_match.carbs,
+            "fat": best_match.fat,
+            "similarity_score": best_score
+        }
+
+    logger.info(f"NO MATCH ABOVE THRESHOLD {threshold}. Best was {best_score:.4f}")
     return None
