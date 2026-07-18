@@ -151,12 +151,12 @@ def safe_parse_text(text: str) -> ParsedMeal:
         print(f"Parsing Error: {e}")
         raise HTTPException(status_code=400, detail="Failed to parse meal description")
 
-def resolve_nutrition(parsed_meal: ParsedMeal, db: Session) -> tuple[float, float, float, float, List[MealItem]]:
+def resolve_nutrition(parsed_meal: ParsedMeal, db: Session, client: OpenAI) -> tuple[float, float, float, float, List[MealItem]]:
     total_cal = total_prot = total_carb = total_fat = 0.0
     resolved_items = []
     
     for item in parsed_meal.items:
-        match = find_closest_food(item.name, db, llm_client)
+        match = find_closest_food(item.name, db, client)
         
         if match:
             scale = item.weight_grams / 100.0
@@ -201,24 +201,24 @@ def persist_meal(db: Session, text: str, meal_type: str, totals: tuple[float, fl
         carbs=round(totals[2], 2),
         fat=round(totals[3], 2)
     )
-    db.add(db_meal)
-    db.flush() # Get the ID without committing yet
-    
-    for item in items:
-        db_item = MealItemTable(
-            meal_id=db_meal.id,
-            name=item.name,
-            weight_grams=item.weight_grams,
-            calories=item.calories,
-            protein=item.protein,
-            carbs=item.carbs,
-            fat=item.fat,
-            source=item.source,
-            confidence=item.confidence
-        )
-        db.add(db_item)
-        
     try:
+        db.add(db_meal)
+        db.flush() # Get the ID without committing yet
+        
+        for item in items:
+            db_item = MealItemTable(
+                meal_id=db_meal.id,
+                name=item.name,
+                weight_grams=item.weight_grams,
+                calories=item.calories,
+                protein=item.protein,
+                carbs=item.carbs,
+                fat=item.fat,
+                source=item.source,
+                confidence=item.confidence
+            )
+            db.add(db_item)
+            
         db.commit()
         db.refresh(db_meal)
     except Exception as e:
@@ -235,7 +235,7 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
     and saves it to the database.
     """
     llm_result = safe_parse_text(request.text)
-    total_cal, total_prot, total_carb, total_fat, resolved_items = resolve_nutrition(llm_result, db)
+    total_cal, total_prot, total_carb, total_fat, resolved_items = resolve_nutrition(llm_result, db, llm_client)
     
     db_meal = persist_meal(db, request.text, llm_result.meal_type, (total_cal, total_prot, total_carb, total_fat), resolved_items)
     
