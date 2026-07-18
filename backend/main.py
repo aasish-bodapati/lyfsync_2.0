@@ -136,19 +136,14 @@ def parse_nutrition_from_text(text: str) -> ParsedMeal:
     return parsed
 
 
+
 # ##############################################################################
 # API ENDPOINTS
 # ##############################################################################
 
-@app.post("/api/v1/meals/parse", response_model=Meal)
-def parse_meal(request: UserInput, db: Session = Depends(get_db)):
-    """
-    Parses a natural language meal log, sums up the estimated macros, 
-    and saves it to the database.
-    """
-    # 1. Ask the LLM to parse the text and estimate macros
+def safe_parse_text(text: str) -> ParsedMeal:
     try:
-        llm_result = parse_nutrition_from_text(request.text)
+        return parse_nutrition_from_text(text)
     except openai.APIError as e:
         print(f"OpenAI API Error: {e}")
         raise HTTPException(status_code=502, detail="AI service unavailable")
@@ -156,71 +151,35 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
         print(f"Parsing Error: {e}")
         raise HTTPException(status_code=400, detail="Failed to parse meal description")
 
-    # 2. Sum up the macros from all identified foods (checking local database for semantic matches)
-    total_cal = 0.0
-    total_prot = 0.0
-    total_carb = 0.0
-    total_fat = 0.0
-
-    for item in llm_result.items:
-        # Check if we have a semantic vector match in our local food database
-        match = find_closest_food(item.name, db)
-        if match:
-            # Scale database nutritional values (stored per 100g) by the LLM-determined weight
-            scale = item.weight_grams / 100.0
-            total_cal += match["calories"] * scale
-            total_prot += match["protein"] * scale
-            total_carb += match["carbs"] * scale
-            total_fat += match["fat"] * scale
-        else:
-            # Fall back to LLM estimations
-            total_cal += item.calories
-            total_prot += item.protein
-            total_carb += item.carbs
-            total_fat += item.fat
-
-    # 3. Create and save the DB record for the meal
-    db_meal = MealTable(
-        raw_text=request.text,
-        meal_type=llm_result.meal_type,
-        calories=round(total_cal, 2),
-        protein=round(total_prot, 2),
-        carbs=round(total_carb, 2),
-        fat=round(total_fat, 2)
-    )
+def resolve_nutrition(parsed_meal: ParsedMeal, db: Session) -> tuple[float, float, float, float, List[MealItem]]:
+    total_cal = total_prot = total_carb = total_fat = 0.0
+    resolved_items = []
     
-    db.add(db_meal)
-    db.commit()
-    db.refresh(db_meal)
-    
-    # 4. Save the individual meal items
-    response_items = []
-    for item in llm_result.items:
-        match = find_closest_food(item.name, db)
+    for item in parsed_meal.items:
+        match = find_closest_food(item.name, db, llm_client)
         
-        if match:
-            if match["similarity_score"] >= 0.80:
-                source = "db_match_high"
-            else:
-                source = "db_match_low"
-        else:
-            source = "llm_fallback"
-        
-        # Recalculate scaled macros just for this item
         if match:
             scale = item.weight_grams / 100.0
             item_cal = match["calories"] * scale
             item_prot = match["protein"] * scale
             item_carb = match["carbs"] * scale
             item_fat = match["fat"] * scale
+            confidence = match["similarity_score"]
+            source = "db_match_high" if confidence >= 0.80 else "db_match_low"
         else:
             item_cal = item.calories
             item_prot = item.protein
             item_carb = item.carbs
             item_fat = item.fat
+            confidence = None
+            source = "llm_fallback"
             
-        db_item = MealItemTable(
-            meal_id=db_meal.id,
+        total_cal += item_cal
+        total_prot += item_prot
+        total_carb += item_carb
+        total_fat += item_fat
+        
+        resolved_items.append(MealItem(
             name=item.name,
             weight_grams=item.weight_grams,
             calories=round(item_cal, 2),
@@ -228,34 +187,61 @@ def parse_meal(request: UserInput, db: Session = Depends(get_db)):
             carbs=round(item_carb, 2),
             fat=round(item_fat, 2),
             source=source,
-            confidence=match["similarity_score"] if match else None
+            confidence=confidence
+        ))
+        
+    return total_cal, total_prot, total_carb, total_fat, resolved_items
+
+def persist_meal(db: Session, text: str, meal_type: str, totals: tuple[float, float, float, float], items: List[MealItem]) -> MealTable:
+    db_meal = MealTable(
+        raw_text=text,
+        meal_type=meal_type,
+        calories=round(totals[0], 2),
+        protein=round(totals[1], 2),
+        carbs=round(totals[2], 2),
+        fat=round(totals[3], 2)
+    )
+    db.add(db_meal)
+    db.flush() # Get the ID without committing yet
+    
+    for item in items:
+        db_item = MealItemTable(
+            meal_id=db_meal.id,
+            name=item.name,
+            weight_grams=item.weight_grams,
+            calories=item.calories,
+            protein=item.protein,
+            carbs=item.carbs,
+            fat=item.fat,
+            source=item.source,
+            confidence=item.confidence
         )
         db.add(db_item)
         
-        # Build the response object for this item
-        response_items.append(
-            MealItem(
-                name=db_item.name,
-                weight_grams=db_item.weight_grams,
-                calories=db_item.calories,
-                protein=db_item.protein,
-                carbs=db_item.carbs,
-                fat=db_item.fat,
-                source=db_item.source,
-                confidence=db_item.confidence
-            )
-        )
     try:
         db.commit()
+        db.refresh(db_meal)
     except Exception as e:
         db.rollback()
-        print(f"Database error: {e}")
+        print(f"Database Error: {e}")
         raise HTTPException(status_code=500, detail="Failed to save meal")
+        
+    return db_meal
+
+@app.post("/api/v1/meals/parse", response_model=Meal)
+def parse_meal(request: UserInput, db: Session = Depends(get_db)):
+    """
+    Parses a natural language meal log, sums up the estimated macros, 
+    and saves it to the database.
+    """
+    llm_result = safe_parse_text(request.text)
+    total_cal, total_prot, total_carb, total_fat, resolved_items = resolve_nutrition(llm_result, db)
     
-    # 5. Return the expected API schema
+    db_meal = persist_meal(db, request.text, llm_result.meal_type, (total_cal, total_prot, total_carb, total_fat), resolved_items)
+    
     return Meal(
         meal_type=db_meal.meal_type,
-        items=response_items,
+        items=resolved_items,
         total_calories=db_meal.calories,
         total_protein=db_meal.protein,
         total_carbs=db_meal.carbs,

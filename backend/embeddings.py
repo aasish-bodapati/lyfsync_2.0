@@ -1,17 +1,8 @@
-import os
-import json
 from typing import List, Dict, Any, Optional
 from openai import OpenAI
-from sqlmodel import Session, select, SQLModel, Field, text, Column
+from sqlmodel import Session, select, SQLModel, Field, Column
 from pgvector.sqlalchemy import Vector
-from dotenv import load_dotenv
-
-# Ensure environment variables are loaded
-dotenv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
-load_dotenv(dotenv_path)
-
-# Initialize OpenAI client
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+import re
 
 class FoodNutrition(SQLModel, table=True):
     __tablename__ = "food_nutrition"  # type: ignore
@@ -24,8 +15,7 @@ class FoodNutrition(SQLModel, table=True):
     vector_embedding: Any = Field(default=None, sa_column=Column(Vector(1536)))
     source: str = Field(default="usda")
 
-
-def get_embedding(text_to_embed: str) -> List[float]:
+def get_embedding(text_to_embed: str, client: OpenAI) -> List[float]:
     """Generates a 1536-dimensional vector embedding using text-embedding-3-small."""
     response = client.embeddings.create(
         input=[text_to_embed],
@@ -47,31 +37,33 @@ def cosine_similarity(v1: List[float], v2: List[float]) -> float:
         
     return dot_product / (mag1 * mag2)
 
-def find_closest_food(query: str, db: Session, threshold: float = 0.60) -> Optional[Dict[str, Any]]:
-    """
-    Computes query embedding, compares it to all foods in the DB natively using pgvector,
-    and returns the best match if its similarity score exceeds the threshold.
-    """
+def normalize_food_name(query: str) -> str:
+    """Normalizes the query using a dictionary of common Indian food aliases."""
     ALIASES = {
         "curd": "yogurt",
         "roti": "chapati",
         "kadhai": "wok",
-        "paneer": "cheese", # or "cottage cheese" but paneer might already exist, though alias helps if it doesn't
+        "paneer": "cheese",
         "dal": "lentils",
         "chana": "chickpeas",
         "rajma": "kidney beans"
     }
-
-    # Normalize query for alias lookup
-    query_lower = query.lower().strip()
     
-    import re
-    # Simple word replacement for known aliases using word boundaries
+    query_lower = query.lower().strip()
     for alias, replacement in ALIASES.items():
         query_lower = re.sub(rf'\b{alias}\b', replacement, query_lower)
+        
+    return query_lower
 
+def find_closest_food(query: str, db: Session, client: OpenAI, threshold: float = 0.60) -> Optional[Dict[str, Any]]:
+    """
+    Computes query embedding, compares it to all foods in the DB natively using pgvector,
+    and returns the best match if its similarity score exceeds the threshold.
+    """
+    query_normalized = normalize_food_name(query)
+    
     try:
-        query_vector = get_embedding(query_lower)
+        query_vector = get_embedding(query_normalized, client)
     except Exception as e:
         print(f"Error generating query embedding: {e}")
         return None
@@ -89,12 +81,8 @@ def find_closest_food(query: str, db: Session, threshold: float = 0.60) -> Optio
     result = results[0]
 
     if result and result.vector_embedding is not None:
-        # Re-compute distance in Python or extract from query if possible.
-        # But we can also compute it directly if we do it in python.
-        distance = cosine_similarity(query_vector, result.vector_embedding)
-        # Wait, pgvector cosine distance = 1 - cosine similarity. Let's just use cosine_similarity since it's exact.
         similarity_score = cosine_similarity(query_vector, result.vector_embedding)
-
+        
         if similarity_score >= threshold:
             print(f"FOUND MATCH: '{result.description}' with score {similarity_score:.4f}")
             return {
