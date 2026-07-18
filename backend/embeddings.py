@@ -3,6 +3,9 @@ from openai import OpenAI
 from sqlmodel import Session, select, SQLModel, Field, Column
 from pgvector.sqlalchemy import Vector
 import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 class FoodNutrition(SQLModel, table=True):
     __tablename__ = "food_nutrition"  # type: ignore
@@ -65,26 +68,24 @@ def find_closest_food(query: str, db: Session, client: OpenAI, threshold: float 
     try:
         query_vector = get_embedding(query_normalized, client)
     except Exception as e:
-        print(f"Error generating query embedding: {e}")
+        logger.error(f"Error generating query embedding: {e}")
         return None
 
-    results = db.execute(
+    result = db.execute(
         select(FoodNutrition)
         .where(FoodNutrition.vector_embedding.is_not(None))
         .order_by(FoodNutrition.vector_embedding.cosine_distance(query_vector))
-        .limit(3)
-    ).scalars().all()
+        .limit(1)
+    ).scalars().first()
     
-    if not results:
+    if not result:
         return None
-        
-    result = results[0]
 
     if result and result.vector_embedding is not None:
         similarity_score = cosine_similarity(query_vector, result.vector_embedding)
         
         if similarity_score >= threshold:
-            print(f"FOUND MATCH: '{result.description}' with score {similarity_score:.4f}")
+            logger.info(f"FOUND MATCH: '{result.description}' with score {similarity_score:.4f}")
             return {
                 "fdc_id": result.fdc_id,
                 "description": result.description,
@@ -95,5 +96,5 @@ def find_closest_food(query: str, db: Session, client: OpenAI, threshold: float 
                 "similarity_score": similarity_score
             }
 
-    print(f"NO MATCH ABOVE THRESHOLD.")
+    logger.info("NO MATCH ABOVE THRESHOLD.")
     return None

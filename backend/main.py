@@ -1,11 +1,10 @@
 import os
+import logging
 from typing import List
 from contextlib import asynccontextmanager
-from fastapi.responses import JSONResponse
 from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from sqlmodel import create_engine, Session, Field, SQLModel, select, text
-from dotenv import load_dotenv
 from openai import OpenAI
 import openai
 from datetime import datetime, timezone
@@ -18,13 +17,14 @@ from embeddings import find_closest_food
 # DATABASE & APP SETUP
 # ##############################################################################
 
-dotenv_path = os.path.dirname(__file__)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class Settings(BaseSettings):
     database_url: str
     openai_api_key: str
 
-    model_config = SettingsConfigDict(env_file=os.path.join(dotenv_path, ".env"))
+    model_config = SettingsConfigDict(env_file=os.path.join(os.path.dirname(__file__), ".env"))
 
 settings = Settings()
 
@@ -145,10 +145,10 @@ def safe_parse_text(text: str) -> ParsedMeal:
     try:
         return parse_nutrition_from_text(text)
     except openai.APIError as e:
-        print(f"OpenAI API Error: {e}")
+        logger.error(f"OpenAI API Error: {e}")
         raise HTTPException(status_code=502, detail="AI service unavailable")
     except ValueError as e:
-        print(f"Parsing Error: {e}")
+        logger.error(f"Parsing Error: {e}")
         raise HTTPException(status_code=400, detail="Failed to parse meal description")
 
 def resolve_nutrition(parsed_meal: ParsedMeal, db: Session, client: OpenAI) -> tuple[float, float, float, float, List[MealItem]]:
@@ -223,7 +223,7 @@ def persist_meal(db: Session, text: str, meal_type: str, totals: tuple[float, fl
         db.refresh(db_meal)
     except Exception as e:
         db.rollback()
-        print(f"Database Error: {e}")
+        logger.error(f"Database Error: {e}")
         raise HTTPException(status_code=500, detail="Failed to save meal")
         
     return db_meal
