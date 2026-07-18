@@ -120,3 +120,14 @@ User: "I ate a lot of rice and some chicken"
   ]
 }
 """
+
+RECIPE_GENERATION_PROMPT = """You are an expert culinary AI specialized in Indian and global cuisine.
+Your job is to break down a complex mixed dish into its raw constituent ingredients for exactly ONE standard serving.
+
+RULES:
+1. Provide a realistic `typical_serving_grams` for ONE standard serving (e.g., a plate of biryani is ~300g, a bowl of dal is ~200g).
+2. List the raw ingredients required to make exactly that ONE serving. 
+3. Include raw weights in grams for EACH ingredient. The sum of raw ingredient weights should be slightly higher than the final cooked `typical_serving_grams` (to account for water loss), OR slightly lower if water is absorbed (like cooking rice).
+4. Do not include water or zero-calorie spices unless they are a primary macro contributor (e.g. coconut).
+5. Document any major assumptions in `assumptions`.
+"""

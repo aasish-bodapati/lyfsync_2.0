@@ -1,0 +1,19 @@
+{
+  "egg": {"piece": 50.0, "whole": 50.0},
+  "bread": {"slice": 30.0},
+  "samosa": {"piece": 100.0},
+  "gulab jamun": {"piece": 40.0},
+  "paneer tikka": {"piece": 30.0},
+  "chicken breast": {"piece": 150.0},
+  "chicken": {"piece": 100.0},
+  "nuts": {"cup": 140.0, "handful": 30.0},
+  "rice": {"bowl": 200.0, "plate": 350.0, "cup": 150.0, "katori": 150.0},
+  "dal": {"bowl": 250.0, "katori": 150.0},
+  "coffee": {"cup": 240.0, "glass": 250.0},
+  "milk": {"glass": 250.0, "cup": 240.0},
+  "roti": {"piece": 60.0},
+  "chapati": {"piece": 60.0},
+  "paratha": {"piece": 80.0, "whole": 80.0},
+  "naan": {"piece": 80.0},
+  "dosa": {"piece": 100.0}
+}

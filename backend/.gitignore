@@ -1,2 +1,5 @@
 
 local_meals.db
+
+# Evaluation Outputs
+backend/evals/*.json

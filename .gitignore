@@ -12,6 +12,7 @@ env/
 .pytest_cache/
 .coverage
 htmlcov/
+backend/evals/*.json
 build/
 develop-eggs/
 dist/

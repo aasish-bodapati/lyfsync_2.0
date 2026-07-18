@@ -7,4 +7,5 @@ psycopg2-binary
 pgvector
 fastapi[standard]
 pytest
-pytest-covpydantic-settings
+pytest-cov
+pydantic-settings

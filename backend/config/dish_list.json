@@ -1,0 +1,994 @@
+{
+    "dishes": [
+        {
+            "name": "Butter Chicken",
+            "cuisine": "Punjabi",
+            "category": "dinner"
+        },
+        {
+            "name": "Rogan Josh",
+            "cuisine": "Kashmiri",
+            "category": "dinner"
+        },
+        {
+            "name": "Dal Makhani",
+            "cuisine": "Punjabi",
+            "category": "lunch"
+        },
+        {
+            "name": "Aloo Paratha",
+            "cuisine": "Punjabi",
+            "category": "lunch"
+        },
+        {
+            "name": "Chole Bhature",
+            "cuisine": "Punjabi",
+            "category": "dinner"
+        },
+        {
+            "name": "Paneer Tikka",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Saag Paneer",
+            "cuisine": "Punjabi",
+            "category": "lunch"
+        },
+        {
+            "name": "Bhindi Masala",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Rajma Chawal",
+            "cuisine": "Punjabi",
+            "category": "lunch"
+        },
+        {
+            "name": "Kadhi Pakora",
+            "cuisine": "Punjabi",
+            "category": "lunch"
+        },
+        {
+            "name": "Goat Curry",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Litti Chokha",
+            "cuisine": "Bihari",
+            "category": "dinner"
+        },
+        {
+            "name": "Kashmiri Dum Aloo",
+            "cuisine": "Kashmiri",
+            "category": "dinner"
+        },
+        {
+            "name": "Tandoori Chicken",
+            "cuisine": "Punjabi",
+            "category": "dinner"
+        },
+        {
+            "name": "Aloo Gobi",
+            "cuisine": "North Indian",
+            "category": "lunch"
+        },
+        {
+            "name": "Palak Paneer",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Mutton Biryani",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Shahi Paneer",
+            "cuisine": "Punjabi",
+            "category": "dinner"
+        },
+        {
+            "name": "Naan",
+            "cuisine": "Punjabi",
+            "category": "dinner"
+        },
+        {
+            "name": "Pav Bhaji",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Sarson Ka Saag",
+            "cuisine": "Punjabi",
+            "category": "dinner"
+        },
+        {
+            "name": "Aloo Tikki",
+            "cuisine": "North Indian",
+            "category": "lunch"
+        },
+        {
+            "name": "Malai Kofta",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Tandoori Roti",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Aloo Matar",
+            "cuisine": "Punjabi",
+            "category": "lunch"
+        },
+        {
+            "name": "Bhatura",
+            "cuisine": "Punjabi",
+            "category": "dinner"
+        },
+        {
+            "name": "Korma",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Pulao",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Dum Aloo",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Paratha",
+            "cuisine": "North Indian",
+            "category": "lunch"
+        },
+        {
+            "name": "Khichdi",
+            "cuisine": "North Indian",
+            "category": "lunch"
+        },
+        {
+            "name": "Pindi Chole",
+            "cuisine": "Punjabi",
+            "category": "dinner"
+        },
+        {
+            "name": "Kofta Curry",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Punjabi Rajma",
+            "cuisine": "Punjabi",
+            "category": "dinner"
+        },
+        {
+            "name": "Baingan Bharta",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Panner Butter Masala",
+            "cuisine": "Punjabi",
+            "category": "dinner"
+        },
+        {
+            "name": "Jeera Aloo",
+            "cuisine": "North Indian",
+            "category": "lunch"
+        },
+        {
+            "name": "Gajar Ka Halwa",
+            "cuisine": "Punjabi",
+            "category": "dessert"
+        },
+        {
+            "name": "Methi Malai Murg",
+            "cuisine": "Punjabi",
+            "category": "dinner"
+        },
+        {
+            "name": "Dahi Bhalla",
+            "cuisine": "North Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Chicken Korma",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Veg Jalfrezi",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Chana Masala",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Dahi Ke Kebab",
+            "cuisine": "North Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Machher Jhol",
+            "cuisine": "Bengali",
+            "category": "dinner"
+        },
+        {
+            "name": "Rasgulla",
+            "cuisine": "Bengali",
+            "category": "dessert"
+        },
+        {
+            "name": "Kosha Mangsho",
+            "cuisine": "Bengali",
+            "category": "dinner"
+        },
+        {
+            "name": "Shorshe Ilish",
+            "cuisine": "Bengali",
+            "category": "dinner"
+        },
+        {
+            "name": "Sandesh",
+            "cuisine": "Bengali",
+            "category": "dessert"
+        },
+        {
+            "name": "Luchi Aloor Dom",
+            "cuisine": "Bengali",
+            "category": "dinner"
+        },
+        {
+            "name": "Aloo Posto",
+            "cuisine": "Bengali",
+            "category": "lunch"
+        },
+        {
+            "name": "Chingri Malai Curry",
+            "cuisine": "Bengali",
+            "category": "dinner"
+        },
+        {
+            "name": "Ghugni",
+            "cuisine": "Bengali",
+            "category": "snack"
+        },
+        {
+            "name": "Dalma",
+            "cuisine": "Odia",
+            "category": "lunch"
+        },
+        {
+            "name": "Pakhala Bhata",
+            "cuisine": "Odia",
+            "category": "lunch"
+        },
+        {
+            "name": "Chenna Poda",
+            "cuisine": "Odia",
+            "category": "dessert"
+        },
+        {
+            "name": "Pithas",
+            "cuisine": "Odia",
+            "category": "snack"
+        },
+        {
+            "name": "Muri Ghonto",
+            "cuisine": "Bengali",
+            "category": "lunch"
+        },
+        {
+            "name": "Patra Poda",
+            "cuisine": "Odia",
+            "category": "dinner"
+        },
+        {
+            "name": "Macher Paturi",
+            "cuisine": "Bengali",
+            "category": "dinner"
+        },
+        {
+            "name": "Meetha Kada",
+            "cuisine": "Odia",
+            "category": "snack"
+        },
+        {
+            "name": "Mishti Doi",
+            "cuisine": "Bengali",
+            "category": "dessert"
+        },
+        {
+            "name": "Macher Muri Ghonto",
+            "cuisine": "Bengali",
+            "category": "dinner"
+        },
+        {
+            "name": "Nolen Gurer Payesh",
+            "cuisine": "Bengali",
+            "category": "dessert"
+        },
+        {
+            "name": "R\u016bsu Mangsar Jhol",
+            "cuisine": "Bengali",
+            "category": "dinner"
+        },
+        {
+            "name": "Baigana Bharta",
+            "cuisine": "Bengali",
+            "category": "lunch"
+        },
+        {
+            "name": "Bhuna Khichuri",
+            "cuisine": "Bengali",
+            "category": "dinner"
+        },
+        {
+            "name": "Pathare Prabhu Fish Fry",
+            "cuisine": "Bengali",
+            "category": "snack"
+        },
+        {
+            "name": "Mung Dal Payesh",
+            "cuisine": "Bengali",
+            "category": "dessert"
+        },
+        {
+            "name": "Kumro Bhapa",
+            "cuisine": "Bengali",
+            "category": "lunch"
+        },
+        {
+            "name": "Mangalorean Fish Curry",
+            "cuisine": "Mangalorean",
+            "category": "dinner"
+        },
+        {
+            "name": "Masala Dosa",
+            "cuisine": "South Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Idli Sambhar",
+            "cuisine": "South Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Rasam",
+            "cuisine": "South Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Pongal",
+            "cuisine": "South Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Upma",
+            "cuisine": "South Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Chettinad Chicken",
+            "cuisine": "Chettinad",
+            "category": "dinner"
+        },
+        {
+            "name": "Chicken Biryani",
+            "cuisine": "Hyderabadi",
+            "category": "dinner"
+        },
+        {
+            "name": "Fish Moilee",
+            "cuisine": "Kerala",
+            "category": "dinner"
+        },
+        {
+            "name": "Appam with Stew",
+            "cuisine": "Kerala",
+            "category": "breakfast"
+        },
+        {
+            "name": "Hyderabadi Dal",
+            "cuisine": "Hyderabadi",
+            "category": "dinner"
+        },
+        {
+            "name": "Gongura Mutton",
+            "cuisine": "Andhra",
+            "category": "dinner"
+        },
+        {
+            "name": "Puliyodarai",
+            "cuisine": "Tamil Nadu",
+            "category": "lunch"
+        },
+        {
+            "name": "Chicken 65",
+            "cuisine": "South Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Coorgi Style Chicken",
+            "cuisine": "Karnataka",
+            "category": "dinner"
+        },
+        {
+            "name": "Kappa and Meen Curry",
+            "cuisine": "Kerala",
+            "category": "dinner"
+        },
+        {
+            "name": "Meen Pollichathu",
+            "cuisine": "Kerala",
+            "category": "dinner"
+        },
+        {
+            "name": "Chicken Chettinad",
+            "cuisine": "Chettinad",
+            "category": "lunch"
+        },
+        {
+            "name": "Bisi Bele Bath",
+            "cuisine": "Karnataka",
+            "category": "lunch"
+        },
+        {
+            "name": "Dosa",
+            "cuisine": "South Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Andhra Pepper Chicken",
+            "cuisine": "Andhra",
+            "category": "dinner"
+        },
+        {
+            "name": "Puliogare",
+            "cuisine": "South Indian",
+            "category": "lunch"
+        },
+        {
+            "name": "Nei Choru",
+            "cuisine": "South Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Nethili Varuval",
+            "cuisine": "Tamil Nadu",
+            "category": "lunch"
+        },
+        {
+            "name": "Egg Dosa",
+            "cuisine": "South Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Mutton Sukka",
+            "cuisine": "Tamil Nadu",
+            "category": "dinner"
+        },
+        {
+            "name": "Vazhaipoo Vadai",
+            "cuisine": "Tamil Nadu",
+            "category": "snack"
+        },
+        {
+            "name": "Kozhi Roast",
+            "cuisine": "Kerala",
+            "category": "lunch"
+        },
+        {
+            "name": "Egg Curry",
+            "cuisine": "Kerala",
+            "category": "dinner"
+        },
+        {
+            "name": "Sooji Halwa",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Poori Bhaji",
+            "cuisine": "North Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Medu Vada",
+            "cuisine": "South Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Thalipeeth",
+            "cuisine": "Maharashtrian",
+            "category": "snack"
+        },
+        {
+            "name": "Pav Bhaji",
+            "cuisine": "Maharashtrian",
+            "category": "snack"
+        },
+        {
+            "name": "Vada Pav",
+            "cuisine": "Maharashtrian",
+            "category": "snack"
+        },
+        {
+            "name": "Zunka Bhakri",
+            "cuisine": "Maharashtrian",
+            "category": "lunch"
+        },
+        {
+            "name": "Poha",
+            "cuisine": "Maharashtrian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Puran Poli",
+            "cuisine": "Maharashtrian",
+            "category": "dessert"
+        },
+        {
+            "name": "Sabudana Khichdi",
+            "cuisine": "Maharashtrian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Misal Pav",
+            "cuisine": "Maharashtrian",
+            "category": "lunch"
+        },
+        {
+            "name": "Shreekhand",
+            "cuisine": "Gujarat",
+            "category": "dessert"
+        },
+        {
+            "name": "Dhokla",
+            "cuisine": "Gujarat",
+            "category": "snack"
+        },
+        {
+            "name": "Thepla",
+            "cuisine": "Gujarat",
+            "category": "snack"
+        },
+        {
+            "name": "Khandvi",
+            "cuisine": "Gujarat",
+            "category": "snack"
+        },
+        {
+            "name": "Undhiyu",
+            "cuisine": "Gujarat",
+            "category": "dinner"
+        },
+        {
+            "name": "Yogurt Kadhi",
+            "cuisine": "Gujarati",
+            "category": "lunch"
+        },
+        {
+            "name": "Gujarati Dal",
+            "cuisine": "Gujarat",
+            "category": "lunch"
+        },
+        {
+            "name": "Dabeli",
+            "cuisine": "Gujarat",
+            "category": "snack"
+        },
+        {
+            "name": "Handvo",
+            "cuisine": "Gujarat",
+            "category": "lunch"
+        },
+        {
+            "name": "Patra",
+            "cuisine": "Gujarat",
+            "category": "snack"
+        },
+        {
+            "name": "Khakra",
+            "cuisine": "Gujarat",
+            "category": "snack"
+        },
+        {
+            "name": "Bhutte Ka Kees",
+            "cuisine": "Maharashtrian",
+            "category": "snack"
+        },
+        {
+            "name": "Khichu",
+            "cuisine": "Gujarat",
+            "category": "snack"
+        },
+        {
+            "name": "Batata Vada",
+            "cuisine": "Maharashtrian",
+            "category": "snack"
+        },
+        {
+            "name": "Amti Dal",
+            "cuisine": "Maharashtrian",
+            "category": "lunch"
+        },
+        {
+            "name": "Ragda Pattice",
+            "cuisine": "Maharashtrian",
+            "category": "snack"
+        },
+        {
+            "name": "Moong Dal Chilla",
+            "cuisine": "North Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Pavakka pachadi",
+            "cuisine": "Kerala",
+            "category": "lunch"
+        },
+        {
+            "name": "Appam",
+            "cuisine": "Kerala",
+            "category": "breakfast"
+        },
+        {
+            "name": "Aloo Puri",
+            "cuisine": "North Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Jalebi",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Rabri",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Seviyan Kheer",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Besan Ladoo",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Motichoor Ladoo",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Gulab Jamun",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Kulfi",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Balushahi",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Kaju Katli",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Shrikhand",
+            "cuisine": "West Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Junnu",
+            "cuisine": "Telangana",
+            "category": "dessert"
+        },
+        {
+            "name": "Imarti",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Doodhpak",
+            "cuisine": "Gujarat",
+            "category": "dessert"
+        },
+        {
+            "name": "Aate Ka Halwa",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Malpua",
+            "cuisine": "Bihari",
+            "category": "dessert"
+        },
+        {
+            "name": "Misti Kumro",
+            "cuisine": "Bengali",
+            "category": "dessert"
+        },
+        {
+            "name": "Mysore Pak",
+            "cuisine": "South Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Neer Dosa",
+            "cuisine": "Karnataka",
+            "category": "breakfast"
+        },
+        {
+            "name": "Ariselu",
+            "cuisine": "Andhra",
+            "category": "dessert"
+        },
+        {
+            "name": "Mathura Peda",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Ghewar",
+            "cuisine": "Rajasthani",
+            "category": "dessert"
+        },
+        {
+            "name": "Petha",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Basundi",
+            "cuisine": "Maharashtrian",
+            "category": "dessert"
+        },
+        {
+            "name": "Chole Bhature",
+            "cuisine": "Punjabi",
+            "category": "breakfast"
+        },
+        {
+            "name": "Rava Idli",
+            "cuisine": "South Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Egg Bhurji",
+            "cuisine": "North Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Sattu Paratha",
+            "cuisine": "Bihari",
+            "category": "breakfast"
+        },
+        {
+            "name": "Khakhra",
+            "cuisine": "Gujarat",
+            "category": "breakfast"
+        },
+        {
+            "name": "Bajra Roti",
+            "cuisine": "Rajasthani",
+            "category": "breakfast"
+        },
+        {
+            "name": "Akki Roti",
+            "cuisine": "Karnataka",
+            "category": "breakfast"
+        },
+        {
+            "name": "Baida Roti",
+            "cuisine": "Maharashtrian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Cheela",
+            "cuisine": "North Indian",
+            "category": "breakfast"
+        },
+        {
+            "name": "Falooda",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Pesarattu",
+            "cuisine": "Andhra",
+            "category": "breakfast"
+        },
+        {
+            "name": "Aloo Bonda",
+            "cuisine": "South Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Pani Puri",
+            "cuisine": "Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Samosa",
+            "cuisine": "North Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Dahi Puri",
+            "cuisine": "Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Murukku",
+            "cuisine": "South Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Aloo Chaat",
+            "cuisine": "North Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Papdi Chaat",
+            "cuisine": "North Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Aloo Bhujiya",
+            "cuisine": "North Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Pakora",
+            "cuisine": "North Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Kachori",
+            "cuisine": "North Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Sev",
+            "cuisine": "Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Ghugni Chaat",
+            "cuisine": "Bengali",
+            "category": "snack"
+        },
+        {
+            "name": "Khaman Dhokla",
+            "cuisine": "Gujarat",
+            "category": "snack"
+        },
+        {
+            "name": "Methi Khakhra",
+            "cuisine": "Gujarat",
+            "category": "snack"
+        },
+        {
+            "name": "Paneer Pakora",
+            "cuisine": "North Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Aloo Tikki Chat",
+            "cuisine": "North Indian",
+            "category": "snack"
+        },
+        {
+            "name": "Pavakka Ularthiyathu",
+            "cuisine": "Kerala",
+            "category": "snack"
+        },
+        {
+            "name": "Rumali Roti",
+            "cuisine": "North Indian",
+            "category": "dinner"
+        },
+        {
+            "name": "Nariyal Ladoo",
+            "cuisine": "North Indian",
+            "category": "dessert"
+        },
+        {
+            "name": "Thayir Sadam",
+            "cuisine": "Tamil Nadu",
+            "category": "rice"
+        },
+        {
+            "name": "Biryani",
+            "cuisine": "Hyderabadi",
+            "category": "rice"
+        },
+        {
+            "name": "Kesari Bhath",
+            "cuisine": "Karnataka",
+            "category": "rice"
+        },
+        {
+            "name": "Zarda",
+            "cuisine": "North Indian",
+            "category": "rice"
+        },
+        {
+            "name": "Onion Rava Dosa",
+            "cuisine": "South Indian",
+            "category": "rice"
+        },
+        {
+            "name": "Veg Biryani",
+            "cuisine": "South Indian",
+            "category": "rice"
+        },
+        {
+            "name": "Jeera Rice",
+            "cuisine": "North Indian",
+            "category": "rice"
+        },
+        {
+            "name": "Lemon Rice",
+            "cuisine": "South Indian",
+            "category": "rice"
+        },
+        {
+            "name": "Curd Rice",
+            "cuisine": "South Indian",
+            "category": "rice"
+        },
+        {
+            "name": "Kashmiri Pulao",
+            "cuisine": "North Indian",
+            "category": "rice"
+        },
+        {
+            "name": "Tamarind Rice",
+            "cuisine": "South Indian",
+            "category": "rice"
+        },
+        {
+            "name": "Veg Fried Rice",
+            "cuisine": "North Indian",
+            "category": "rice"
+        },
+        {
+            "name": "Peas Pulao",
+            "cuisine": "North Indian",
+            "category": "rice"
+        },
+        {
+            "name": "Coconut Rice",
+            "cuisine": "South Indian",
+            "category": "rice"
+        },
+        {
+            "name": "Pongal Rice",
+            "cuisine": "South Indian",
+            "category": "rice"
+        }
+    ]
+}
